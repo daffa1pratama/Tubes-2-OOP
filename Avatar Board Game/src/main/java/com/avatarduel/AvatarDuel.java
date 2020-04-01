@@ -5,14 +5,18 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import com.avatarduel.card.CharacterCard;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import com.avatarduel.model.Element;
-import com.avatarduel.model.Land;
+import com.avatarduel.card.Element;
+import com.avatarduel.card.LandCard;
 import com.avatarduel.util.CSVReader;
 
 public class AvatarDuel extends Application {
@@ -24,7 +28,7 @@ public class AvatarDuel extends Application {
     landReader.setSkipHeader(true);
     List<String[]> landRows = landReader.read();
     for (String[] row : landRows) {
-      Land l = new Land(row[1], row[3], Element.valueOf(row[2]));
+      LandCard l = new LandCard(row[1], row[3], Element.valueOf(row[2]));
     }
   }
 
@@ -47,6 +51,20 @@ public class AvatarDuel extends Application {
     try {
       this.loadCards();
       text.setText("Avatar Duel!");
+      Button button = new Button("Test");
+      button.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+          CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
+          Text test = new Text();
+          test.setX(100);
+          test.setY(100);
+          test.setText(aang.CardInfo());
+          root.getChildren().add(test);
+          aang.InfoCard();
+        }
+      });
+      root.getChildren().add(button);
     } catch (Exception e) {
       text.setText("Failed to load cards: " + e);
     }
