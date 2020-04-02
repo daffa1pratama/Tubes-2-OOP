@@ -1,9 +1,10 @@
 package com.avatarduel.card;
 
 public class PowerUpCard extends SkillCard {
-    public void Effect (CharacterCard characterCard) {
+
+    public void Effect (CharacterFieldCard characterFieldCard) {
         // If enemy position defense, attack is same as enemy position attack
-        if (characterCard.getPosition() == 0) {
+        if (characterFieldCard.getRole() == 0) {
             // Attack
         }
     }

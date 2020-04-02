@@ -1,10 +1,9 @@
 package com.avatarduel.card;
 
-public class CharacterCard extends  Card{
+public class CharacterCard extends Card{
     private int attack;
     private int defense;
     private int power;
-    private int position; // 0 : Defense ; 1 : AttackW
 
     public CharacterCard() {
         super();
@@ -32,10 +31,6 @@ public class CharacterCard extends  Card{
         return this.power;
     }
 
-    public int getPosition() {
-        return this.position;
-    }
-
     public void setAttack(int attack) {
         this.attack = attack;
     }
@@ -48,10 +43,6 @@ public class CharacterCard extends  Card{
         this.power = power;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     @Override
     public void InfoCard() {
         super.InfoCard();
@@ -60,25 +51,6 @@ public class CharacterCard extends  Card{
         System.out.println("Power\t : " + this.power);
     }
 
-    public void changePosition() {
-        if (this.position == 0) {
-            setPosition(1);
-        }
-        else {
-            setPosition(0);
-        }
-    }
-
-    public void AttackEnemy(CharacterCard enemyCard) {
-        //Enemy defense position
-        if (enemyCard.getPosition() == 0) {
-
-        }
-        //Enemy attack position
-        else {
-
-        }
-    }
 
     public String CardInfo() {
         String stream = "";

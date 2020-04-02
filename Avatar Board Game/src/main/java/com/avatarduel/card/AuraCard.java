@@ -4,7 +4,7 @@ public class AuraCard extends SkillCard {
     private int addAttack;
     private int addDefense;
 
-    public void Effect(CharacterCard characterCard) {
+    public void Effect(CharacterFieldCard characterCard) {
         int currAttack = characterCard.getAttack();
         int currDefense = characterCard.getDefense();
         characterCard.setAttack(currAttack + this.addAttack);

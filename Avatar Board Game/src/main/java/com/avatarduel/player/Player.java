@@ -8,6 +8,10 @@ public class Player {
     private Deck deck;
     private Card[] onHand;
     private int hp;
+    //private int fire;
+    //private int earth;
+    //privage int water;
+    //private int air;
 
     public Player() {
         this.name = "";
