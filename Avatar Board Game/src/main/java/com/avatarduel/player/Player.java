@@ -69,6 +69,14 @@ public class Player {
     
     public int getAir() { return air; }
 
+    public List<LandCard> getLandFieldCards(){return this.landFieldCards;}
+    public List<CharacterFieldCard> getCharacterFieldCards() {return this.characterFieldCards;}
+    public List<SkillCard> getSkillFieldCards() {return this.skillFieldCards;}
+
+    public int setHp(int newhp){return this.hp = newhp;}
+
+    //Masih ada getter dan setter yang belum lengkap
+
     public boolean deployAble(Element element,int amount){
         boolean temp=true;
         switch(element){
@@ -121,6 +129,15 @@ public class Player {
                 break;
         }
     }
+
+    public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
+        if (opponentCharacterFieldCard.getPosition() == 0 ){
+            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getDefense());
+        } else {
+            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getAttack());
+        }
+    }
+    
 
     /**
      *Player movement option in DRAW PHASE
@@ -201,23 +218,50 @@ public class Player {
     /**
      * Battle Phase
      */
-    public void attack(){
+    public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
+        //Harus dicek lagi apakah udah ada pemenang game dr proses attack
+        if (characterFieldCard.getBattleAvailability() == 1){
+            if (opponent.getCharacterFieldCards().isEmpty()){
+                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
+                characterFieldCard.setIsRotatable(0);
+            } else {
+                if (isAttackValid(characterFieldCard,opponentCharacterCard)){
+                    opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
+                    opponent.getCharacterFieldCards().remove(opponentCharacterCard);
+                    characterFieldCard.setIsRotatable(0);
+                } else {
+                    //Lempar exception
+                }
+            }
+        } else {
 
+        }
+        
     }
 
+    /**
+     * Player's movement in Main2 is the same with Player's movement in Main1 
+     */
 
-    
+    /**
+     * Player's movement in END PHASE
+     */
+
     public void endPhase() {
-        // End phase implements later
+        this.isLandCardDeploy = 0;
+        for(CharacterFieldCard currentCard : this.characterFieldCards){
+            currentCard.setIsRotatable(1);
+            currentCard.setBattleAvailability(1);
+        }
     }
 
-    public void endTurn() {
-        // End turn implements later
-    }
+    // public void endTurn() {
+    //     // End turn implements later
+    // }
 
-    public void placeCard(Card card) {
-        // Place card implements later
-    }
+    // public void placeCard(Card card) {
+    //     // Place card implements later
+    // }
 
 
 }

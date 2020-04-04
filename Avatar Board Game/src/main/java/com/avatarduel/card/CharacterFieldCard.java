@@ -5,17 +5,20 @@ public class CharacterFieldCard implements iFieldCard {
     private CharacterCard characterCard;
     private int position; //0 defense 1 attack
     private int isAvailableAttack; // Set to attack on next turn
+    private int isRotatable;
 
     public CharacterFieldCard(){
         this.characterCard = new CharacterCard();
         this.position=0;
         this.isAvailableAttack=0;
+        this.isRotatable = 1;
     }
 
     public CharacterFieldCard(CharacterCard  characterCard,int position,int isAvailableAttack){
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = position;
         this.isAvailableAttack = isAvailableAttack;
+        this.isRotatable = 1;
     }
 
     public CharacterCard getCharacterCard(){return this.characterCard;}
@@ -26,7 +29,18 @@ public class CharacterFieldCard implements iFieldCard {
 
     public int getBattleAvailability(){return this.isAvailableAttack;}
 
-    public void setOffBattleAvailability(){this.isAvailableAttack = 1;}
+    public void setBattleAvailability(int isAvailableAttack){this.isAvailableAttack = isAvailableAttack;}
+
+
+    @Override
+    public int getIsRotateAble() {
+        return this.isRotatable;
+    }
+
+    @Override
+    public void setIsRotatable(int isRotatable) {
+        this.isRotatable = isRotatable;
+    }
 
     @Override
     public void setPositionValue(int position) {
