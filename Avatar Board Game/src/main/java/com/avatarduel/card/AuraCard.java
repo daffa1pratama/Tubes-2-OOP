@@ -4,11 +4,11 @@ public class AuraCard extends SkillCard {
     private int addAttack;
     private int addDefense;
 
-    public void Effect(CharacterFieldCard characterCard) {
-        int currAttack = characterCard.getAttack();
-        int currDefense = characterCard.getDefense();
-        characterCard.setAttack(currAttack + this.addAttack);
-        characterCard.setDefense(currDefense + this.addDefense);
+    public void Effect(CharacterFieldCard characterFieldCard) {
+        int currAttack = characterFieldCard.getCharacterCard().getAttack();
+        int currDefense = characterFieldCard.getCharacterCard().getDefense();
+        characterFieldCard.getCharacterCard().setAttack(currAttack + this.addAttack);
+        characterFieldCard.getCharacterCard().setDefense(currDefense + this.addDefense);
     }
 
     @Override
