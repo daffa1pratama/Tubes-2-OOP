@@ -9,7 +9,9 @@ import com.avatarduel.card.CharacterCard;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -33,7 +35,14 @@ public class AvatarDuel extends Application {
   }
 
   @Override
-  public void start(Stage stage) {
+  public void start(Stage stage) throws IOException {
+//	  Parent root = FXMLLoader.load(getClass().getResource("AvatarDuel.fxml"));
+//
+//      Scene scene = new Scene(root);
+//
+//      stage.setTitle("FXML Welcome");
+//      stage.setScene(scene);
+//      stage.show();
     Text text = new Text();
     text.setText("Loading...");
     text.setX(50);
