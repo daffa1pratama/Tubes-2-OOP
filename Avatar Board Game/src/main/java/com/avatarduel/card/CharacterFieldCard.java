@@ -1,31 +1,39 @@
 package com.avatarduel.card;
 
-public class CharacterFieldCard extends CharacterCard{
-    private int role; //0 defense 1 attack
-    private int isAvailableBattle;//Aktifkan jadi 1 di saat endturn (?)
+public class CharacterFieldCard extends CharacterCard implements iFieldCard {
+    private int position; //0 defense 1 attack
+    private int isAvailableAttack; // Set to attack on next turn
 
     public CharacterFieldCard(){
         super();
-        this.role=0;
-        this.isAvailableBattle=0;
+        this.position=0;
+        this.isAvailableAttack=0;
     }
 
-    public int getRole() {
-        return this.role;
+    public int getPosition() {
+        return this.position;
     }
 
-    public void setRole() {
-        this.role = (this.role +1)%2;
-        this.isAvailableBattle = 0;
+    public int getBattleAvailability(){return this.isAvailableAttack;}
+
+    public void setOffBattleAvailability(){this.isAvailableAttack = 1;}
+
+    @Override
+    public void rotate() {
+        this.position = (this.position + 1) % 2;
     }
 
-    public int getBattleAvailability(){return this.isAvailableBattle;}
-
-    public void setOffBattleAvailability(){this.isAvailableBattle = 1;}
+    @Override
+    public int getPositionValue() {
+        if (this.position == 0) {
+            return super.getAttack();
+        }
+        return super.getDefense();
+    }
 
     public void AttackEnemy(CharacterFieldCard enemyCard) {
         //Enemy defense role
-        if (enemyCard.getRole() == 0) {
+        if (enemyCard.getPosition() == 0) {
 
         }
         //Enemy attack role

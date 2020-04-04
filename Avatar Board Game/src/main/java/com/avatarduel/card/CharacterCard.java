@@ -1,6 +1,6 @@
 package com.avatarduel.card;
 
-public class CharacterCard extends Card{
+public class CharacterCard extends Card {
     private int attack;
     private int defense;
     private int power;
