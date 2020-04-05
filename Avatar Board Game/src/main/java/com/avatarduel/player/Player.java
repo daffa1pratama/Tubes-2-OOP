@@ -3,6 +3,7 @@ package com.avatarduel.player;
 import com.avatarduel.card.Card;
 import com.avatarduel.card.CharacterCard;
 import com.avatarduel.card.SkillCard;
+import com.avatarduel.card.CardCollection;
 import com.avatarduel.card.Element;
 import com.avatarduel.deck.Deck;
 import com.avatarduel.card.LandCard;
@@ -28,9 +29,9 @@ public class Player {
     private int air;
     private int isLandCardDeploy; 
 
-    public Player() {
+    public Player(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection) {
         this.name = "";
-        this.deck = new Deck();
+        this.deck = new Deck(characterCardCollection, landCardCollection, skillCardCollection);
         this.onHand = new ArrayList<Card>(7);
         this.landFieldCards = new ArrayList<LandCard>();
         this.characterFieldCards = new ArrayList<CharacterFieldCard>(8);
@@ -44,9 +45,9 @@ public class Player {
 
     }
 
-    public Player(String name) {
+    public Player(String name, CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection) {
         this.name = name;
-        this.deck = new Deck();
+        this.deck = new Deck(characterCardCollection, landCardCollection, skillCardCollection);
         this.hp = 80;
         this.fire = 0;
         this.earth = 0;

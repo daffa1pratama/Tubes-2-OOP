@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import com.avatarduel.board.Board;
 import com.avatarduel.card.Element;
 import com.avatarduel.card.CharacterCard;
 import com.avatarduel.card.LandCard;
@@ -87,9 +88,8 @@ public class AvatarDuel extends Application {
 
     try {
       this.loadCards();
-//      characterCardCollection.printCards();
-//      landCardCollection.printCards();
-//      skillCardCollection.printCards();
+      Board board = new Board(characterCardCollection, landCardCollection, skillCardCollection);
+//      board.printCards();
       text.setText("Avatar Duel!");
       Button button = new Button("Test");
       button.setOnAction(new EventHandler<ActionEvent>() {
