@@ -7,6 +7,7 @@ import com.avatarduel.card.Element;
 import com.avatarduel.deck.Deck;
 import com.avatarduel.card.LandCard;
 import com.avatarduel.card.CharacterFieldCard;
+import com.avatarduel.player.Turn;
 
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private Deck deck;
+    private Turn turn;
     private List<Card> onHand;
     private List<LandCard> landFieldCards;
     private List<CharacterFieldCard> characterFieldCards;
@@ -29,11 +31,10 @@ public class Player {
     public Player() {
         this.name = "";
         this.deck = new Deck();
-        //Belum diset berapa card batasan
-        this.onHand = new ArrayList<Card>();
+        this.onHand = new ArrayList<Card>(7);
         this.landFieldCards = new ArrayList<LandCard>();
-        this.characterFieldCards = new ArrayList<CharacterFieldCard>();
-        this.skillFieldCards = new ArrayList<SkillCard>();
+        this.characterFieldCards = new ArrayList<CharacterFieldCard>(8);
+        this.skillFieldCards = new ArrayList<SkillCard>(8);
         this.isLandCardDeploy = 0;
         this.hp = 80;
         this.fire = 0;
@@ -70,7 +71,9 @@ public class Player {
     public int getAir() { return air; }
 
     public List<LandCard> getLandFieldCards(){return this.landFieldCards;}
+
     public List<CharacterFieldCard> getCharacterFieldCards() {return this.characterFieldCards;}
+
     public List<SkillCard> getSkillFieldCards() {return this.skillFieldCards;}
 
     public int setHp(int newhp){return this.hp = newhp;}
@@ -143,13 +146,14 @@ public class Player {
      *Player movement option in DRAW PHASE
      */
     public void drawCard() {
-        //Tambahin try and catch
-        this.onHand.add(this.deck.drawCard());
-
+        if (this.onHand.size() < 7){
+            this.onHand.add(this.deck.drawCard());
+        } else {
+            //Buang kartu dengan memilih salah satu dari 8 kartu (?)
+        }
     }
 
     public void resetPower(){
-        //Apakah ada cara lain selian di reset jd 0 ?
         this.air = 0;
         this.fire = 0;
         this.earth = 0;
@@ -172,47 +176,86 @@ public class Player {
      * Player movement option in MAIN1
      */
     public void deployCharacterCard(CharacterCard characterCard,int position){
-        // !!!! Perlu cek kondisi apakah field sudah penuh !!!
-        if (this.onHand.contains(characterCard)){
-            if (deployAble(characterCard.getElement(), characterCard.getPower())){
-                this.characterFieldCards.add(new CharacterFieldCard(characterCard,position,0));
-                usePower(characterCard.getElement(), characterCard.getPower());
+        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
+            if (this.onHand.contains(characterCard)){
+                if (deployAble(characterCard.getElement(), characterCard.getPower())){
+                    if (this.characterFieldCards.size() <= 8){
+                        this.characterFieldCards.add(new CharacterFieldCard(characterCard,position,0));
+                        usePower(characterCard.getElement(), characterCard.getPower());
+                    } else {
+
+                    }
+                } else {
+                    //Lempar Exception
+                 }
+                
             } else {
-                //Lempar Exception
+                //Lempar exception
             }
-            
         } else {
-            //Lempar exception
+
         }
     }
 
     public void changeCharacterCardPosition(CharacterFieldCard characterFieldCard){
-        characterFieldCard.rotate();
+        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
+            if (this.characterFieldCards.contains(characterFieldCard)){
+                if (characterFieldCard.getIsRotateAble() == 1){
+                    characterFieldCard.rotate();
+                } else {
+                    
+                }
+            } else {
+                //Kartu yang diklik berupa kartu lawan sehingga tidak valid untuk diganti position
+            }
+        } else {
+
+        }
     }
 
     public void deployLandCard(LandCard landCard){
         if (this.onHand.remove(landCard)){
             this.landFieldCards.add(landCard);
-            this.isLandCardDeploy = 1;
             addPower(landCard.getElement());
+            this.isLandCardDeploy = 1;
         } else {
             //Lempar exception
         }
     }
 
-    public void deploySkillCard(SkillCard skillCard){
+    public void deploySkillCard(SkillCard skillCard,CharacterFieldCard characterFieldCard){
         // !!!! Perlu cek kondisi apakah field sudah penuh !!!
-        //Apakah perlu cek .contains()
-        if (deployAble(skillCard.getElement(), skillCard.getPower())){
-            this.skillFieldCards.add(skillCard);
-            usePower(skillCard.getElement(), skillCard.getPower());
-        } else {
-            //Lempar Exception
+        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
+            if (this.characterFieldCards.contains(characterFieldCard)){
+                if (deployAble(skillCard.getElement(), skillCard.getPower())){
+                    if (this.skillFieldCards.size() <= 8){
+                        this.skillFieldCards.add(skillCard);
+                        //Pemanggilan fungsi useSkillOnCard()
+                        usePower(skillCard.getElement(), skillCard.getPower());
+                    } else {
+
+                    }
+                } else {
+                    //Lempar Exception
+                }
+            } else {
+
+            }
+        } else{
+
         }
     }
 
     public void dumpSkillCard(SkillCard skillCard){
-        this.skillFieldCards.remove(skillCard);
+        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
+            if (this.skillFieldCards.contains(skillCard)){
+                this.skillFieldCards.remove(skillCard);
+            } else {
+
+            }
+        } else {
+
+        }
     }
 
     /**
@@ -220,20 +263,27 @@ public class Player {
      */
     public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
         //Harus dicek lagi apakah udah ada pemenang game dr proses attack
-        if (characterFieldCard.getBattleAvailability() == 1){
-            if (opponent.getCharacterFieldCards().isEmpty()){
-                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-                characterFieldCard.setIsRotatable(0);
-            } else {
-                if (isAttackValid(characterFieldCard,opponentCharacterCard)){
-                    opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
-                    opponent.getCharacterFieldCards().remove(opponentCharacterCard);
+        if (this.turn.getPhase() == Phase.BATTLE){
+            //Apakah perlu cek kepemilikan card ?
+            if (characterFieldCard.getBattleAvailability() == 1){
+                if (opponent.getCharacterFieldCards().isEmpty()){
+                    opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
                     characterFieldCard.setIsRotatable(0);
+                    characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
                 } else {
-                    //Lempar exception
+                    if (isAttackValid(characterFieldCard,opponentCharacterCard)){
+                        opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
+                        opponent.getCharacterFieldCards().remove(opponentCharacterCard);
+                        characterFieldCard.setIsRotatable(0);
+                        characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+                    } else {
+                        //Lempar exception
+                    }
                 }
+            } else {
+    
             }
-        } else {
+        } else{
 
         }
         
@@ -253,6 +303,7 @@ public class Player {
             currentCard.setIsRotatable(1);
             currentCard.setBattleAvailability(1);
         }
+        this.turn.setEndTurn(1);
     }
 
     // public void endTurn() {

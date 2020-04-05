@@ -9,11 +9,15 @@ public class Turn {
         this.endTurn = 0;
     }
 
+    public Phase getPhase(){return this.phase;}
+
     public void setPhase(Phase phase){
         this.phase = phase;
     }
 
     public int getEndTurn(){ return endTurn;}
+
+    public void setEndTurn(int endTurn){ this.endTurn = endTurn;}
 
     public void changePhase(){
         switch (this.phase){
