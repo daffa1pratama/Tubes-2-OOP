@@ -6,6 +6,7 @@ import com.avatarduel.card.CardCollection;
 import com.avatarduel.card.Card;
 
 public class Board {
+
     private Player p1;
     private Player p2;
     private Player winner;
@@ -14,9 +15,12 @@ public class Board {
 
     //MAIN BOARD IMPLEMENTS HERE
 
-    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection) {
-        this.p1 = new Player("P1", characterCardCollection, landCardCollection, skillCardCollection);
-        this.p2 = new Player("P2", characterCardCollection, landCardCollection, skillCardCollection);
+    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection) {
+        this.p1 = new Player("P1", characterCardCollection, landCardCollection, auraCardCollection);
+        this.p2 = new Player("P2", characterCardCollection, landCardCollection, auraCardCollection);
+        this.turn = 1;
+        this.winner = null;
+        this.currentPlayer = this.p1;
         this.turn = 1;
     }
 
@@ -35,5 +39,9 @@ public class Board {
             Card C = D2.drawCard();
             C.InfoCard();
         }
+    }
+
+    public void runGame() {
+        // main game algo
     }
 }

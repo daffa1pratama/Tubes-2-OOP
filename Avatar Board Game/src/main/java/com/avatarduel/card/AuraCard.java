@@ -4,6 +4,10 @@ public class AuraCard extends SkillCard {
     private int addAttack;
     private int addDefense;
 
+    public AuraCard(String name, String description, Element element, int attack, int defense, int power) {
+        super(name, description, element, attack, defense, power);
+    }
+
     public void Effect(CharacterFieldCard characterFieldCard) {
         int currAttack = characterFieldCard.getCharacterCard().getAttack();
         int currDefense = characterFieldCard.getCharacterCard().getDefense();
