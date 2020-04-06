@@ -6,27 +6,16 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import com.avatarduel.board.Board;
-import com.avatarduel.card.Element;
-import com.avatarduel.card.CharacterCard;
-import com.avatarduel.card.LandCard;
-import com.avatarduel.card.AuraCard;
-import com.avatarduel.card.DestroyCard;
-import com.avatarduel.card.PowerUpCard;
-import com.avatarduel.card.CardCollection;
-import com.avatarduel.util.CSVReader;
+import com.avatarduel.card.*;
+import com.avatarduel.util.*;
+import com.avatarduel.board.*;
 
 public class AvatarDuel extends Application {
   private CardCollection characterCardCollection;
@@ -92,22 +81,9 @@ public class AvatarDuel extends Application {
       errorAlert.showAndWait();
     }
     
-    Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
-    board.runGame();
     text.setText("Avatar Duel!");
-    Button button = new Button("Test");
-    button.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent actionEvent) {
-        CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
-        Text test = new Text();
-        test.setX(100);
-        test.setY(100);
-        test.setText(aang.CardInfo());
-        root.getChildren().add(test);
-      }
-    });
-    root.getChildren().add(button);
+    Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
+    board.runGame(root);
   }
 
   public static void main(String[] args) {

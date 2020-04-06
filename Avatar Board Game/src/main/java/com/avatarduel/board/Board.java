@@ -3,7 +3,15 @@ package com.avatarduel.board;
 import com.avatarduel.deck.Deck;
 import com.avatarduel.player.Player;
 import com.avatarduel.card.CardCollection;
+import com.avatarduel.card.CharacterCard;
 import com.avatarduel.card.Card;
+import com.avatarduel.card.Element;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.text.*;
+import javafx.scene.control.*;
+import javafx.scene.Group;
 
 public class Board {
 
@@ -41,7 +49,20 @@ public class Board {
         }
     }
 
-    public void runGame() {
+    public void runGame(Group root) {
         // main game algo
+        Button button = new Button("Test");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
+            Text test = new Text();
+            test.setX(100);
+            test.setY(100);
+            test.setText(aang.CardInfo());
+            root.getChildren().add(test);
+        }
+        });
+        root.getChildren().add(button);
     }
 }
