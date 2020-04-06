@@ -3,9 +3,18 @@ package com.avatarduel.board;
 import com.avatarduel.deck.Deck;
 import com.avatarduel.player.Player;
 import com.avatarduel.card.CardCollection;
+import com.avatarduel.card.CharacterCard;
 import com.avatarduel.card.Card;
+import com.avatarduel.card.Element;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.text.*;
+import javafx.scene.control.*;
+import javafx.scene.Group;
 
 public class Board {
+
     private Player p1;
     private Player p2;
     private Player winner;
@@ -14,9 +23,12 @@ public class Board {
 
     //MAIN BOARD IMPLEMENTS HERE
 
-    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection) {
-        this.p1 = new Player("P1", characterCardCollection, landCardCollection, skillCardCollection);
-        this.p2 = new Player("P2", characterCardCollection, landCardCollection, skillCardCollection);
+    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection) {
+        this.p1 = new Player("P1", characterCardCollection, landCardCollection, auraCardCollection);
+        this.p2 = new Player("P2", characterCardCollection, landCardCollection, auraCardCollection);
+        this.turn = 1;
+        this.winner = null;
+        this.currentPlayer = this.p1;
         this.turn = 1;
     }
 
@@ -35,5 +47,22 @@ public class Board {
             Card C = D2.drawCard();
             C.InfoCard();
         }
+    }
+
+    public void runGame(Group root) {
+        // main game algo
+        Button button = new Button("Test");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
+            Text test = new Text();
+            test.setX(100);
+            test.setY(100);
+            test.setText(aang.CardInfo());
+            root.getChildren().add(test);
+        }
+        });
+        root.getChildren().add(button);
     }
 }
