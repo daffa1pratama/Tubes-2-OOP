@@ -57,14 +57,13 @@ public class AvatarDuel extends Application {
       auraCardCollection.addCard(l);
     }
   }
-
-  @Override
+  //Override
   // public void start(Stage stage) throws Exception {
   //   Text text = new Text();
   //   text.setText("Loading...");
   //   text.setX(50);
   //   text.setY(50);
-    
+
   //   Group root = new Group();
   //   root.getChildren().add(text);
 
@@ -82,11 +81,12 @@ public class AvatarDuel extends Application {
   //     errorAlert.setContentText("Failed to load cards: " + e);
   //     errorAlert.showAndWait();
   //   }
-    
+
   //   text.setText("Avatar Duel!");
   //   Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
   //   board.runGame(root);
   // }
+  @Override
   public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load((getClass().getResource("AvatarDuel.fxml")));
     Scene scene = new Scene(root);

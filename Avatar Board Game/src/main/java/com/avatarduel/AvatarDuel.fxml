@@ -65,7 +65,7 @@
       <Label layoutX="263.0" layoutY="202.0" text="Player B" />
       <Label layoutX="265.0" layoutY="680.0" text="Player A" />
       <Rectangle id="cardDesc" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="353.0" layoutX="13.0" layoutY="278.0" stroke="BLACK" strokeType="INSIDE" width="239.0" />
-      <Label id="txtCurrentPlayerNPhase" layoutX="676.0" layoutY="451.0" text="Current Player - Current Phase" />
+      <Label id="txtCurrentPhase" layoutX="784.0" layoutY="450.0" text="Current Phase" />
       <TextArea id="txtareaInfoB" layoutX="232.0" layoutY="59.0" prefHeight="136.0" prefWidth="122.0" text="LandCard  &#10;Air &#10;Water&#10;Earth&#10;Fire">
          <effect>
             <Blend mode="OVERLAY" />
@@ -112,5 +112,7 @@
       <Text id="txtDeckA" layoutX="105.0" layoutY="803.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card lefts" />
       <Rectangle id="AvatarA" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="61.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Text id="txtDeckA" layoutX="90.0" layoutY="115.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card lefts" />
+      <Label id="txtCurrentPlayer" layoutX="630.0" layoutY="450.0" text="Current Player " />
+      <Label id="txtseperator" layoutX="740.0" layoutY="451.0" prefHeight="21.0" prefWidth="28.0" text="  -" textAlignment="CENTER" />
    </children>
 </AnchorPane>
