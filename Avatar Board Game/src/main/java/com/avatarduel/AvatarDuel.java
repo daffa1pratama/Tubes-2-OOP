@@ -68,28 +68,7 @@ public class AvatarDuel extends Application {
       auraCardCollection.addCard(l);
     }
   }
-  @Override
-   public void start(Stage stage) throws Exception {
-     Text text = new Text();
-     text.setText("Loading...");
-     text.setX(50);
-     text.setY(50);
 
-     Group root = new Group();
-     root.getChildren().add(text);
-
-     Scene scene = new Scene(root, 1280, 720);
-
-     stage.setTitle("Avatar Duel");
-     stage.setScene(scene);
-     stage.show();
-
-
-
-  //   text.setText("Avatar Duel!");
-  //   Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
-  //   board.runGame(root);
-  // }
   @Override
   public void start(Stage stage) throws Exception {
     try {
