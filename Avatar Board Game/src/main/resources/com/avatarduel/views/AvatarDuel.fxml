@@ -9,12 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="921.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="921.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.AvatarDuel">
    <children>
       <Rectangle id="AvatarA" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="88.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Rectangle id="AvatarA" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="74.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Rectangle />
-      <Rectangle id="handCardA1" fx:id="test1" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="365.0" layoutY="770.0" onMouseClicked="#handClick" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+      <Rectangle id="handCardA1" fx:id="test1" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="365.0" layoutY="770.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="handCardA2" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="484.0" layoutY="771.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="handCardA3" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="603.0" layoutY="771.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="handCardA4" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="722.0" layoutY="771.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
@@ -61,7 +61,7 @@
       <Rectangle id="charCardB7" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="136.0" layoutX="975.0" layoutY="309.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="charCardB8" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="136.0" layoutX="1077.0" layoutY="309.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Button id="btnNextPhase" layoutX="262.0" layoutY="392.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="94.0" text="Next Phase" />
-      <Button id="btnEndTurn" fx:id="btnEndTurn" layoutX="262.0" layoutY="461.0" mnemonicParsing="false" onAction="#pressButton" prefHeight="53.0" prefWidth="94.0" text="End Turn" />
+      <Button id="btnEndTurn" fx:id="btnEndTurn" layoutX="262.0" layoutY="461.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="94.0" text="End Turn" />
       <Label layoutX="263.0" layoutY="202.0" text="Player B" />
       <Label layoutX="265.0" layoutY="680.0" text="Player A" />
       <Rectangle id="cardDesc" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="353.0" layoutX="13.0" layoutY="278.0" stroke="BLACK" strokeType="INSIDE" width="239.0" />

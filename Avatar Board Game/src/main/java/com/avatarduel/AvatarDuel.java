@@ -88,7 +88,7 @@ public class AvatarDuel extends Application {
   //   board.runGame(root);
   // }
   public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load((getClass().getResource("AvatarDuel.fxml")));
+    Parent root = FXMLLoader.load(getClass().getResource("views/AvatarDuel.fxml"));
     Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
