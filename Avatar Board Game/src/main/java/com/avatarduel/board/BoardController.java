@@ -1,5 +1,6 @@
 package com.avatarduel.board;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.*;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+import com.avatarduel.card.*;
+
 public class BoardController {
     @FXML
     private AnchorPane dataPane;
@@ -20,16 +23,25 @@ public class BoardController {
     @FXML
     private AnchorPane battlePane;
 
-//    @FXML
-//    private Label aLabel;
+    @FXML
+    private BorderPane cardDetail;
 
     @FXML
     public void initialize() {
 
     }
 
-//    public void changeText() {
-//        aLabel.setText("PUNTEN");
-//        System.out.println(aLabel);
-//    }
+    public void displayCard(CharacterCard card) {
+//        Button button = new Button("TOT");
+//        cardDetail.getChildren().add(button);
+        try {
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
+            Pane cardDetailPane = cardLoader.load();
+            CardController cardController = cardLoader.getController();
+            cardController.setCard(card);
+            cardDetail.setCenter(cardDetailPane);
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
 }

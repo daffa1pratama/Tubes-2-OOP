@@ -84,9 +84,9 @@ public class AvatarDuel extends Application {
     FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("views/Board.fxml"));
     Parent root = boardLoader.load();
     boardController = boardLoader.getController();
-//    boardController.changeText();
+    boardController.displayCard((CharacterCard) characterCardCollection.getCardAt(1));
     Scene scene = new Scene(root);
-//    stage.setTitle("Avatar Duel");
+    stage.setTitle("Avatar Duel");
     stage.setScene(scene);
   }
 

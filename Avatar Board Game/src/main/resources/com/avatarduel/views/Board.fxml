@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,11 +17,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.33444816053511706" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<SplitPane dividerPositions="0.33444816053511706" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.board.BoardController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Pane layoutX="53.0" layoutY="176.0" prefHeight="247.0" prefWidth="158.0" />
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="145.0" prefWidth="95.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdc1e" height="145.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
@@ -99,6 +99,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdc1e" height="145.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
                </children>
             </Pane>
+            <BorderPane fx:id="cardDetail" layoutX="53.0" layoutY="176.0" prefHeight="247.0" prefWidth="158.0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
