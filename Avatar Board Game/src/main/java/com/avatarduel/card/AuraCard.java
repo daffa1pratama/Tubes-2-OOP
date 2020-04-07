@@ -4,8 +4,8 @@ public class AuraCard extends SkillCard {
     private int addAttack;
     private int addDefense;
 
-    public AuraCard(String name, String description, Element element, int attack, int defense, int power) {
-        super(name, description, element, attack, defense, power);
+    public AuraCard(String name, String description, Element element,String imagePath, int attack, int defense, int power) {
+        super(name, description, element,imagePath, attack, defense, power);
     }
 
     public void Effect(CharacterFieldCard characterFieldCard) {
