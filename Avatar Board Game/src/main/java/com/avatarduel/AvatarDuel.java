@@ -6,7 +6,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -57,33 +59,40 @@ public class AvatarDuel extends Application {
   }
 
   @Override
-  public void start(Stage stage) throws Exception {
-    Text text = new Text();
-    text.setText("Loading...");
-    text.setX(50);
-    text.setY(50);
+  // public void start(Stage stage) throws Exception {
+  //   Text text = new Text();
+  //   text.setText("Loading...");
+  //   text.setX(50);
+  //   text.setY(50);
     
-    Group root = new Group();
-    root.getChildren().add(text);
+  //   Group root = new Group();
+  //   root.getChildren().add(text);
 
-    Scene scene = new Scene(root, 1280, 720);
+  //   Scene scene = new Scene(root, 1280, 720);
 
+  //   stage.setTitle("Avatar Duel");
+  //   stage.setScene(scene);
+  //   stage.show();
+
+  //   try {
+  //     this.loadCards();
+  //   } catch (Exception e) {
+  //     Alert errorAlert = new Alert(AlertType.ERROR);
+  //     errorAlert.setHeaderText("Card loading failed");
+  //     errorAlert.setContentText("Failed to load cards: " + e);
+  //     errorAlert.showAndWait();
+  //   }
+    
+  //   text.setText("Avatar Duel!");
+  //   Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
+  //   board.runGame(root);
+  // }
+  public void start(Stage stage) throws Exception {
+    Parent root = FXMLLoader.load((getClass().getResource("AvatarDuel.fxml")));
+    Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
     stage.show();
-
-    try {
-      this.loadCards();
-    } catch (Exception e) {
-      Alert errorAlert = new Alert(AlertType.ERROR);
-      errorAlert.setHeaderText("Card loading failed");
-      errorAlert.setContentText("Failed to load cards: " + e);
-      errorAlert.showAndWait();
-    }
-    
-    text.setText("Avatar Duel!");
-    Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
-    board.runGame(root);
   }
 
   public static void main(String[] args) {
