@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.fxml.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -14,12 +15,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 import com.avatarduel.card.*;
 import com.avatarduel.util.*;
 import com.avatarduel.board.*;
 
 public class AvatarDuel extends Application {
+  private BoardController boardController;
   private CardCollection characterCardCollection;
   private CardCollection landCardCollection;
   private CardCollection auraCardCollection;
@@ -73,14 +77,7 @@ public class AvatarDuel extends Application {
   //   stage.setScene(scene);
   //   stage.show();
 
-  //   try {
-  //     this.loadCards();
-  //   } catch (Exception e) {
-  //     Alert errorAlert = new Alert(AlertType.ERROR);
-  //     errorAlert.setHeaderText("Card loading failed");
-  //     errorAlert.setContentText("Failed to load cards: " + e);
-  //     errorAlert.showAndWait();
-  //   }
+
 
   //   text.setText("Avatar Duel!");
   //   Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
@@ -88,11 +85,23 @@ public class AvatarDuel extends Application {
   // }
   @Override
   public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("views/AvatarDuel.fxml"));
-    Scene scene = new Scene(root);
-    stage.setTitle("Avatar Duel");
-    stage.setScene(scene);
+    try {
+      this.loadCards();
+    } catch (Exception e) {
+      Alert errorAlert = new Alert(AlertType.ERROR);
+      errorAlert.setHeaderText("Card loading failed");
+      errorAlert.setContentText("Failed to load cards: " + e);
+      errorAlert.showAndWait();
+    }
+    Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
     stage.show();
+    FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("views/Board.fxml"));
+    Parent root = boardLoader.load();
+    boardController = boardLoader.getController();
+//    boardController.changeText();
+    Scene scene = new Scene(root);
+//    stage.setTitle("Avatar Duel");
+    stage.setScene(scene);
   }
 
   public static void main(String[] args) {

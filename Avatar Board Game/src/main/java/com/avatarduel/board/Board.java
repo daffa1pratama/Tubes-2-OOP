@@ -49,20 +49,20 @@ public class Board {
         }
     }
 
-    public void runGame(Group root) {
-        // main game algo
-        Button button = new Button("Test");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
-            Text test = new Text();
-            test.setX(100);
-            test.setY(100);
-            test.setText(aang.CardInfo());
-            root.getChildren().add(test);
-        }
-        });
-        root.getChildren().add(button);
-    }
+//    public void runGame(Group root) {
+//        // main game algo
+//        Button button = new Button("Test");
+//        button.setOnAction(new EventHandler<ActionEvent>() {
+//        @Override
+//        public void handle(ActionEvent actionEvent) {
+//            CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
+//            Text test = new Text();
+//            test.setX(100);
+//            test.setY(100);
+//            test.setText(aang.CardInfo());
+//            root.getChildren().add(test);
+//        }
+//        });
+//        root.getChildren().add(button);
+//    }
 }
