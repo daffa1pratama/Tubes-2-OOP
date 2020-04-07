@@ -5,15 +5,15 @@ public class SkillCard extends Card {
     private int defense;
     private int power;
 
-    public SkillCard() {
-        super();
-        this.attack = 0;
-        this.defense = 0;
-        this.power = 0;
-    }
+    // public SkillCard() {
+    //     super();
+    //     this.attack = 0;
+    //     this.defense = 0;
+    //     this.power = 0;
+    // }
 
-    public SkillCard(String name, String description, Element element, int attack, int defense, int power) {
-        super(name, description, element);
+    public SkillCard(String name, String description, Element element,String imagePath, int attack, int defense, int power) {
+        super(name, description, element,imagePath);
         this.attack = attack;
         this.defense = defense;
         this.power = power;

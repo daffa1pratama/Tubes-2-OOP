@@ -9,12 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="921.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.AvatarDuel">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="921.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.AvatarDuel">
    <children>
       <Rectangle id="AvatarA" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="88.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Rectangle id="AvatarA" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="74.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Rectangle />
-      <Rectangle id="handCardA1" fx:id="test1" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="365.0" layoutY="770.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+      <Rectangle id="handCardA1" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="365.0" layoutY="770.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="handCardA2" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="484.0" layoutY="771.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="handCardA3" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="603.0" layoutY="771.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
       <Rectangle id="handCardA4" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="136.0" layoutX="722.0" layoutY="771.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
@@ -111,7 +111,7 @@
       <Rectangle id="AvatarA" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="77.0" layoutY="722.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
       <Text id="txtDeckA" layoutX="105.0" layoutY="803.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card lefts" />
       <Rectangle id="AvatarA" accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#ffb31f" height="166.0" layoutX="61.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
-      <Text id="txtDeckA" layoutX="90.0" layoutY="115.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card lefts" />
+      <Text id="txtDeckA" layoutX="90.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card lefts" />
       <Label id="txtCurrentPlayer" layoutX="630.0" layoutY="450.0" text="Current Player " />
       <Label id="txtseperator" layoutX="740.0" layoutY="451.0" prefHeight="21.0" prefWidth="28.0" text="  -" textAlignment="CENTER" />
    </children>

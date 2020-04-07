@@ -55,7 +55,7 @@ public class Board {
         button.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {
-            CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR, 100, 100, 1);
+            CharacterCard aang = new CharacterCard("Aang", "Botak, gundul", Element.AIR,"src/res/image/character/Aang.png",100, 100, 1);
             Text test = new Text();
             test.setX(100);
             test.setY(100);
