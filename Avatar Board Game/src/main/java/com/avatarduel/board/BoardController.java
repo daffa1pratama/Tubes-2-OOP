@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
@@ -25,6 +26,12 @@ public class BoardController {
 
     @FXML
     private BorderPane cardDetail;
+
+    @FXML
+    private GridPane handCardA;
+
+    @FXML
+    private GridPane handCardB;
 
     @FXML
     public void initialize() {
@@ -44,4 +51,23 @@ public class BoardController {
             System.out.println("Exception: " + e);
         }
     }
+
+    public void displayHandCard(CharacterCard card,int player,int x){
+        try{
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCharacterCard.fxml"));
+            Pane handCard = (Pane) cardLoader.load();
+            handCard.setPrefSize(66, 91);
+            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+            CardController cardController = cardLoader.getController();
+            cardController.setFieldCard(card);
+            if (player == 1){
+                handCardA.add(handCard,x,2,1,1);
+            } else { //player == 2
+                handCardB.add(handCard,x,0,1,1);
+            }
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
 }

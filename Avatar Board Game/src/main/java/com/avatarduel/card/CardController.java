@@ -65,4 +65,21 @@ public class CardController {
         }
         cardElement.setImage(elementImage);
     }
+
+    public void setFieldCard(CharacterCard card){
+        cardName.setText(card.getName());
+        Image newImage = new Image(card.getPathName());
+        cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        }
+        cardElement.setImage(elementImage);
+    }
 }
