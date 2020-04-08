@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.input.*;
 
 import com.avatarduel.card.*;
 
@@ -66,62 +65,9 @@ public class BoardController {
             } else { //player == 2
                 handCardB.add(handCard,x,0,1,1);
             }
-            
-            Hover(card, handCard);
-
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
     }
 
-    // public void taroKartu(CharacterCard card,int player,int x){
-    //     try{
-    //         FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCharacterCard.fxml"));
-    //         Pane handCard = (Pane) cardLoader.load();
-    //         handCard.setPrefSize(66, 91);
-    //         handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
-    //         CardController cardController = cardLoader.getController();
-    //         cardController.setFieldCard(card);
-    //         if (player == 1){
-    //             handCardA.add(handCard,x,0,1,1);
-    //         } else { //player == 2
-    //             handCardB.add(handCard,x,2,1,1);
-    //         }
-            
-    //         Hover(card, handCard);
-
-    //     } catch (IOException e) {
-    //         System.out.println("Exception: " + e);
-    //     }
-    // }
-
-    public void Hover(CharacterCard card, Pane pane) {
-        pane.setOnMouseEntered((MouseEvent t) -> {
-            displayCard(card);
-        });
-
-        pane.setOnMouseExited((MouseEvent t) -> {
-            cardDetail.setCenter(new Pane());
-        });
-    }
-
-    // public void Click() {
-    //     cellButton.setOnAction(new EventHandler<ActionEvent>(){
-
-    //         @Override
-    //         public void handle(ActionEvent t){
-    
-    //             Alert alert = new Alert(AlertType.CONFIRMATION);
-    //             alert.setTitle("Confirmation Dialog");
-    //             alert.setHeaderText("Look, a Confirmation Dialog");
-    //             alert.setContentText("Are you ok with this?");
-    
-    //             Optional<ButtonType> result = alert.showAndWait();
-    //             if (result.get() == ButtonType.OK){
-    //                 Animal currentAnimal = (Animal) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
-    //                 data.remove(currentAnimal);
-    //             }
-    //         }
-    //     });
-    }
 }
