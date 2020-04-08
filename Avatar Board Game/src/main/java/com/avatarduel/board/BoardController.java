@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.input.MouseEvent;
 
 import com.avatarduel.card.*;
 
@@ -100,39 +101,49 @@ public class BoardController {
         }
     }
 
-    public void fieldOnClick(){
-        FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
-        FieldCardController fieldCardController = fieldCardLoader.getController();
-        fieldCardController.click();
-    }
+    // public void fieldOnClick(){
+    //     FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+    //     FieldCardController fieldCardController = fieldCardLoader.getController();
+    //     fieldCardController.click();
+    // }
 
-//    public void displayHandCard(CharacterCard card,int player,int x){
-//        try{
-//            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCharacterCard.fxml"));
-//            Pane handCard = (Pane) cardLoader.load();
-//            handCard.setPrefSize(66, 91);
-//            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
-//            CardController cardController = cardLoader.getController();
-//            cardController.setFieldCard(card);
-//            if (player == 1){
-//                handCardA.add(handCard,x,2,1,1);
-//            } else { //player == 2
-//                handCardB.add(handCard,x,0,1,1);
-//            }
-//          Hover(card, handCard);
-//        } catch (IOException e) {
-//            System.out.println("Exception: " + e);
-//        }
-//    }
+   public void displayHandCard(CharacterCard card,int player,int x){
+       try{
+           FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+           Pane handCard = (Pane) cardLoader.load();
+           handCard.setPrefSize(66, 91);
+           handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+           FieldCardController cardController = cardLoader.getController();
+           cardController.setFieldCard(card);
+           if (player == 1){
+               handCardA.add(handCard,x,2,1,1);
+           } else { //player == 2
+               handCardB.add(handCard,x,0,1,1);
+           }
+         Hover(card, handCard);
+       } catch (IOException e) {
+           System.out.println("Exception: " + e);
+       }
+   }
 
     public void Hover(Card card, Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
-            displayCard(card);
+            if (card instanceof CharacterCard) {
+                this.displayCard((CharacterCard) card);
+            } else if (card instanceof LandCard) {
+                this.displayCard((LandCard) card);
+            } else if (card instanceof AuraCard) {
+                this.displayCard((AuraCard) card);
+            } else if (card instanceof DestroyCard) {
+                this.displayCard((DestroyCard) card);
+            } else if (card instanceof PowerUpCard) {
+                this.displayCard((PowerUpCard) card);
+            }
         });
 
         pane.setOnMouseExited((MouseEvent t) -> {
             cardDetail.setCenter(new Pane());
         });
-    }
+}
 
 }

@@ -106,10 +106,10 @@ public class AvatarDuel extends Application {
     FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("views/Board.fxml"));
     Parent root = boardLoader.load();
     boardController = boardLoader.getController();
-//    for (int i=0;i<=7;i++){
-//      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
-//      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
-//    }
+   for (int i=0;i<=7;i++){
+     boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
+     boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
+   }
     Card test = characterCardCollection.getCardAt(3);
     if (test instanceof CharacterCard) {
       boardController.displayCard((CharacterCard) test);
@@ -123,7 +123,7 @@ public class AvatarDuel extends Application {
       boardController.displayCard((PowerUpCard) test);
     }
 
-   boardController.fieldOnClick();
+  //  boardController.fieldOnClick();
 
     Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");
