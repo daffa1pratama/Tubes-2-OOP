@@ -119,9 +119,20 @@ public class BoardController {
 //            } else { //player == 2
 //                handCardB.add(handCard,x,0,1,1);
 //            }
+//          Hover(card, handCard);
 //        } catch (IOException e) {
 //            System.out.println("Exception: " + e);
 //        }
 //    }
+
+    public void Hover(Card card, Pane pane) {
+        pane.setOnMouseEntered((MouseEvent t) -> {
+            displayCard(card);
+        });
+
+        pane.setOnMouseExited((MouseEvent t) -> {
+            cardDetail.setCenter(new Pane());
+        });
+    }
 
 }
