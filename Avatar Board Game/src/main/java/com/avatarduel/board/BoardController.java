@@ -38,18 +38,6 @@ public class BoardController {
 
     }
 
-    public void displayCard(LandCard card) {
-        try {
-            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
-            Pane cardDetailPane = cardLoader.load();
-            CardController cardController = cardLoader.getController();
-            cardController.setCard(card);
-            cardDetail.setCenter(cardDetailPane);
-        } catch (IOException e) {
-            System.out.println("Exception: " + e);
-        }
-    }
-
     public void displayCard(CharacterCard card) {
         try {
             FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
@@ -62,22 +50,70 @@ public class BoardController {
         }
     }
 
-    public void displayHandCard(CharacterCard card,int player,int x){
-        try{
-            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCharacterCard.fxml"));
-            Pane handCard = (Pane) cardLoader.load();
-            handCard.setPrefSize(66, 91);
-            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+    public void displayCard(LandCard card) {
+        try {
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
+            Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
-            cardController.setFieldCard(card);
-            if (player == 1){
-                handCardA.add(handCard,x,2,1,1);
-            } else { //player == 2
-                handCardB.add(handCard,x,0,1,1);
-            }
+            cardController.setCard(card);
+            cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
     }
+
+    public void displayCard(AuraCard card) {
+        try {
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
+            Pane cardDetailPane = cardLoader.load();
+            CardController cardController = cardLoader.getController();
+            cardController.setCard(card);
+            cardDetail.setCenter(cardDetailPane);
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
+    public void displayCard(DestroyCard card) {
+        try {
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
+            Pane cardDetailPane = cardLoader.load();
+            CardController cardController = cardLoader.getController();
+            cardController.setCard(card);
+            cardDetail.setCenter(cardDetailPane);
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
+    public void displayCard(PowerUpCard card) {
+        try {
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
+            Pane cardDetailPane = cardLoader.load();
+            CardController cardController = cardLoader.getController();
+            cardController.setCard(card);
+            cardDetail.setCenter(cardDetailPane);
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
+//    public void displayHandCard(CharacterCard card,int player,int x){
+//        try{
+//            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCharacterCard.fxml"));
+//            Pane handCard = (Pane) cardLoader.load();
+//            handCard.setPrefSize(66, 91);
+//            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+//            CardController cardController = cardLoader.getController();
+//            cardController.setFieldCard(card);
+//            if (player == 1){
+//                handCardA.add(handCard,x,2,1,1);
+//            } else { //player == 2
+//                handCardB.add(handCard,x,0,1,1);
+//            }
+//        } catch (IOException e) {
+//            System.out.println("Exception: " + e);
+//        }
+//    }
 
 }

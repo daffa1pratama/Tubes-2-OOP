@@ -34,17 +34,25 @@ public class AvatarDuel extends Application {
   private CardCollection characterCardCollection;
   private CardCollection landCardCollection;
   private CardCollection auraCardCollection;
+  private CardCollection destroyCardCollection;
+  private CardCollection powerupCardCollection;
   private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
   private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
   private static final String AURA_CSV_FILE_PATH = "card/data/skill_aura.csv";
+  private static final String DESTROY_CSV_FILE_PATH = "card/data/skill_destroy.csv";
+  private static final String POWERUP_CSV_FILE_PATH = "card/data/skill_powerup.csv";
 
   public void loadCards() throws IOException, URISyntaxException {
     characterCardCollection = new CardCollection();
     landCardCollection = new CardCollection();
     auraCardCollection = new CardCollection();
+    destroyCardCollection = new CardCollection();
+    powerupCardCollection = new CardCollection();
     File characterCSVFile = new File(getClass().getResource(CHARACTER_CSV_FILE_PATH).toURI());
     File landCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
     File auraCSVFile = new File(getClass().getResource(AURA_CSV_FILE_PATH).toURI());
+    File destroyCSVFile = new File(getClass().getResource(DESTROY_CSV_FILE_PATH).toURI());
+    File powerupCSVFile = new File(getClass().getResource(POWERUP_CSV_FILE_PATH).toURI());
 
     CSVReader characterReader = new CSVReader(characterCSVFile, "\t");
     characterReader.setSkipHeader(true);
@@ -67,6 +75,20 @@ public class AvatarDuel extends Application {
       AuraCard l = new AuraCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[6]), Integer.parseInt(row[7]), Integer.parseInt(row[5]));
       auraCardCollection.addCard(l);
     }
+    CSVReader destroyReader = new CSVReader(destroyCSVFile, "\t");
+    destroyReader.setSkipHeader(true);
+    List<String[]> destroyRows = destroyReader.read();
+    for (String[] row : destroyRows) {
+      DestroyCard l = new DestroyCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[6]), Integer.parseInt(row[7]), Integer.parseInt(row[5]));
+      destroyCardCollection.addCard(l);
+    }
+    CSVReader powerupReader = new CSVReader(powerupCSVFile, "\t");
+    powerupReader.setSkipHeader(true);
+    List<String[]> powerupRows = powerupReader.read();
+    for (String[] row : powerupRows) {
+      PowerUpCard l = new PowerUpCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[6]), Integer.parseInt(row[7]), Integer.parseInt(row[5]));
+      powerupCardCollection.addCard(l);
+    }
   }
 
   @Override
@@ -84,10 +106,10 @@ public class AvatarDuel extends Application {
     FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("views/Board.fxml"));
     Parent root = boardLoader.load();
     boardController = boardLoader.getController();
-    for (int i=0;i<=7;i++){
-      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
-      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
-    }
+//    for (int i=0;i<=7;i++){
+//      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
+//      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
+//    }
     boardController.displayCard((LandCard) landCardCollection.getCardAt(1));
 
     Scene scene = new Scene(root);
