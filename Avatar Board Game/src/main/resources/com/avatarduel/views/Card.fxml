@@ -16,11 +16,7 @@
       </ImageView>
       <Pane layoutX="5.0" layoutY="8.0" prefHeight="28.0" prefWidth="149.0" style="-fx-border-color: BLACK;">
          <children>
-            <Text fx:id="cardName" layoutX="3.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
+            <Text fx:id="cardName" layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
             <ImageView fx:id="cardElement" fitHeight="19.0" fitWidth="24.0" layoutX="126.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../card/image/element/AirElement.png" />
@@ -65,6 +61,11 @@
                   <Font size="9.0" />
                </font>
             </TextArea>
+            <Text fx:id="cardType" layoutX="5.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[ C ]">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

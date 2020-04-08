@@ -88,8 +88,7 @@ public class AvatarDuel extends Application {
       boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
       boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
     }
-
-
+    boardController.displayCard((LandCard) landCardCollection.getCardAt(1));
 
     Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");

@@ -38,9 +38,19 @@ public class BoardController {
 
     }
 
+    public void displayCard(LandCard card) {
+        try {
+            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
+            Pane cardDetailPane = cardLoader.load();
+            CardController cardController = cardLoader.getController();
+            cardController.setCard(card);
+            cardDetail.setCenter(cardDetailPane);
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
     public void displayCard(CharacterCard card) {
-//        Button button = new Button("TOT");
-//        cardDetail.getChildren().add(button);
         try {
             FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
             Pane cardDetailPane = cardLoader.load();
