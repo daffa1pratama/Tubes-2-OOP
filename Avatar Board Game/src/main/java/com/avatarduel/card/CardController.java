@@ -41,17 +41,41 @@ public class CardController {
     private Text cardPower;
 
     @FXML
+    private Text cardType;
+
+    @FXML
     public void initialize() {
 
     }
+
+//    public void setCard(String name, String desc, String atk, String def, String pow, String path, Element elmt, String type) {
+//        cardName.setText(name);
+//        cardDescription.setText(desc);
+//        cardAttack.setText(atk);
+//        cardDefense.setText(def);
+//        cardPower.setText(pow);
+//        Image newImage = new Image(path);
+//        cardImage.setImage(newImage);
+//        Image elementImage;
+//        if (elmt == Element.AIR) {
+//            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+//        } else if (elmt == Element.WATER) {
+//            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+//        } else if (elmt == Element.FIRE) {
+//            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+//        } else {
+//            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+//        }
+//        cardElement.setImage(elementImage);
+//        cardType.setText(type);
+//    }
+
     public void setCard(CharacterCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
         cardAttack.setText(Integer.toString(card.getAttack()));
         cardDefense.setText(Integer.toString(card.getDefense()));
         cardPower.setText(Integer.toString(card.getPower()));
-//        Image newImage = new Image("/com/avatarduel/card/image/character/Huu.png");
-        // GANTI PATH DI CSV SEMUA JADI KEK GINI^^^^
         Image newImage = new Image(card.getPathName());
         cardImage.setImage(newImage);
         Image elementImage;
@@ -65,6 +89,96 @@ public class CardController {
             elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
         }
         cardElement.setImage(elementImage);
+        cardType.setText("[ C ]");
+    }
+
+    public void setCard(LandCard card) {
+        cardName.setText(card.getName());
+        cardDescription.setText(card.getDescription());
+        cardAttack.setText("-");
+        cardDefense.setText("-");
+        cardPower.setText("-");
+        System.out.println(card.getPathName());
+        Image newImage = new Image(card.getPathName());
+        cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        }
+        cardElement.setImage(elementImage);
+        cardType.setText("[ L ]");
+    }
+
+    public void setCard(AuraCard card) {
+        cardName.setText(card.getName());
+        cardDescription.setText(card.getDescription());
+        cardAttack.setText(Integer.toString(card.getAttack()));
+        cardDefense.setText(Integer.toString(card.getDefense()));
+        cardPower.setText(Integer.toString(card.getPower()));
+        Image newImage = new Image(card.getPathName());
+        cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        }
+        cardElement.setImage(elementImage);
+        cardType.setText("[ A ]");
+    }
+
+    public void setCard(DestroyCard card) {
+        cardName.setText(card.getName());
+        cardDescription.setText(card.getDescription());
+        cardAttack.setText(Integer.toString(card.getAttack()));
+        cardDefense.setText(Integer.toString(card.getDefense()));
+        cardPower.setText(Integer.toString(card.getPower()));
+        Image newImage = new Image(card.getPathName());
+        cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        }
+        cardElement.setImage(elementImage);
+        cardType.setText("[ D ]");
+    }
+
+    public void setCard(PowerUpCard card) {
+        cardName.setText(card.getName());
+        cardDescription.setText(card.getDescription());
+        cardAttack.setText(Integer.toString(card.getAttack()));
+        cardDefense.setText(Integer.toString(card.getDefense()));
+        cardPower.setText(Integer.toString(card.getPower()));
+        Image newImage = new Image(card.getPathName());
+        cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        }
+        cardElement.setImage(elementImage);
+        cardType.setText("[ P ]");
     }
 
 //    public void setFieldCard(CharacterCard card){
