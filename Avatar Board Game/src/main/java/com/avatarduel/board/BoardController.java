@@ -22,6 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
 
 import com.avatarduel.card.*;
+import com.avatarduel.player.*;
 
 public class BoardController {
     @FXML
@@ -181,6 +182,7 @@ public class BoardController {
 //            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
             }
         }));
+
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
@@ -190,5 +192,14 @@ public class BoardController {
         for (int i = 0; i < p2.size(); i++) {
             displayHandCard(p2.get(i), 2, i);
         }
+    }
+
+    public void updatePlayerData(Player p1, Player p2) {
+
+    }
+
+    public void initializeGame(Board board) {
+        updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
+        updatePlayerData(board.getP1(), board.getP2());
     }
 }

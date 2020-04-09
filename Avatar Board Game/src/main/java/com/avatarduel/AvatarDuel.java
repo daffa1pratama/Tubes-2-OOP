@@ -111,7 +111,7 @@ public class AvatarDuel extends Application {
 //      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
 //      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
 //    }
-    boardController.updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
+    boardController.initializeGame(board);
 
     Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");
