@@ -101,30 +101,17 @@ public class AvatarDuel extends Application {
       errorAlert.setContentText("Failed to load cards: " + e);
       errorAlert.showAndWait();
     }
-    Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection);
+    Board board = new Board(characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
     stage.show();
     FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("views/Board.fxml"));
     Parent root = boardLoader.load();
     boardController = boardLoader.getController();
 
-//    for (int i=0;i<=4;i++){
+//    for (int i=0;i<=7;i++){
 //      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
 //      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
 //    }
-
-    Card test = characterCardCollection.getCardAt(3);
-    if (test instanceof CharacterCard) {
-      boardController.displayCard((CharacterCard) test);
-    } else if (test instanceof LandCard) {
-      boardController.displayCard((LandCard) test);
-    } else if (test instanceof AuraCard) {
-      boardController.displayCard((AuraCard) test);
-    } else if (test instanceof DestroyCard) {
-      boardController.displayCard((DestroyCard) test);
-    } else if (test instanceof PowerUpCard) {
-      boardController.displayCard((PowerUpCard) test);
-    }
-    boardController.click();
+    boardController.updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
 
     Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");

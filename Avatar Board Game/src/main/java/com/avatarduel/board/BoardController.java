@@ -2,6 +2,7 @@ package com.avatarduel.board;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -41,7 +42,7 @@ public class BoardController {
 
     @FXML
     public void initialize() {
-
+        initializeClick();
     }
 
     public void displayCard(CharacterCard card) {
@@ -104,7 +105,21 @@ public class BoardController {
         }
     }
 
-    public void displayHandCard(CharacterCard card,int player,int x){
+    public void displayCard(Card card) {
+        if (card instanceof CharacterCard) {
+            this.displayCard((CharacterCard) card);
+        } else if (card instanceof LandCard) {
+            this.displayCard((LandCard) card);
+        } else if (card instanceof AuraCard) {
+            this.displayCard((AuraCard) card);
+        } else if (card instanceof DestroyCard) {
+            this.displayCard((DestroyCard) card);
+        } else if (card instanceof PowerUpCard) {
+            this.displayCard((PowerUpCard) card);
+        }
+    }
+
+    public void displayHandCard(Card card, int player, int x){
         try{
             FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
             Pane handCard = (Pane) fieldCardLoader.load();
@@ -127,24 +142,14 @@ public class BoardController {
 
     public void Hover(Card card, Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
-            if (card instanceof CharacterCard) {
-                this.displayCard((CharacterCard) card);
-            } else if (card instanceof LandCard) {
-                this.displayCard((LandCard) card);
-            } else if (card instanceof AuraCard) {
-                this.displayCard((AuraCard) card);
-            } else if (card instanceof DestroyCard) {
-                this.displayCard((DestroyCard) card);
-            } else if (card instanceof PowerUpCard) {
-                this.displayCard((PowerUpCard) card);
-            }
+            this.displayCard(card);
         });
 
         pane.setOnMouseExited((MouseEvent t) -> {
             cardDetail.setCenter(new Pane());
         });
     }
-    public void click(){
+    public void initializeClick(){
         handCardA.setOnMouseClicked((new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event){
@@ -192,6 +197,21 @@ public class BoardController {
                 }//BUTTON CANCEL tersedia bawaan Javafx
             }
 
+                Node clickedNode = event.getPickResult().getIntersectedNode();
+                Node parent = clickedNode.getParent();
+                while (parent != handCardA) {
+                    clickedNode = parent;
+                    parent = clickedNode.getParent();
+                }
+                Integer colIndex = GridPane.getColumnIndex(clickedNode);
+                Integer rowIndex = GridPane.getRowIndex(clickedNode);
+                System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Card Clicked");
+                alert.setHeaderText("Choose what to do with your card");
+                alert.setResizable(false);
+                alert.setContentText("Blablabla");
+                alert.showAndWait();
            }
             //            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
         }));
@@ -213,5 +233,14 @@ public class BoardController {
             alert.showAndWait();
             }
         }));
+    }
+
+    public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
+        for (int i = 0; i < p1.size(); i++) {
+            displayHandCard(p1.get(i), 1, i);
+        }
+        for (int i = 0; i < p2.size(); i++) {
+            displayHandCard(p2.get(i), 2, i);
+        }
     }
 }
