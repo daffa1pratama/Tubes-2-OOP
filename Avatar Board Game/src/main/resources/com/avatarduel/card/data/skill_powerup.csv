@@ -9,4 +9,4 @@ id	name	element	description	imagepath	power	attack	defense
 82	Lightningbending	FIRE	Manipulate lightning by separating the yin and yang energies.	/com/avatarduel/card/image/skill/Lightningbending.png	4	4	-2
 83	Shozin Comet	FIRE	Formerly known as the Great Comet. A celestial object that passes close to the Earth every one hundred years, just skimming the surface of the upper atmosphere.	/com/avatarduel/card/image/skill/Shozin Comet.png	4	4	-1
 84	Trebuchets	FIRE	Large weapons to conduct long-range artilery warfare.	/com/avatarduel/card/image/skill/Trebuchets.png	2	2	0
-85  Bulma Capsule   ENERGY  A Mid-tier Capsule that charge your energy.  /com/avatarduel/card/image/skill/Bulma Capsule.png 3   1   0
+85	Bulma Capsule	ENERGY	A Mid-tier Capsule that charge your energy	/com/avatarduel/card/image/skill/Bulma Capsule.png	3	1	0
