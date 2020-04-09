@@ -23,10 +23,16 @@ public class Player {
     private List<CharacterFieldCard> characterFieldCards;
     private List<SkillCard> skillFieldCards;
     private int hp;
-    private int fire;
-    private int earth;
-    private int water;
-    private int air;
+    private int maxFire;
+    private int maxEarth;
+    private int maxWater;
+    private int maxAir;
+    private int maxEnergy;
+    private int curFire;
+    private int curEarth;
+    private int curWater;
+    private int curAir;
+    private int curEnergy;
     private int isLandCardDeploy; 
 
     public Player(String name, CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
@@ -38,10 +44,11 @@ public class Player {
         this.skillFieldCards = new ArrayList<SkillCard>(6);
         this.isLandCardDeploy = 0;
         this.hp = 80;
-        this.fire = 0;
-        this.earth = 0;
-        this.water = 0;
-        this.air = 0;
+        this.maxFire = 0;
+        this.maxEarth = 0;
+        this.maxWater = 0;
+        this.maxAir = 0;
+        this.maxEnergy = 0;
     }
 
     public String getName() { return name; }
@@ -52,13 +59,25 @@ public class Player {
 
     public int getHp() { return hp; }
     
-    public int getFire() { return fire; }
+    public int getMaxFire() { return maxFire; }
     
-    public int getEarth() { return earth; }
+    public int getMaxEarth() { return maxEarth; }
     
-    public int getWater() { return water; }
-    
-    public int getAir() { return air; }
+    public int getMaxWater() { return maxWater; }
+
+    public int getMaxAir() { return maxAir; }
+
+    public int getMaxEnergy() { return maxEnergy; }
+
+    public int getCurFire() { return curFire; }
+
+    public int getCurEarth() { return curEarth; }
+
+    public int getCurWater() { return curWater; }
+
+    public int getCurAir() { return curAir; }
+
+    public int getCurEnergy() { return curEnergy; }
 
     public List<LandCard> getLandFieldCards(){return this.landFieldCards;}
 
@@ -70,55 +89,64 @@ public class Player {
 
     //Masih ada getter dan setter yang belum lengkap
 
-    public boolean deployAble(Element element,int amount){
+    public boolean deployAble (Element element,int amount){
         boolean temp=true;
         switch(element){
             case FIRE:
-                temp = (this.fire >= amount) ? true : false;
+                temp = (this.curFire >= amount) ? true : false;
                 break;
             case EARTH:
-                temp = (this.earth >= amount) ? true : false;
+                temp = (this.curEarth >= amount) ? true : false;
                 break;
             case WATER:
-                temp = (this.water >= amount) ? true : false;
+                temp = (this.curWater >= amount) ? true : false;
                 break;
             case AIR:
-                temp = (this.water >= amount) ? true : false;
+                temp = (this.curWater >= amount) ? true : false;
+                break;
+            case ENERGY:
+                temp = (this.curEnergy >= amount) ? true : false;
                 break;
         }
         return temp;
     }
 
-    public void addPower(Element element) {
+    public void addPower (Element element) {
         switch (element) {
             case AIR:
-                this.air++;
+                this.maxAir++;
                 break;
             case WATER:
-                this.water++;
+                this.maxWater++;
                 break;
             case FIRE:
-                this.fire++;
+                this.maxFire++;
                 break;
             case EARTH:
-                this.earth++;
+                this.maxEarth++;
+                break;
+            case ENERGY:
+                this.maxEnergy++;
                 break;
         }
     }
 
-    public void usePower(Element element, int amount) {
+    public void usePower (Element element, int amount) {
         switch (element) {
             case AIR:
-                this.air -= amount;
+                this.curAir -= amount;
                 break;
             case WATER:
-                this.water -= amount;
+                this.curWater -= amount;
                 break;
             case FIRE:
-                this.fire -= amount;
+                this.curFire -= amount;
                 break;
             case EARTH:
-                this.earth -= amount;
+                this.curEarth -= amount;
+                break;
+            case ENERGY:
+                this.curEnergy -= amount;
                 break;
         }
     }
@@ -139,25 +167,28 @@ public class Player {
         if (this.onHand.size() < 7){
             this.onHand.add(this.deck.drawCard());
         } else {
-            //Buang kartu dengan memilih salah satu dari 8 kartu (?)
+            // Skip draw phase
         }
     }
 
     public void resetPower(){
-        this.air = 0;
-        this.fire = 0;
-        this.earth = 0;
-        this.water = 0;
+        this.curAir = 0;
+        this.curFire = 0;
+        this.curEarth = 0;
+        this.curWater = 0;
+        this.curEnergy = 0;
         for(Card currentCard : landFieldCards){
             switch(currentCard.getElement()){
                 case AIR:
-                    this.air +=1;
+                    this.maxAir +=1;
                 case WATER:
-                    this.water +=1;
+                    this.maxWater +=1;
                 case FIRE:
-                    this.fire +=1;
+                    this.maxFire +=1;
                 case EARTH:
-                    this.earth +=1;
+                    this.maxEarth +=1;
+                case ENERGY:
+                    this.maxEnergy +=1;
             }
         }
     }
