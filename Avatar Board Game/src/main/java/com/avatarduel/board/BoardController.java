@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.input.MouseEvent;
 
 import com.avatarduel.card.*;
 
@@ -114,22 +115,31 @@ public class BoardController {
             } else { //player == 2
                 handCardB.add(handCard,x,0,1,1);
             }
+            Hover(card, handCard);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
     }
 
-//    public void fieldOnClick(CharacterCard card) {
-//        try {
-//            FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
-//            Pane handCard = fieldCardLoader.load();
-//            FieldCardController fieldCardController = fieldCardLoader.getController();
-//            fieldCardController.setFieldCard(card);
-//            fieldCardController.click();
-//        } catch (IOException e) {
-//            System.out.println("Exception: " + e);
-//        }
-//    }
+    public void Hover(Card card, Pane pane) {
+        pane.setOnMouseEntered((MouseEvent t) -> {
+            if (card instanceof CharacterCard) {
+                this.displayCard((CharacterCard) card);
+            } else if (card instanceof LandCard) {
+                this.displayCard((LandCard) card);
+            } else if (card instanceof AuraCard) {
+                this.displayCard((AuraCard) card);
+            } else if (card instanceof DestroyCard) {
+                this.displayCard((DestroyCard) card);
+            } else if (card instanceof PowerUpCard) {
+                this.displayCard((PowerUpCard) card);
+            }
+        });
+
+        pane.setOnMouseExited((MouseEvent t) -> {
+            cardDetail.setCenter(new Pane());
+        });
+    }
     public void click(){
         handCardA.setOnMouseClicked((new EventHandler<MouseEvent>(){
             @Override
@@ -182,5 +192,13 @@ public class BoardController {
 //     Integer rowIndex = GridPane.getRowIndex(clickedNode);
 //     System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
 //   }
+    // public void fieldOnClick(){
+    //     FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+    //     FieldCardController fieldCardController = fieldCardLoader.getController();
+    //     fieldCardController.click();
+    // }
+
+
+
 
 }

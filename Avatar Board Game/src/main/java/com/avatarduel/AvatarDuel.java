@@ -125,7 +125,6 @@ public class AvatarDuel extends Application {
     }
     boardController.click();
 
-
     Scene scene = new Scene(root);
     stage.setTitle("Avatar Duel");
     stage.setScene(scene);
