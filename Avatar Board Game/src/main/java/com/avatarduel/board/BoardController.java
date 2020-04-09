@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -100,28 +101,86 @@ public class BoardController {
         }
     }
 
-    public void fieldOnClick(){
-        FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
-        FieldCardController fieldCardController = fieldCardLoader.getController();
-        fieldCardController.click();
+    public void displayHandCard(CharacterCard card,int player,int x){
+        try{
+            FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+            Pane handCard = (Pane) fieldCardLoader.load();
+            handCard.setPrefSize(66, 91);
+            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+            FieldCardController fieldCardController = fieldCardLoader.getController();
+            fieldCardController.setFieldCard(card);
+            if (player == 1){
+                handCardA.add(handCard,x,2,1,1);
+            } else { //player == 2
+                handCardB.add(handCard,x,0,1,1);
+            }
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
     }
 
-//    public void displayHandCard(CharacterCard card,int player,int x){
-//        try{
-//            FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCharacterCard.fxml"));
-//            Pane handCard = (Pane) cardLoader.load();
-//            handCard.setPrefSize(66, 91);
-//            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
-//            CardController cardController = cardLoader.getController();
-//            cardController.setFieldCard(card);
-//            if (player == 1){
-//                handCardA.add(handCard,x,2,1,1);
-//            } else { //player == 2
-//                handCardB.add(handCard,x,0,1,1);
-//            }
+//    public void fieldOnClick(CharacterCard card) {
+//        try {
+//            FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+//            Pane handCard = fieldCardLoader.load();
+//            FieldCardController fieldCardController = fieldCardLoader.getController();
+//            fieldCardController.setFieldCard(card);
+//            fieldCardController.click();
 //        } catch (IOException e) {
 //            System.out.println("Exception: " + e);
 //        }
 //    }
+    public void click(){
+        handCardA.setOnMouseClicked((new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event){
+            Node clickedNode = event.getPickResult().getIntersectedNode();
+            Node parent = clickedNode.getParent();
+            while (parent != handCardA) {
+                clickedNode = parent;
+                parent = clickedNode.getParent();
+            }
+            Integer colIndex = GridPane.getColumnIndex(clickedNode);
+            Integer rowIndex = GridPane.getRowIndex(clickedNode);
+//            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Card Clicked");
+            alert.setHeaderText("Choose what to do with your card");
+            alert.setResizable(false);
+            alert.setContentText("Blablabla");
+            alert.showAndWait();
+           }
+        }));
+        handCardB.setOnMouseClicked((new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event){
+                Node clickedNode = event.getPickResult().getIntersectedNode();
+                Node parent = clickedNode.getParent();
+                while (parent != handCardB) {
+                    clickedNode = parent;
+                    parent = clickedNode.getParent();
+                }
+                Integer colIndex = GridPane.getColumnIndex(clickedNode);
+                Integer rowIndex = GridPane.getRowIndex(clickedNode);
+//            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+            }
+        }));
+    }
+
+    
+// public void clickGrid(javafx.scene.input.MouseEvent event) {
+//   }
+  
+//   if (clickedNode != gridmane) {
+//     // click on descendant node
+//     Node parent = clickedNode.getParent();
+//     while (parent != gridmane) {
+//         clickedNode = parent;
+//         parent = clickedNode.getParent();
+//     }
+//     Integer colIndex = GridPane.getColumnIndex(clickedNode);
+//     Integer rowIndex = GridPane.getRowIndex(clickedNode);
+//     System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+//   }
 
 }
