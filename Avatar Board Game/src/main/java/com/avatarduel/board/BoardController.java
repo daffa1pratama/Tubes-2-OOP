@@ -102,6 +102,20 @@ public class BoardController {
         }
     }
 
+    public void displayCard(Card card) {
+        if (card instanceof CharacterCard) {
+            this.displayCard((CharacterCard) card);
+        } else if (card instanceof LandCard) {
+            this.displayCard((LandCard) card);
+        } else if (card instanceof AuraCard) {
+            this.displayCard((AuraCard) card);
+        } else if (card instanceof DestroyCard) {
+            this.displayCard((DestroyCard) card);
+        } else if (card instanceof PowerUpCard) {
+            this.displayCard((PowerUpCard) card);
+        }
+    }
+
     public void displayHandCard(CharacterCard card,int player,int x){
         try{
             FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
@@ -123,17 +137,7 @@ public class BoardController {
 
     public void Hover(Card card, Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
-            if (card instanceof CharacterCard) {
-                this.displayCard((CharacterCard) card);
-            } else if (card instanceof LandCard) {
-                this.displayCard((LandCard) card);
-            } else if (card instanceof AuraCard) {
-                this.displayCard((AuraCard) card);
-            } else if (card instanceof DestroyCard) {
-                this.displayCard((DestroyCard) card);
-            } else if (card instanceof PowerUpCard) {
-                this.displayCard((PowerUpCard) card);
-            }
+            this.displayCard(card);
         });
 
         pane.setOnMouseExited((MouseEvent t) -> {

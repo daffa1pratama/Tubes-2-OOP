@@ -110,19 +110,6 @@ public class AvatarDuel extends Application {
       boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
       boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
     }
-
-    Card test = characterCardCollection.getCardAt(3);
-    if (test instanceof CharacterCard) {
-      boardController.displayCard((CharacterCard) test);
-    } else if (test instanceof LandCard) {
-      boardController.displayCard((LandCard) test);
-    } else if (test instanceof AuraCard) {
-      boardController.displayCard((AuraCard) test);
-    } else if (test instanceof DestroyCard) {
-      boardController.displayCard((DestroyCard) test);
-    } else if (test instanceof PowerUpCard) {
-      boardController.displayCard((PowerUpCard) test);
-    }
     boardController.click();
 
     Scene scene = new Scene(root);
