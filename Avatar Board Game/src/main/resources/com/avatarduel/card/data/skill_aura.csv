@@ -1,4 +1,4 @@
-id	name	element	description	imagepath	power	attack	defense
+    id	name	element	description	imagepath	power	attack	defense
 65	Air Funnel	AIR	Technique to create a cannon for small projectiles.	/com/avatarduel/card/image/skill/Air Funnel.png	2	4	0
 66	Air Scooter	AIR	A form of transportation invented by Aang.	/com/avatarduel/card/image/skill/Air Scooter.png	2	2	4
 67	Airbender Staff	AIR	A wooden stave used primarily by airbenders to augment their bending.	/com/avatarduel/card/image/skill/Airbender Staff.png	2	2	2
@@ -27,3 +27,6 @@ id	name	element	description	imagepath	power	attack	defense
 90	Ice Prison	WATER	This technique covers an opponent in a prison made of ice.	/com/avatarduel/card/image/skill/Ice Prison.png	3	-4	2
 91	Tangle Mine	WATER	Military weapons invented by Hakoda to aid the Southern Water Tribe's quest to defeat the Fire Nation.	/com/avatarduel/card/image/skill/Tangle Mine.png	2	2	-1
 92	Wolf Armor	WATER	Protective battle gear worn by the warriors of the Southern Water Tribe.	/com/avatarduel/card/image/skill/Wolf Armor.png	2	2	1
+93  Super Ball  ENERGY  A slight ball around your body to give slightly charge for med-run. /com/avatarduel/card/image/skill/SuperBall.png	1	1	1
+94  Chakra Skuy ENERGY  A Universe dark matter to get high energy extra but losing some defense.    /com/avatarduel/card/image/skill/ChakraSkuy.png 6   0   -1
+95  Super Apes  ENERGY  Transformation for some times, take slightly more defense and attack.   /com/avatarduel/card/image/skill/SuperApes.png -3   5   4
