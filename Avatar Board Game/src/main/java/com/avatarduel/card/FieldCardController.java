@@ -32,8 +32,9 @@ public class FieldCardController {
 
     }
 
-    public void setFieldCard(CharacterCard card){
+    public void setFieldCard(Card card){
             cardName.setText(card.getName());
+            System.out.println(card.getPathName());
             Image newImage = new Image(card.getPathName());
             cardImage.setImage(newImage);
     }

@@ -29,25 +29,14 @@ public class Player {
     private int air;
     private int isLandCardDeploy; 
 
-    public Player(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection) {
-        this.name = "";
-        this.deck = new Deck(characterCardCollection, landCardCollection, skillCardCollection);
+    public Player(String name, CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
+        this.name = name;
+        this.deck = new Deck(characterCardCollection, landCardCollection, skillCardCollection, destroyCardCollection, powerupCardCollection);
         this.onHand = new ArrayList<Card>(7);
         this.landFieldCards = new ArrayList<LandCard>();
-        this.characterFieldCards = new ArrayList<CharacterFieldCard>(8);
-        this.skillFieldCards = new ArrayList<SkillCard>(8);
+        this.characterFieldCards = new ArrayList<CharacterFieldCard>(6);
+        this.skillFieldCards = new ArrayList<SkillCard>(6);
         this.isLandCardDeploy = 0;
-        this.hp = 80;
-        this.fire = 0;
-        this.earth = 0;
-        this.water = 0;
-        this.air = 0;
-
-    }
-
-    public Player(String name, CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection) {
-        this.name = name;
-        this.deck = new Deck(characterCardCollection, landCardCollection, skillCardCollection);
         this.hp = 80;
         this.fire = 0;
         this.earth = 0;

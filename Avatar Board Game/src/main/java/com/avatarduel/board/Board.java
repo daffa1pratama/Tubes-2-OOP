@@ -22,14 +22,18 @@ public class Board {
     private int turn; //1 or 2
 
     //MAIN BOARD IMPLEMENTS HERE
+    public Player getP1() { return this.p1; };
+    public Player getP2() { return this.p2; };
 
-    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection) {
-        this.p1 = new Player("P1", characterCardCollection, landCardCollection, auraCardCollection);
-        this.p2 = new Player("P2", characterCardCollection, landCardCollection, auraCardCollection);
+    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
+        this.p1 = new Player("P1", characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
+        this.p2 = new Player("P2", characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
         this.turn = 1;
         this.winner = null;
         this.currentPlayer = this.p1;
         this.turn = 1;
+        for (int i = 0; i < 7; i++) this.p1.drawCard();
+        for (int i = 0; i < 7; i++) this.p2.drawCard();
     }
 
     public void printCards() {
