@@ -107,10 +107,6 @@ public class AvatarDuel extends Application {
     Parent root = boardLoader.load();
     boardController = boardLoader.getController();
 
-//    for (int i=0;i<=7;i++){
-//      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+1),1,i);
-//      boardController.displayHandCard((CharacterCard) characterCardCollection.getCardAt(i+9),2,i);
-//    }
     boardController.updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
 
     Scene scene = new Scene(root);
