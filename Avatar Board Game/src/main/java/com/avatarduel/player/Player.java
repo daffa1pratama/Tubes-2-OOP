@@ -33,7 +33,7 @@ public class Player {
     private int curWater;
     private int curAir;
     private int curEnergy;
-    private int isLandCardDeploy; 
+    private boolean isLandCardDeployed;
 
     public Player(String name, CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
         this.name = name;
@@ -42,7 +42,7 @@ public class Player {
         this.landFieldCards = new ArrayList<LandCard>();
         this.characterFieldCards = new ArrayList<CharacterFieldCard>(6);
         this.skillFieldCards = new ArrayList<SkillCard>(6);
-        this.isLandCardDeploy = 0;
+        this.isLandCardDeployed = false;
         this.hp = 80;
         this.maxFire = 0;
         this.maxEarth = 0;
@@ -84,6 +84,8 @@ public class Player {
     public List<CharacterFieldCard> getCharacterFieldCards() {return this.characterFieldCards;}
 
     public List<SkillCard> getSkillFieldCards() {return this.skillFieldCards;}
+
+    public boolean getIsLandCardDeployed() { return this.isLandCardDeployed; }
 
     public int setHp(int newhp){return this.hp = newhp;}
 
@@ -238,7 +240,7 @@ public class Player {
         if (this.onHand.remove(landCard)){
             this.landFieldCards.add(landCard);
             addPower(landCard.getElement());
-            this.isLandCardDeploy = 1;
+            this.isLandCardDeployed = true;
         } else {
             //Lempar exception
         }
@@ -319,7 +321,7 @@ public class Player {
      */
 
     public void endPhase() {
-        this.isLandCardDeploy = 0;
+        this.isLandCardDeployed = false;
         for(CharacterFieldCard currentCard : this.characterFieldCards){
             currentCard.setIsRotatable(1);
             currentCard.setBattleAvailability(1);

@@ -40,14 +40,14 @@ public class Board {
         // Careful. Both decks will be emptied. For debugging purposes only.
         System.out.println("Player 1:");
         Deck D1 = this.p1.getDeck();
-        for (int i = 0; i < D1.getDeckSize(); i++) {
+        for (int i = 0; i < D1.getDeckCount(); i++) {
             Card C = D1.drawCard();
             C.InfoCard();
         }
         System.out.println();
         System.out.println("Player 2:");
         Deck D2 = this.p2.getDeck();
-        for (int i = 0; i < D2.getDeckSize(); i++) {
+        for (int i = 0; i < D2.getDeckCount(); i++) {
             Card C = D2.drawCard();
             C.InfoCard();
         }

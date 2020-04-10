@@ -16,7 +16,7 @@ public class Deck {
         buildDeck(characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
     }
 
-    public int getDeckSize() { return this.deckSize; }
+    public int getDeckCount() { return this.deckContainer.size(); }
 
     public Card drawCard() {
         return this.deckContainer.remove();

@@ -42,6 +42,12 @@ public class BoardController {
     private GridPane handCardB;
 
     @FXML
+    private TextField deckCountA, hpA, landA, airA, fireA, earthA, waterA, energyA;
+    
+    @FXML
+    private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB;
+
+    @FXML
     public void initialize() {
         initializeClick();
     }
@@ -230,7 +236,25 @@ public class BoardController {
     }
 
     public void updatePlayerData(Player p1, Player p2) {
+        deckCountA.setText(Integer.toString(p1.getDeck().getDeckCount()));
+        hpA.setText(Integer.toString(p1.getHp()));
+        airA.setText(Integer.toString(p1.getCurAir()) + " / " + p1.getMaxAir());
+        fireA.setText(Integer.toString(p1.getCurFire()) + " / " + p1.getMaxFire());
+        earthA.setText(Integer.toString(p1.getCurEarth()) + " / " + p1.getMaxEarth());
+        waterA.setText(Integer.toString(p1.getCurWater()) + " / " + p1.getMaxWater());
+        energyA.setText(Integer.toString(p1.getCurEnergy()) + " / " + p1.getMaxEnergy());
+        if (p1.getIsLandCardDeployed()) landA.setText("YES");
+        else landA.setText("NO");
 
+        deckCountB.setText(Integer.toString(p2.getDeck().getDeckCount()));
+        hpB.setText(Integer.toString(p2.getHp()));
+        airB.setText(Integer.toString(p2.getCurAir()) + " / " + p2.getMaxAir());
+        fireB.setText(Integer.toString(p2.getCurFire()) + " / " + p2.getMaxFire());
+        earthB.setText(Integer.toString(p2.getCurEarth()) + " / " + p2.getMaxEarth());
+        waterB.setText(Integer.toString(p2.getCurWater()) + " / " + p2.getMaxWater());
+        energyB.setText(Integer.toString(p2.getCurEnergy()) + " / " + p2.getMaxEnergy());
+        if (p2.getIsLandCardDeployed()) landB.setText("YES");
+        else landB.setText("NO");
     }
 
     public void initializeGame(Board board) {
