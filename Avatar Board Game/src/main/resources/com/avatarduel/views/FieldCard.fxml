@@ -6,9 +6,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="91.0" prefWidth="66.0" style="-fx-border-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.card.FieldCardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="66.0" style="-fx-border-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.card.FieldCardController">
    <children>
-      <ImageView fx:id="cardImage" fitHeight="68.0" fitWidth="50.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cardImage" fitHeight="48.0" fitWidth="45.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../card/image/character/Aang.png" />
          </image>
@@ -19,9 +19,9 @@
             <Image url="@../card/image/element/AirElement.png" />
          </image>
       </ImageView>
-      <Text fx:id="cardName" layoutX="-7.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aang" textAlignment="CENTER" wrappingWidth="82.99999839067459">
+      <Text fx:id="cardName" layoutX="-7.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aang" textAlignment="CENTER" wrappingWidth="82.99999839067459">
          <font>
-            <Font size="16.0" />
+            <Font size="12.0" />
          </font>
       </Text>
    </children>
