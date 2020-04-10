@@ -79,14 +79,14 @@ public class AvatarDuel extends Application {
     destroyReader.setSkipHeader(true);
     List<String[]> destroyRows = destroyReader.read();
     for (String[] row : destroyRows) {
-      DestroyCard l = new DestroyCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[6]), Integer.parseInt(row[7]), Integer.parseInt(row[5]));
+      DestroyCard l = new DestroyCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[5]));
       destroyCardCollection.addCard(l);
     }
     CSVReader powerupReader = new CSVReader(powerupCSVFile, "\t");
     powerupReader.setSkipHeader(true);
     List<String[]> powerupRows = powerupReader.read();
     for (String[] row : powerupRows) {
-      PowerUpCard l = new PowerUpCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[6]), Integer.parseInt(row[7]), Integer.parseInt(row[5]));
+      PowerUpCard l = new PowerUpCard(row[1], row[3], Element.valueOf(row[2]),row[4], Integer.parseInt(row[5]));
       powerupCardCollection.addCard(l);
     }
   }

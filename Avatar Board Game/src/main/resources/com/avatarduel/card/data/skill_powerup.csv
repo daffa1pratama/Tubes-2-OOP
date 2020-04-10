@@ -1,12 +1,12 @@
-id	name	element	description	imagepath	power	attack	defense
-75	Metalbending	EARTH	Ability to bend metal.	/com/avatarduel/card/image/skill/Metalbending.png	4	1	3
-76	Rock Gloves	EARTH	Favored weapons of Ba Sing Se's secret police force, known as the Dai Li.	/com/avatarduel/card/image/skill/Rock Gloves.png	1	-2	-2
-77	Slinky Tank	EARTH	Stone vehicles provided both transportation and protection during the invasion of the Fire Nation.	/com/avatarduel/card/image/skill/Slinky Tank.png	3	-1	5
-78	Surface Rocks	EARTH	Largse rocks used as projectiles of Royal Earthbender Guards.	/com/avatarduel/card/image/skill/Surface Rocks.png	2	3	0
-79	Blue Fire	FIRE	Bend completely blue flames, which are hotter than the orange flames.	/com/avatarduel/card/image/skill/Blue Fire.png	3	3	0
-80	Combustionbending	FIRE	Ignite objects with their mind instead of traditional firebending methods.	/com/avatarduel/card/image/skill/Combustionbending.png	3	3	0
-81	Fire Armor	FIRE	Fire Nation armor.	/com/avatarduel/card/image/skill/Fire Armor.png	1	0	2
-82	Lightningbending	FIRE	Manipulate lightning by separating the yin and yang energies.	/com/avatarduel/card/image/skill/Lightningbending.png	4	4	-2
-83	Shozin Comet	FIRE	Formerly known as the Great Comet. A celestial object that passes close to the Earth every one hundred years, just skimming the surface of the upper atmosphere.	/com/avatarduel/card/image/skill/Shozin Comet.png	4	4	-1
-84	Trebuchets	FIRE	Large weapons to conduct long-range artilery warfare.	/com/avatarduel/card/image/skill/Trebuchets.png	2	2	0
-85	Bulma Capsule	ENERGY	A Mid-tier Capsule that charge your energy	/com/avatarduel/card/image/skill/Bulma Capsule.png	3	1	0
+id	name	element	description	imagepath	power
+95	Glider	AIR	Aerial transportation made by Mechanist, inspired from Air nomad gliders.	/com/avatarduel/card/image/skill/Glider.png	1
+96	Hot Air Balloon	AIR	Air balloon created by Mechanist, originally developed for the Fire Nation	/com/avatarduel/card/image/skill/Hot Air Balloon.png	3
+97	Rock Gloves	EARTH	Favored weapons of Ba Sing Se's secret police force, known as the Dai Li.	/com/avatarduel/card/image/skill/Rock Gloves.png	1
+98	Slinky Tank	EARTH	Stone vehicles provided both transportation and protection during the invasion of the Fire Nation.	/com/avatarduel/card/image/skill/Slinky Tank.png	3
+99	Blue Fire	FIRE	Bend completely blue flames, which are hotter than the orange flames.	/com/avatarduel/card/image/skill/Blue Fire.png	3
+100	Combustionbending	FIRE	Ignite objects with their mind instead of traditional firebending methods.	/com/avatarduel/card/image/skill/Combustionbending.png	3
+101	Fire Armor	FIRE	Fire Nation armor.	/com/avatarduel/card/image/skill/Fire Armor.png	1
+102	Lightningbending	FIRE	Manipulate lightning by separating the yin and yang energies.	/com/avatarduel/card/image/skill/Lightningbending.png	4
+103	Ice Claws	WATER	Drawing water around the fingers and freezing it.	/com/avatarduel/card/image/skill/Ice Claws.png	3
+104	Ice Prison	WATER	This technique covers an opponent in a prison made of ice.	/com/avatarduel/card/image/skill/Ice Prison.png	3
+105	Ozai Lightning	ENERGY	Blue lightning of Lord Fire Ozai at Final battle.	/com/avatarduel/card/image/skill/Ozai Lightning.png	4

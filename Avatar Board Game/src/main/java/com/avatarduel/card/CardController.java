@@ -85,8 +85,10 @@ public class CardController {
             elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
         } else if (card.getElement() == Element.FIRE) {
             elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
-        } else {
+        } else if (card.getElement() == Element.EARTH) {
             elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
         cardType.setText("[ C ]");
@@ -108,8 +110,10 @@ public class CardController {
             elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
         } else if (card.getElement() == Element.FIRE) {
             elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
-        } else {
+        } else if (card.getElement() == Element.EARTH) {
             elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
         cardType.setText("[ L ]");
@@ -130,8 +134,10 @@ public class CardController {
             elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
         } else if (card.getElement() == Element.FIRE) {
             elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
-        } else {
+        } else if (card.getElement() == Element.EARTH) {
             elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
         cardType.setText("[ A ]");
@@ -140,9 +146,9 @@ public class CardController {
     public void setCard(DestroyCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
-        cardAttack.setText(Integer.toString(card.getAttack()));
-        cardDefense.setText(Integer.toString(card.getDefense()));
         cardPower.setText(Integer.toString(card.getPower()));
+        cardAttack.setText("-");
+        cardDefense.setText("-");
         Image newImage = new Image(card.getPathName());
         cardImage.setImage(newImage);
         Image elementImage;
@@ -152,8 +158,10 @@ public class CardController {
             elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
         } else if (card.getElement() == Element.FIRE) {
             elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
-        } else {
+        } else if (card.getElement() == Element.EARTH) {
             elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
         cardType.setText("[ D ]");
@@ -162,9 +170,9 @@ public class CardController {
     public void setCard(PowerUpCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
-        cardAttack.setText(Integer.toString(card.getAttack()));
-        cardDefense.setText(Integer.toString(card.getDefense()));
         cardPower.setText(Integer.toString(card.getPower()));
+        cardAttack.setText("-");
+        cardDefense.setText("-");
         Image newImage = new Image(card.getPathName());
         cardImage.setImage(newImage);
         Image elementImage;
@@ -174,8 +182,10 @@ public class CardController {
             elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
         } else if (card.getElement() == Element.FIRE) {
             elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
-        } else {
+        } else if (card.getElement() == Element.EARTH) {
             elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
         cardType.setText("[ P ]");

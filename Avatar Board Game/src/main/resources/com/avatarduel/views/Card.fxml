@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="158.0" style="-fx-border-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.card.CardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="158.0" style="-fx-border-color: BLACK;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.card.CardController">
    <children>
       <ImageView fx:id="cardImage" fitHeight="100.0" fitWidth="100.0" layoutX="29.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -16,6 +16,7 @@
       </ImageView>
       <Pane layoutX="5.0" layoutY="8.0" prefHeight="28.0" prefWidth="149.0" style="-fx-border-color: BLACK;">
          <children>
+            <Pane prefHeight="28.0" prefWidth="149.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-border-color: BLACK;" />
             <Text fx:id="cardName" layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
             <ImageView fx:id="cardElement" fitHeight="19.0" fitWidth="24.0" layoutX="126.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,6 +27,7 @@
       </Pane>
       <Pane layoutX="5.0" layoutY="152.0" prefHeight="87.0" prefWidth="149.0" style="-fx-border-color: BLACK;">
          <children>
+            <Pane layoutY="59.0" prefHeight="28.0" prefWidth="149.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-border-color: BLACK;" />
             <Text layoutX="40.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atk / ">
                <font>
                   <Font size="9.0" />
