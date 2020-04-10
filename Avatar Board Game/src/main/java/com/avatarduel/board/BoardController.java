@@ -3,9 +3,12 @@ package com.avatarduel.board;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.List;
+import javafx.scene.paint.Color;
+import javafx.geometry.HPos;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -46,6 +49,11 @@ public class BoardController {
     
     @FXML
     private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB;
+
+    @FXML
+    private Button endTurnButton;
+
+    private Board board;
 
     @FXML
     public void initialize() {
@@ -130,13 +138,12 @@ public class BoardController {
         try{
             FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
             Pane handCard = (Pane) fieldCardLoader.load();
-            handCard.setPrefSize(66, 91);
+            handCard.setPrefSize(66, 80);
             handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
             if (player == 1){
                 handCardA.add(handCard,x,2,1,1);
-                // handCardA.add(handCard,x,0,1,1);
             } else { //player == 2
                 handCardB.add(handCard,x,0,1,1);
             }
@@ -146,6 +153,17 @@ public class BoardController {
         }
     }
 
+    public void displayFlippedHandCard(int player, int x) {
+        Rectangle rectangle = new Rectangle(64, 80);
+        rectangle.setFill(Color.web("#ed4b00"));    // nanti diganti yaw stylenya
+        if (player == 1){
+            handCardA.setHalignment(rectangle, HPos.CENTER);
+            handCardA.add(rectangle,x,2,1,1);
+        } else { //player == 2
+            handCardB.setHalignment(rectangle, HPos.CENTER);
+            handCardB.add(rectangle,x,0,1,1);
+        }
+    }
 
     public void Hover(Card card, Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
@@ -156,7 +174,18 @@ public class BoardController {
             cardDetail.setCenter(new Pane());
         });
     }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
     public void initializeClick(){
+        endTurnButton.setOnAction((new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                board.switchTurn();
+                updateBoard();
+            }
+        }));
 //        handCardA.setOnMouseClicked((new EventHandler<MouseEvent>(){
 //            @Override
 //            public void handle(MouseEvent event){
@@ -227,11 +256,22 @@ public class BoardController {
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
-        for (int i = 0; i < p1.size(); i++) {
-            displayHandCard(p1.get(i), 1, i);
-        }
-        for (int i = 0; i < p2.size(); i++) {
-            displayHandCard(p2.get(i), 2, i);
+        handCardA.getChildren().clear();
+        handCardB.getChildren().clear();
+        if (board.getTurn() == 1) {
+            for (int i = 0; i < p1.size(); i++) {
+                displayHandCard(p1.get(i), 1, i);
+            }
+            for (int i = 0; i < p2.size(); i++) {
+                displayFlippedHandCard(2, i);
+            }
+        } else {
+            for (int i = 0; i < p1.size(); i++) {
+                displayFlippedHandCard(1, i);
+            }
+            for (int i = 0; i < p2.size(); i++) {
+                displayHandCard(p2.get(i), 2, i);
+            }
         }
     }
 
@@ -257,7 +297,7 @@ public class BoardController {
         else landB.setText("NO");
     }
 
-    public void initializeGame(Board board) {
+    public void updateBoard() {
         updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
         updatePlayerData(board.getP1(), board.getP2());
     }

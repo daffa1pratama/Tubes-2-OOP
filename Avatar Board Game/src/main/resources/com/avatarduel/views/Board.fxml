@@ -152,7 +152,7 @@
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" text="End Turn">
+                  <Button fx:id="endTurnButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" text="End Turn">
                      <HBox.margin>
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </HBox.margin>
