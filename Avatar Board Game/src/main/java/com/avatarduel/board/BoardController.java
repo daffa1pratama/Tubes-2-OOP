@@ -3,9 +3,12 @@ package com.avatarduel.board;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.List;
+import javafx.scene.paint.Color;
+import javafx.geometry.HPos;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -23,6 +26,7 @@ import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
 
 import com.avatarduel.card.*;
+import com.avatarduel.player.*;
 
 public class BoardController {
     @FXML
@@ -41,6 +45,17 @@ public class BoardController {
     private GridPane handCardB;
 
     private String colorCard;
+
+    @FXML
+    private TextField deckCountA, hpA, landA, airA, fireA, earthA, waterA, energyA;
+    
+    @FXML
+    private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB;
+
+    @FXML
+    private Button endTurnButton;
+
+    private Board board;
 
     @FXML
     public void initialize() {
@@ -255,6 +270,17 @@ public class BoardController {
         }
     }
 
+    public void displayFlippedHandCard(int player, int x) {
+        Rectangle rectangle = new Rectangle(64, 80);
+        rectangle.setFill(Color.web("#ed4b00"));    // nanti diganti yaw stylenya
+        if (player == 1){
+            handCardA.setHalignment(rectangle, HPos.CENTER);
+            handCardA.add(rectangle,x,2,1,1);
+        } else { //player == 2
+            handCardB.setHalignment(rectangle, HPos.CENTER);
+            handCardB.add(rectangle,x,0,1,1);
+        }
+    }
 
     public void Hover(Card card, Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
@@ -265,7 +291,18 @@ public class BoardController {
             cardDetail.setCenter(new Pane());
         });
     }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
     public void initializeClick(){
+        endTurnButton.setOnAction((new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                board.switchTurn();
+                updateBoard();
+            }
+        }));
 //        handCardA.setOnMouseClicked((new EventHandler<MouseEvent>(){
 //            @Override
 //            public void handle(MouseEvent event){
@@ -336,11 +373,49 @@ public class BoardController {
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
-        for (int i = 0; i < p1.size(); i++) {
-            displayHandCard(p1.get(i), 1, i);
+        handCardA.getChildren().clear();
+        handCardB.getChildren().clear();
+        if (board.getTurn() == 1) {
+            for (int i = 0; i < p1.size(); i++) {
+                displayHandCard(p1.get(i), 1, i);
+            }
+            for (int i = 0; i < p2.size(); i++) {
+                displayFlippedHandCard(2, i);
+            }
+        } else {
+            for (int i = 0; i < p1.size(); i++) {
+                displayFlippedHandCard(1, i);
+            }
+            for (int i = 0; i < p2.size(); i++) {
+                displayHandCard(p2.get(i), 2, i);
+            }
         }
-        for (int i = 0; i < p2.size(); i++) {
-            displayHandCard(p2.get(i), 2, i);
-        }
+    }
+
+    public void updatePlayerData(Player p1, Player p2) {
+        deckCountA.setText(Integer.toString(p1.getDeck().getDeckCount()));
+        hpA.setText(Integer.toString(p1.getHp()));
+        airA.setText(Integer.toString(p1.getCurAir()) + " / " + p1.getMaxAir());
+        fireA.setText(Integer.toString(p1.getCurFire()) + " / " + p1.getMaxFire());
+        earthA.setText(Integer.toString(p1.getCurEarth()) + " / " + p1.getMaxEarth());
+        waterA.setText(Integer.toString(p1.getCurWater()) + " / " + p1.getMaxWater());
+        energyA.setText(Integer.toString(p1.getCurEnergy()) + " / " + p1.getMaxEnergy());
+        if (p1.getIsLandCardDeployed()) landA.setText("YES");
+        else landA.setText("NO");
+
+        deckCountB.setText(Integer.toString(p2.getDeck().getDeckCount()));
+        hpB.setText(Integer.toString(p2.getHp()));
+        airB.setText(Integer.toString(p2.getCurAir()) + " / " + p2.getMaxAir());
+        fireB.setText(Integer.toString(p2.getCurFire()) + " / " + p2.getMaxFire());
+        earthB.setText(Integer.toString(p2.getCurEarth()) + " / " + p2.getMaxEarth());
+        waterB.setText(Integer.toString(p2.getCurWater()) + " / " + p2.getMaxWater());
+        energyB.setText(Integer.toString(p2.getCurEnergy()) + " / " + p2.getMaxEnergy());
+        if (p2.getIsLandCardDeployed()) landB.setText("YES");
+        else landB.setText("NO");
+    }
+
+    public void updateBoard() {
+        updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
+        updatePlayerData(board.getP1(), board.getP2());
     }
 }
