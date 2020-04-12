@@ -166,7 +166,7 @@ public class Player {
      *Player movement option in DRAW PHASE
      */
     public void drawCard() {
-        if (this.onHand.size() < 7){
+        if (this.onHand.size() < 8){
             this.onHand.add(this.deck.drawCard());
         } else {
             // Skip draw phase

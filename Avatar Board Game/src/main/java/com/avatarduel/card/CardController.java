@@ -100,7 +100,6 @@ public class CardController {
         cardAttack.setText("-");
         cardDefense.setText("-");
         cardPower.setText("-");
-        System.out.println(card.getPathName());
         Image newImage = new Image(card.getPathName());
         cardImage.setImage(newImage);
         Image elementImage;

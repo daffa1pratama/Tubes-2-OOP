@@ -265,6 +265,10 @@ public class BoardController {
             }
             handCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
             Hover(card, handCard);
+            Player currentPlayer = board.getCurrentPlayer();
+            handCard.setOnMouseClicked(e -> {
+                System.out.println("Mouse clicked card " + currentPlayer.getOnHand().get(x).getName());
+            });
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
