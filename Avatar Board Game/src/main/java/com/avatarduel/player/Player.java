@@ -202,6 +202,10 @@ public class Player {
             return hasEnoughPower(card.getElement(), ((PowerUpCard) card).getPower());
         }
     }
+
+    public void discardCardOnHand(Card card) {
+        onHand.remove(card);
+    }
 //    public void deployCharacterCard(CharacterCard characterCard,int position){
 //        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
 //            if (this.onHand.contains(characterCard)){

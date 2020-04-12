@@ -271,6 +271,26 @@ public class BoardController {
                 System.out.println("Mouse clicked card " + clickedCard.getName());
                 if (currentPlayer.canDeploy(clickedCard)) {
                     System.out.println("YOU CAN DEPLOY!");
+                    ButtonType deploy = new ButtonType("Deploy");
+                    ButtonType discard = new ButtonType("Discard");
+                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard);
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == deploy) {
+                            // TODO
+                        } else if (response == discard) {
+                            currentPlayer.discardCardOnHand(clickedCard);
+                        }
+                        updateBoard();
+                    });
+                } else {
+                    ButtonType discard = new ButtonType("Discard");
+                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", discard);
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == discard) {
+                            currentPlayer.discardCardOnHand(clickedCard);
+                        }
+                        updateBoard();
+                    });
                 }
             });
         } catch (IOException e) {
