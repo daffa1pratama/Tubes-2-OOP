@@ -72,9 +72,9 @@ public class Player {
 
     public List<LandCard> getLandFieldCards(){return this.landFieldCards;}
 
-    public List<CharacterFieldCard> getCharacterFieldCards() {return this.characterFieldCards;}
+    public List<CharacterFieldCard> getCharacterFieldCard() {return this.characterFieldCards;}
 
-    public List<SkillCard> getSkillFieldCards() {return this.skillFieldCards;}
+    public List<SkillCard> getSkillFieldCard() {return this.skillFieldCards;}
 
     public boolean getIsLandCardDeployed() { return this.isLandCardDeployed; }
 
@@ -107,18 +107,23 @@ public class Player {
     public void addPower (Element element) {
         switch (element) {
             case AIR:
+                this.curAir++;
                 this.maxAir++;
                 break;
             case WATER:
+                this.curWater++;
                 this.maxWater++;
                 break;
             case FIRE:
+                this.curFire++;
                 this.maxFire++;
                 break;
             case EARTH:
+                this.curEarth++;
                 this.maxEarth++;
                 break;
             case ENERGY:
+                this.curEnergy++;
                 this.maxEnergy++;
                 break;
         }
@@ -191,16 +196,29 @@ public class Player {
      */
     public boolean canDeploy(Card card) {
         if (card instanceof CharacterCard) {
-            return hasEnoughPower(card.getElement(), ((CharacterCard) card).getPower());
+            return hasEnoughPower(card.getElement(), ((CharacterCard) card).getPower()) && characterFieldCards.size() < 6;
         } else if (card instanceof LandCard) {
             return !isLandCardDeployed;
         } else if (card instanceof AuraCard) {
-            return hasEnoughPower(card.getElement(), ((AuraCard) card).getPower());
+            return hasEnoughPower(card.getElement(), ((AuraCard) card).getPower()) && skillFieldCards.size() < 6;
         } else if (card instanceof DestroyCard) {
-            return hasEnoughPower(card.getElement(), ((DestroyCard) card).getPower());
+            return hasEnoughPower(card.getElement(), ((DestroyCard) card).getPower()) && skillFieldCards.size() < 6;
         } else { // card instanceof PowerUpCard
-            return hasEnoughPower(card.getElement(), ((PowerUpCard) card).getPower());
+            return hasEnoughPower(card.getElement(), ((PowerUpCard) card).getPower()) && skillFieldCards.size() < 6;
         }
+    }
+
+    public void addToField(Card card) {
+        if (card instanceof CharacterCard) {
+            CharacterFieldCard fieldCard = new CharacterFieldCard((CharacterCard) card);
+            characterFieldCards.add(fieldCard);
+        } else if (card instanceof LandCard) {
+            landFieldCards.add((LandCard) card);
+            addPower(card.getElement());
+        } else {
+            skillFieldCards.add((SkillCard) card);
+        }
+        discardCardOnHand(card);
     }
 
     public void discardCardOnHand(Card card) {

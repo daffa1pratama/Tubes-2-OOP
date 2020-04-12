@@ -14,10 +14,10 @@ public class CharacterFieldCard implements iFieldCard {
     //     this.isRotatable = 1;
     // }
 
-    public CharacterFieldCard(CharacterCard  characterCard,int position,int isAvailableAttack){
+    public CharacterFieldCard(CharacterCard characterCard){
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getPathName(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
-        this.position = position;
-        this.isAvailableAttack = isAvailableAttack;
+        this.position = 1;
+        this.isAvailableAttack = 1;
         this.isRotatable = 1;
     }
 
