@@ -267,7 +267,11 @@ public class BoardController {
             Hover(card, handCard);
             Player currentPlayer = board.getCurrentPlayer();
             handCard.setOnMouseClicked(e -> {
-                System.out.println("Mouse clicked card " + currentPlayer.getOnHand().get(x).getName());
+                Card clickedCard = currentPlayer.getOnHand().get(x);
+                System.out.println("Mouse clicked card " + clickedCard.getName());
+                if (currentPlayer.canDeploy(clickedCard)) {
+                    System.out.println("YOU CAN DEPLOY!");
+                }
             });
         } catch (IOException e) {
             System.out.println("Exception: " + e);
