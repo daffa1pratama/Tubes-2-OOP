@@ -345,6 +345,7 @@ public class BoardController {
             handCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
             addHoverEvent(card, handCard);
             Player currentPlayer = board.getCurrentPlayer();
+            fieldCardController.rotate(handCard);
 //            handCard.setOnMouseClicked(e -> {
 //                Card clickedCard = currentPlayer.getOnHand().get(x);
 //                System.out.println("Mouse clicked card " + clickedCard.getName());
