@@ -19,6 +19,8 @@ public class CharacterCard extends Card {
         this.power = power;
     }
 
+    public String getName(){return super.getName();}
+
     public int getAttack() {
         return this.attack;
     }

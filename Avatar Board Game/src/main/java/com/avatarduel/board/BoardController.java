@@ -24,9 +24,13 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Button;
 
 import com.avatarduel.card.*;
 import com.avatarduel.player.*;
+
+import javax.swing.*;
 
 public class BoardController {
     @FXML
@@ -273,7 +277,7 @@ public class BoardController {
                     System.out.println("YOU CAN DEPLOY!");
                     ButtonType deploy = new ButtonType("Deploy");
                     ButtonType discard = new ButtonType("Discard");
-                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard);
+                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard,ButtonType.CANCEL);
                     alert.showAndWait().ifPresent(response -> {
                         if (response == deploy) {
                             currentPlayer.addToField(clickedCard);
@@ -313,8 +317,8 @@ public class BoardController {
     public void displayCharacterFieldCard(CharacterFieldCard card, int player, int x) {
         try{
             FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
-            Pane handCard = (Pane) fieldCardLoader.load();
-            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+            Pane characterFieldCard = (Pane) fieldCardLoader.load();
+            characterFieldCard.setClip(new Rectangle(characterFieldCard.getPrefWidth(), characterFieldCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
             Element cardElement = card.getCharacterCard().getElement();
@@ -335,42 +339,48 @@ public class BoardController {
                     this.colorCard = "A57FBB";
                     break;
             }
+
             if (player == 1){
-                characterFieldCardA.add(handCard,x,0,1,1);
+                characterFieldCardA.add(characterFieldCard,x,0,1,1);
             } else { //player == 2
-                characterFieldCardB.add(handCard,x,0,1,1);
+                characterFieldCardB.add(characterFieldCard,x,0,1,1);
             }
-            handCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
-            addHoverEvent(card, handCard);
+            if (card.getPosition() == 0){
+                characterFieldCard.setRotate(90);
+            }else {
+                characterFieldCard.setRotate(0);
+            }
+            characterFieldCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            addHoverEvent(card, characterFieldCard);
             Player currentPlayer = board.getCurrentPlayer();
-//            handCard.setOnMouseClicked(e -> {
-//                Card clickedCard = currentPlayer.getOnHand().get(x);
-//                System.out.println("Mouse clicked card " + clickedCard.getName());
-//                if (currentPlayer.canDeploy(clickedCard)) {
-//                    System.out.println("YOU CAN DEPLOY!");
-//                    ButtonType deploy = new ButtonType("Deploy");
-//                    ButtonType discard = new ButtonType("Discard");
-//                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard);
-//                    alert.showAndWait().ifPresent(response -> {
-//                        if (response == deploy) {
-//                            currentPlayer.addToField(clickedCard);
-//                        } else if (response == discard) {
-//                            currentPlayer.discardCardOnHand(clickedCard);
-//                        }
-//                        updateBoard();
-//                    });
-//                } else {
-//                    ButtonType discard = new ButtonType("Discard");
-//                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", discard);
-//                    alert.showAndWait().ifPresent(response -> {
-//                        if (response == discard) {
-//                            currentPlayer.discardCardOnHand(clickedCard);
-//                        }
-//                        updateBoard();
-//                    });
-//                }
-//            });
-        } catch (IOException e) {
+            characterFieldCard.setOnMouseClicked(e -> {
+                CharacterFieldCard clickedCard = currentPlayer.getCharacterFieldCard().get(x);
+                System.out.println("Mouse clicked card " + clickedCard.getCharacterCard().getName());
+                ButtonType discard = new ButtonType("Discard");
+                ButtonType attack = new ButtonType("Attack");
+                ButtonType rotate = new ButtonType("Rotate");
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this character card.",attack,rotate,discard,ButtonType.CANCEL);
+                if (card.getIsRotateAble()==0){
+                    alert.getDialogPane().lookupButton(rotate).setDisable(true);
+                }
+                if (card.getPosition()==0){
+                    alert.getDialogPane().lookupButton(attack).setDisable(true);
+                }
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == attack) {
+
+                    } else if (response == discard) {
+                        currentPlayer.discardCharacterCardOnField(card);
+                    } else if (response == rotate){
+                        card.setPositionValue();
+                    } else {
+                        //Tombol CANCEL
+                    }
+                  updateBoard();
+                });
+
+            });
+        }catch (IOException e) {
             System.out.println("Exception: " + e);
         }
     }
@@ -385,7 +395,7 @@ public class BoardController {
         });
     }
 
-    public void addHoverEvent(CharacterFieldCard card, Pane pane) {
+    public void addHoverEvent(CharacterFieldCard card,Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
             this.displayCard(card.getCharacterCard());
         });
@@ -466,4 +476,6 @@ public class BoardController {
         updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
         updatePlayerData(board.getP1(), board.getP2());
     }
+
+
 }

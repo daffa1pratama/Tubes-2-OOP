@@ -24,6 +24,7 @@ public class Board {
     public Player getP1() { return this.p1; }
     public Player getP2() { return this.p2; }
     public Player getCurrentPlayer() { if (turn == 1) return p1; else return p2; }
+    public Player getOppositePlayer(){ if (turn == 1) return p2; else return p1;}
     public int getTurn() { return this.turn; }
     public void switchTurn() {
         if (turn == 1) turn = 2; else turn = 1;

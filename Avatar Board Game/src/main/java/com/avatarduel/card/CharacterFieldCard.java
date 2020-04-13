@@ -31,8 +31,6 @@ public class CharacterFieldCard implements iFieldCard {
 
     public void setBattleAvailability(int isAvailableAttack){this.isAvailableAttack = isAvailableAttack;}
 
-
-    @Override
     public int getIsRotateAble() {
         return this.isRotatable;
     }
@@ -47,10 +45,10 @@ public class CharacterFieldCard implements iFieldCard {
         this.position = position;
     }
 
+    public void setPositionValue(){position = (position+1)%2 ;}
+
     @Override
-    public void rotate() {
-        this.position = (this.position + 1) % 2;
-    }
+    public void rotate() { this.position = (this.position + 1) % 2; }
 
     @Override
     public int getPositionValue() {

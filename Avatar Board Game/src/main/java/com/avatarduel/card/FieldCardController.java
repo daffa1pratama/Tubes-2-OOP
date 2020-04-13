@@ -45,12 +45,15 @@ public class FieldCardController {
         cardImage.setImage(newImage);
     }
 
-//    public void click(){
-//            cardImage.setOnMouseClicked((new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                System.out.println("cliked..");
-//            }
-//        }));
+//    public void rotate(Pane pane,int currentPosition){
+//        if (currentPosition == 1){
+//            System.out.println("aaa");
+//            pane.setRotate(180);
+//        } else {
+//            System.out.println("bbbb");
+//            pane.setRotate(0);
+//        }
+//
 //    }
+
 }

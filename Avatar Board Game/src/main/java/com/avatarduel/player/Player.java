@@ -35,11 +35,18 @@ public class Player {
         this.skillFieldCards = new ArrayList<SkillCard>(6);
         this.isLandCardDeployed = false;
         this.hp = 80;
-        this.maxFire = 0;
-        this.maxEarth = 0;
-        this.maxWater = 0;
-        this.maxAir = 0;
-        this.maxEnergy = 0;
+//        this.maxFire = 0;
+//        this.maxEarth = 0;
+//        this.maxWater = 0;
+//        this.maxAir = 0;
+//        this.maxEnergy = 0;
+
+//      Supposed to be all 0, set 10 only for testing deploy
+        this.curAir = 10;
+        this.curFire = 10;
+        this.curEarth = 10;
+        this.curWater = 10;
+        this.curEnergy = 10;
     }
 
     public String getName() { return name; }
@@ -221,9 +228,9 @@ public class Player {
         discardCardOnHand(card);
     }
 
-    public void discardCardOnHand(Card card) {
-        onHand.remove(card);
-    }
+    public void discardCardOnHand(Card card) { onHand.remove(card); }
+
+    public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
 //    public void deployCharacterCard(CharacterCard characterCard,int position){
 //        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
 //            if (this.onHand.contains(characterCard)){
