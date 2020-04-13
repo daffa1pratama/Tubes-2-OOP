@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -23,7 +22,11 @@
          <children>
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="145.0" prefWidth="95.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdc1e" height="145.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
+                  <ImageView fitHeight="146.0" fitWidth="95.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../card/image/backCard.png" />
+                     </image>
+                  </ImageView>
                   <TextField fx:id="deckCountB" editable="false" layoutX="1.0" layoutY="119.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="38.0" text="60" />
                </children>
             </Pane>
@@ -65,7 +68,11 @@
             </Text>
             <Pane layoutX="14.0" layoutY="439.0" prefHeight="145.0" prefWidth="95.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdc1e" height="145.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
+                  <ImageView fitHeight="146.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../card/image/backCard.png" />
+                     </image>
+                  </ImageView>
                   <TextField fx:id="deckCountA" editable="false" layoutY="1.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="38.0" text="60" />
                </children>
             </Pane>

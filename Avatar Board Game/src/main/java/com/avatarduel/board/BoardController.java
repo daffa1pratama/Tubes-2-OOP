@@ -3,6 +3,9 @@ package com.avatarduel.board;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.List;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.geometry.HPos;
 
@@ -271,14 +274,13 @@ public class BoardController {
     }
 
     public void displayFlippedHandCard(int player, int x) {
-        Rectangle rectangle = new Rectangle(64, 80);
-        rectangle.setFill(Color.web("#ed4b00"));    // nanti diganti yaw stylenya
+        ImageView backCard = new ImageView("/com/avatarduel/card/image/backCard.png");
+        backCard.setFitHeight(80);
+        backCard.setFitWidth(64);
         if (player == 1){
-            handCardA.setHalignment(rectangle, HPos.CENTER);
-            handCardA.add(rectangle,x,2,1,1);
+            handCardA.add(backCard, x, 0, 1, 1);
         } else { //player == 2
-            handCardB.setHalignment(rectangle, HPos.CENTER);
-            handCardB.add(rectangle,x,0,1,1);
+            handCardB.add(backCard, x, 0, 1, 1);
         }
     }
 
