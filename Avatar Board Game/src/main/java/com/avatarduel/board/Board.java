@@ -18,22 +18,24 @@ public class Board {
     private Player p1;
     private Player p2;
     private Player winner;
-    private Player currentPlayer;
     private int turn; //1 or 2
 
     //MAIN BOARD IMPLEMENTS HERE
     public Player getP1() { return this.p1; }
     public Player getP2() { return this.p2; }
+    public Player getCurrentPlayer() { if (turn == 1) return p1; else return p2; }
     public int getTurn() { return this.turn; }
-    public void switchTurn() { if (turn == 1) turn = 2; else turn = 1; }
+    public void switchTurn() {
+        if (turn == 1) turn = 2; else turn = 1;
+        getCurrentPlayer().drawCard();
+    }
 
     public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
         this.p1 = new Player("P1", characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
         this.p2 = new Player("P2", characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
         this.turn = 1;
         this.winner = null;
-        this.currentPlayer = this.p1;
-        for (int i = 0; i < 7; i++) this.p1.drawCard();
+        for (int i = 0; i < 8; i++) this.p1.drawCard(); // player 1 starts first, so draw 1 extra
         for (int i = 0; i < 7; i++) this.p2.drawCard();
     }
 

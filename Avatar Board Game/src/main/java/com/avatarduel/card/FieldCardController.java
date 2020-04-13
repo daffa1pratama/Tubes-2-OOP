@@ -33,10 +33,16 @@ public class FieldCardController {
     }
 
     public void setFieldCard(Card card){
-            cardName.setText(card.getName());
-            System.out.println(card.getPathName());
-            Image newImage = new Image(card.getPathName());
-            cardImage.setImage(newImage);
+        cardName.setText(card.getName());
+//            System.out.println(card.getPathName());
+        Image newImage = new Image(card.getPathName());
+        cardImage.setImage(newImage);
+    }
+
+    public void setFieldCard(CharacterFieldCard card) {
+        cardName.setText(card.getCharacterCard().getName());
+        Image newImage = new Image(card.getCharacterCard().getPathName());
+        cardImage.setImage(newImage);
     }
 
 //    public void click(){

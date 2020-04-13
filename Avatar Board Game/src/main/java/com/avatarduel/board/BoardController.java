@@ -42,10 +42,10 @@ public class BoardController {
     private BorderPane cardDetail;
 
     @FXML
-    private GridPane handCardA;
+    private GridPane handCardA, characterFieldCardA;
 
     @FXML
-    private GridPane handCardB;
+    private GridPane handCardB, characterFieldCardB;
 
     private String colorCard;
 
@@ -267,7 +267,35 @@ public class BoardController {
                 handCardB.add(handCard,x,0,1,1);
             }
             handCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
-            Hover(card, handCard);
+            addHoverEvent(card, handCard);
+            Player currentPlayer = board.getCurrentPlayer();
+            handCard.setOnMouseClicked(e -> {
+                Card clickedCard = currentPlayer.getOnHand().get(x);
+                System.out.println("Mouse clicked card " + clickedCard.getName());
+                if (currentPlayer.canDeploy(clickedCard)) {
+                    System.out.println("YOU CAN DEPLOY!");
+                    ButtonType deploy = new ButtonType("Deploy");
+                    ButtonType discard = new ButtonType("Discard");
+                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard);
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == deploy) {
+                            currentPlayer.addToField(clickedCard);
+                        } else if (response == discard) {
+                            currentPlayer.discardCardOnHand(clickedCard);
+                        }
+                        updateBoard();
+                    });
+                } else {
+                    ButtonType discard = new ButtonType("Discard");
+                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", discard);
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == discard) {
+                            currentPlayer.discardCardOnHand(clickedCard);
+                        }
+                        updateBoard();
+                    });
+                }
+            });
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
@@ -284,9 +312,84 @@ public class BoardController {
         }
     }
 
-    public void Hover(Card card, Pane pane) {
+    public void displayCharacterFieldCard(CharacterFieldCard card, int player, int x) {
+        try{
+            FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+            Pane handCard = (Pane) fieldCardLoader.load();
+            handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
+            FieldCardController fieldCardController = fieldCardLoader.getController();
+            fieldCardController.setFieldCard(card);
+            Element cardElement = card.getCharacterCard().getElement();
+            switch (cardElement) {
+                case AIR :
+                    this.colorCard = "F3D06F";
+                    break;
+                case WATER :
+                    this.colorCard = "01BAEB";
+                    break;
+                case FIRE :
+                    this.colorCard = "D13539";
+                    break;
+                case EARTH :
+                    this.colorCard = "65C387";
+                    break;
+                case ENERGY :
+                    this.colorCard = "A57FBB";
+                    break;
+            }
+            if (player == 1){
+                characterFieldCardA.add(handCard,x,0,1,1);
+            } else { //player == 2
+                characterFieldCardB.add(handCard,x,0,1,1);
+            }
+            handCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            addHoverEvent(card, handCard);
+            Player currentPlayer = board.getCurrentPlayer();
+//            handCard.setOnMouseClicked(e -> {
+//                Card clickedCard = currentPlayer.getOnHand().get(x);
+//                System.out.println("Mouse clicked card " + clickedCard.getName());
+//                if (currentPlayer.canDeploy(clickedCard)) {
+//                    System.out.println("YOU CAN DEPLOY!");
+//                    ButtonType deploy = new ButtonType("Deploy");
+//                    ButtonType discard = new ButtonType("Discard");
+//                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard);
+//                    alert.showAndWait().ifPresent(response -> {
+//                        if (response == deploy) {
+//                            currentPlayer.addToField(clickedCard);
+//                        } else if (response == discard) {
+//                            currentPlayer.discardCardOnHand(clickedCard);
+//                        }
+//                        updateBoard();
+//                    });
+//                } else {
+//                    ButtonType discard = new ButtonType("Discard");
+//                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", discard);
+//                    alert.showAndWait().ifPresent(response -> {
+//                        if (response == discard) {
+//                            currentPlayer.discardCardOnHand(clickedCard);
+//                        }
+//                        updateBoard();
+//                    });
+//                }
+//            });
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
+    public void addHoverEvent(Card card, Pane pane) {
         pane.setOnMouseEntered((MouseEvent t) -> {
             this.displayCard(card);
+        });
+
+        pane.setOnMouseExited((MouseEvent t) -> {
+            cardDetail.setCenter(new Pane());
+        });
+    }
+
+    public void addHoverEvent(CharacterFieldCard card, Pane pane) {
+        pane.setOnMouseEntered((MouseEvent t) -> {
+            this.displayCard(card.getCharacterCard());
         });
 
         pane.setOnMouseExited((MouseEvent t) -> {
@@ -305,73 +408,6 @@ public class BoardController {
                 updateBoard();
             }
         }));
-//        handCardA.setOnMouseClicked((new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent event){
-//            Node clickedNode = event.getPickResult().getIntersectedNode();
-//            Node parent = clickedNode.getParent();
-//            while (parent != handCardA) {
-//                clickedNode = parent;
-//                parent = clickedNode.getParent();
-//            }
-//            Integer colIndex = GridPane.getColumnIndex(clickedNode);
-//            Integer rowIndex = GridPane.getRowIndex(clickedNode);
-//            if (rowIndex == 0){//CharacterFieldCard
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Choose what to do with this card",new ButtonType("Attack"), new ButtonType("Rotate"),ButtonType.CANCEL);
-//                alert.setTitle("Character Card Clicked");
-//                alert.setResizable(false);
-//                Optional<ButtonType> result = alert.showAndWait();
-//                if ( !result.isPresent()) {//Alert diexit tanpa ada button diklik
-//
-//                } else if(result.get() == alert.getButtonTypes().get(0) ){//Attack
-//
-//                } else {//Rotate
-//
-//                }
-//            } else if (rowIndex == 1){//SkillFieldCard
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Choose what to do with this card",new ButtonType("Discard"),ButtonType.CANCEL);
-//                alert.setTitle("Skill Card Clicked");
-//                alert.setResizable(false);
-//                Optional<ButtonType> result = alert.showAndWait();
-//                if ( !result.isPresent()) {//Alert diexit tanpa ada button diklik
-//
-//                } else if(result.get() == alert.getButtonTypes().get(0) ){//Discard
-//
-//                }
-//            } else {//rowIndex == 2 HandCard
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Choose what to do with this card",new ButtonType("Deploy"),new ButtonType("Discard"),ButtonType.CANCEL);
-//                alert.setTitle("HandCard clicked");
-//                alert.setResizable(false);
-//                Optional<ButtonType> result = alert.showAndWait();
-//                if ( !result.isPresent()) {//Alert diexit tanpa ada button diklik
-//
-//                } else if(result.get() == alert.getButtonTypes().get(0) ){//Deploy
-//
-//                } else if(result.get() == alert.getButtonTypes().get(1)){//Discard
-//
-//                }//BUTTON CANCEL tersedia bawaan Javafx
-//            }
-//           }
-//            //            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
-//        }));
-//        handCardB.setOnMouseClicked((new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent event){
-//                Node clickedNode = event.getPickResult().getIntersectedNode();
-//                Node parent = clickedNode.getParent();
-//                while (parent != handCardB) {
-//                    clickedNode = parent;
-//                    parent = clickedNode.getParent();
-//                }
-//                Integer colIndex = GridPane.getColumnIndex(clickedNode);
-//                Integer rowIndex = GridPane.getRowIndex(clickedNode);
-////            System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Choose what to do with this card",new ButtonType("DEPLOY"),new ButtonType("DISCARD"),ButtonType.CANCEL);
-//            alert.setTitle("Card Clicked");
-//            alert.setResizable(false);
-//            alert.showAndWait();
-//            }
-//        }));
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
@@ -391,6 +427,17 @@ public class BoardController {
             for (int i = 0; i < p2.size(); i++) {
                 displayHandCard(p2.get(i), 2, i);
             }
+        }
+    }
+
+    public void updateCharacterFieldCardDisplay(List<CharacterFieldCard> p1, List<CharacterFieldCard> p2) {
+        characterFieldCardA.getChildren().clear();
+        characterFieldCardB.getChildren().clear();
+        for (int i = 0; i < p1.size(); i++) {
+            displayCharacterFieldCard(p1.get(i), 1, i);
+        }
+        for (int i = 0; i < p2.size(); i++) {
+            displayCharacterFieldCard(p2.get(i), 2, i);
         }
     }
 
@@ -418,6 +465,7 @@ public class BoardController {
 
     public void updateBoard() {
         updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
+        updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
         updatePlayerData(board.getP1(), board.getP2());
     }
 }
