@@ -47,7 +47,6 @@ public class BoardController {
     @FXML
     private GridPane handCardB, characterFieldCardB;
 
-    private String colorCard;
 
     @FXML
     private TextField deckCountA, hpA, landA, airA, fireA, earthA, waterA, energyA;
@@ -56,13 +55,21 @@ public class BoardController {
     private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB;
 
     @FXML
-    private Button endTurnButton;
+    private Button endTurnButton, nextPhaseButton;
+
+    @FXML
+    private TextField playerText, phaseText;
 
     private Board board;
+
+    private String colorCard;
+
 
     @FXML
     public void initialize() {
         colorCard = "";
+        this.playerText.setText("PLAYER A");
+        this.phaseText.setText(Phase.DRAW.toString());
         initializeClick();
     }
 
@@ -409,6 +416,13 @@ public class BoardController {
                 updateBoard();
             }
         }));
+        nextPhaseButton.setOnAction((new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                board.nextPhase();
+                updateBoard();
+            }
+        }));
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
@@ -468,5 +482,9 @@ public class BoardController {
         updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
         updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
         updatePlayerData(board.getP1(), board.getP2());
+        if (board.getTurn() == 1) this.playerText.setText("PLAYER A");
+        else this.playerText.setText("PLAYER B");
+        this.phaseText.setText(board.getPhase().toString());
+        System.out.println(board.getPhase());
     }
 }
