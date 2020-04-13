@@ -61,11 +61,14 @@ public class BoardController {
 
     private Board board;
 
+    private int isEnemyCardClickable; //default 0, will become 1 when there skillcard's use button or charactercard's attack button is click
+
     @FXML
     public void initialize() {
         colorCard = "";
         initializeClick();
     }
+
 
     public void displayCard(CharacterCard card) {
         try {
@@ -368,14 +371,12 @@ public class BoardController {
                 }
                 alert.showAndWait().ifPresent(response -> {
                     if (response == attack) {
-
+                        isEnemyCardClickable = 1;
                     } else if (response == discard) {
                         currentPlayer.discardCharacterCardOnField(card);
                     } else if (response == rotate){
                         card.setPositionValue();
-                    } else {
-                        //Tombol CANCEL
-                    }
+                    } else {} //Tombol CANCEL
                   updateBoard();
                 });
 
