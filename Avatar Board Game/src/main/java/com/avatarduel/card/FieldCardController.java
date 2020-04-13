@@ -44,16 +44,4 @@ public class FieldCardController {
         Image newImage = new Image(card.getCharacterCard().getPathName());
         cardImage.setImage(newImage);
     }
-
-//    public void rotate(Pane pane,int currentPosition){
-//        if (currentPosition == 1){
-//            System.out.println("aaa");
-//            pane.setRotate(180);
-//        } else {
-//            System.out.println("bbbb");
-//            pane.setRotate(0);
-//        }
-//
-//    }
-
 }

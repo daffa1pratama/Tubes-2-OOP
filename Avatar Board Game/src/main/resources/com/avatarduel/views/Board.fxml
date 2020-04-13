@@ -13,17 +13,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.33444816053511706" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.board.BoardController">
+<SplitPane dividerPositions="0.33444816053511706" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.board.BoardController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="145.0" prefWidth="95.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdc1e" height="145.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
+                  <ImageView fitHeight="146.0" fitWidth="95.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../card/image/backCard.png" />
+                     </image>
+                  </ImageView>
                   <TextField fx:id="deckCountB" editable="false" layoutX="1.0" layoutY="119.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="38.0" text="60" />
                </children>
             </Pane>
@@ -65,7 +68,11 @@
             </Text>
             <Pane layoutX="14.0" layoutY="439.0" prefHeight="145.0" prefWidth="95.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdc1e" height="145.0" stroke="BLACK" strokeType="INSIDE" width="95.0" />
+                  <ImageView fitHeight="146.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../card/image/backCard.png" />
+                     </image>
+                  </ImageView>
                   <TextField fx:id="deckCountA" editable="false" layoutY="1.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="38.0" text="60" />
                </children>
             </Pane>
@@ -77,7 +84,7 @@
             </Text>
             <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="144.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../card/image/element/WaterElement.png" />
+                  <Image url="@../card/image/element/EnergyElement.png" />
                </image>
             </ImageView>
             <Pane layoutX="185.0" layoutY="3.0">
@@ -93,7 +100,7 @@
             </Pane>
             <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="147.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../card/image/element/WaterElement.png" />
+                  <Image url="@../card/image/element/EnergyElement.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="147.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
@@ -131,8 +138,8 @@
          <children>
             <HBox layoutY="274.0" prefHeight="50.0" prefWidth="528.0">
                <children>
-                  <TextField alignment="CENTER" editable="false" prefHeight="50.0" prefWidth="134.0" text="Player " />
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" text="Next Phase">
+                  <TextField fx:id="playerText" alignment="CENTER" editable="false" prefHeight="50.0" prefWidth="134.0" text="Player " />
+                  <Button fx:id="nextPhaseButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" text="Next Phase">
                      <HBox.margin>
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </HBox.margin>
@@ -142,7 +149,7 @@
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </HBox.margin>
                   </Button>
-                  <TextField alignment="CENTER" editable="false" prefHeight="50.0" prefWidth="150.0" text="Phase" />
+                  <TextField fx:id="phaseText" alignment="CENTER" editable="false" prefHeight="50.0" prefWidth="150.0" text="Phase" />
                </children>
             </HBox>
             <GridPane fx:id="handCardA" gridLinesVisible="true" layoutY="518.0" prefHeight="80.0" prefWidth="528.0" AnchorPane.bottomAnchor="0.39999999999997726">

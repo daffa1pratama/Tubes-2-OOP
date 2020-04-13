@@ -3,6 +3,9 @@ package com.avatarduel.board;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.List;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.geometry.HPos;
 
@@ -48,7 +51,6 @@ public class BoardController {
     @FXML
     private GridPane handCardB, characterFieldCardB;
 
-    private String colorCard;
 
     @FXML
     private TextField deckCountA, hpA, landA, airA, fireA, earthA, waterA, energyA;
@@ -57,15 +59,22 @@ public class BoardController {
     private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB;
 
     @FXML
-    private Button endTurnButton;
+    private Button endTurnButton, nextPhaseButton;
+
+    @FXML
+    private TextField playerText, phaseText;
 
     private Board board;
 
     private int isEnemyCardClickable; //default 0, will become 1 when there skillcard's use button or charactercard's attack button is click
+    private String colorCard;
+
 
     @FXML
     public void initialize() {
         colorCard = "";
+        this.playerText.setText("PLAYER A");
+        this.phaseText.setText(Phase.DRAW.toString());
         initializeClick();
     }
 
@@ -306,14 +315,13 @@ public class BoardController {
     }
 
     public void displayFlippedHandCard(int player, int x) {
-        Rectangle rectangle = new Rectangle(64, 80);
-        rectangle.setFill(Color.web("#ed4b00"));    // nanti diganti yaw stylenya
+        ImageView backCard = new ImageView("/com/avatarduel/card/image/backCard.png");
+        backCard.setFitHeight(80);
+        backCard.setFitWidth(64);
         if (player == 1){
-            handCardA.setHalignment(rectangle, HPos.CENTER);
-            handCardA.add(rectangle,x,2,1,1);
+            handCardA.add(backCard, x, 0, 1, 1);
         } else { //player == 2
-            handCardB.setHalignment(rectangle, HPos.CENTER);
-            handCardB.add(rectangle,x,0,1,1);
+            handCardB.add(backCard, x, 0, 1, 1);
         }
     }
 
@@ -417,6 +425,13 @@ public class BoardController {
                 updateBoard();
             }
         }));
+        nextPhaseButton.setOnAction((new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                board.nextPhase();
+                updateBoard();
+            }
+        }));
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
@@ -476,6 +491,10 @@ public class BoardController {
         updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
         updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
         updatePlayerData(board.getP1(), board.getP2());
+        if (board.getTurn() == 1) this.playerText.setText("PLAYER A");
+        else this.playerText.setText("PLAYER B");
+        this.phaseText.setText(board.getPhase().toString());
+        System.out.println(board.getPhase());
     }
 
 
