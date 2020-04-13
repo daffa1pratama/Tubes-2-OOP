@@ -66,7 +66,8 @@ public class BoardController {
 
     private Board board;
 
-    private int isEnemyCardClickable; //default 0, will become 1 when there skillcard's use button or charactercard's attack button is click
+    private int isAttackClick = 0;//default 0, will become 1 when any charactercard's attack button is click
+
     private String colorCard;
 
 
@@ -285,29 +286,24 @@ public class BoardController {
             handCard.setOnMouseClicked(e -> {
                 Card clickedCard = currentPlayer.getOnHand().get(x);
                 System.out.println("Mouse clicked card " + clickedCard.getName());
-                if (currentPlayer.canDeploy(clickedCard)) {
-                    System.out.println("YOU CAN DEPLOY!");
-                    ButtonType deploy = new ButtonType("Deploy");
-                    ButtonType discard = new ButtonType("Discard");
-                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard,ButtonType.CANCEL);
-                    alert.showAndWait().ifPresent(response -> {
-                        if (response == deploy) {
-                            currentPlayer.addToField(clickedCard);
-                        } else if (response == discard) {
-                            currentPlayer.discardCardOnHand(clickedCard);
-                        }
-                        updateBoard();
-                    });
-                } else {
-                    ButtonType discard = new ButtonType("Discard");
-                    Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", discard);
-                    alert.showAndWait().ifPresent(response -> {
-                        if (response == discard) {
-                            currentPlayer.discardCardOnHand(clickedCard);
-                        }
-                        updateBoard();
-                    });
+                ButtonType deploy = new ButtonType("Deploy");
+                ButtonType discard = new ButtonType("Discard");
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard,ButtonType.CANCEL);
+                boolean isLand = card instanceof LandCard;
+                if ((isLand && currentPlayer.getIsLandCardDeployed()) || (!currentPlayer.canDeploy(clickedCard)) || (board.getPhase() != Phase.MAIN)){
+                    alert.getDialogPane().lookupButton(deploy).setDisable(true);
                 }
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == deploy) {
+                        currentPlayer.addToField(clickedCard);
+                        if (isLand){
+                            currentPlayer.setIsLandCardDeployed(true);
+                        }
+                    } else if (response == discard) {
+                        currentPlayer.discardCardOnHand(clickedCard);
+                    }
+                    updateBoard();
+                });
             });
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -326,7 +322,7 @@ public class BoardController {
     }
 
     public void displayCharacterFieldCard(CharacterFieldCard card, int player, int x) {
-        try{
+        try {
             FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
             Pane characterFieldCard = (Pane) fieldCardLoader.load();
             characterFieldCard.setClip(new Rectangle(characterFieldCard.getPrefWidth(), characterFieldCard.getPrefHeight()));
@@ -334,31 +330,31 @@ public class BoardController {
             fieldCardController.setFieldCard(card);
             Element cardElement = card.getCharacterCard().getElement();
             switch (cardElement) {
-                case AIR :
+                case AIR:
                     this.colorCard = "F3D06F";
                     break;
-                case WATER :
+                case WATER:
                     this.colorCard = "01BAEB";
                     break;
-                case FIRE :
+                case FIRE:
                     this.colorCard = "D13539";
                     break;
-                case EARTH :
+                case EARTH:
                     this.colorCard = "65C387";
                     break;
-                case ENERGY :
+                case ENERGY:
                     this.colorCard = "A57FBB";
                     break;
             }
 
-            if (player == 1){
-                characterFieldCardA.add(characterFieldCard,x,0,1,1);
+            if (player == 1) {
+                characterFieldCardA.add(characterFieldCard, x, 0, 1, 1);
             } else { //player == 2
-                characterFieldCardB.add(characterFieldCard,x,0,1,1);
+                characterFieldCardB.add(characterFieldCard, x, 0, 1, 1);
             }
-            if (card.getPosition() == 0){
+            if (card.getPosition() == 0) {
                 characterFieldCard.setRotate(90);
-            }else {
+            } else {
                 characterFieldCard.setRotate(0);
             }
             characterFieldCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
@@ -370,26 +366,25 @@ public class BoardController {
                 ButtonType discard = new ButtonType("Discard");
                 ButtonType attack = new ButtonType("Attack");
                 ButtonType rotate = new ButtonType("Rotate");
-                Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this character card.",attack,rotate,discard,ButtonType.CANCEL);
-                if (card.getIsRotateAble()==0){
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this character card.", attack, rotate, discard, ButtonType.CANCEL);
+                if (card.getIsRotateAble() == 0 || board.getPhase() != Phase.MAIN) {
                     alert.getDialogPane().lookupButton(rotate).setDisable(true);
                 }
-                if (card.getPosition()==0){
+                if ((card.getPosition() == 0) || (card.getBattleAvailability() == 0) || board.getPhase()!= Phase.BATTLE) {
                     alert.getDialogPane().lookupButton(attack).setDisable(true);
                 }
                 alert.showAndWait().ifPresent(response -> {
                     if (response == attack) {
-                        isEnemyCardClickable = 1;
+                        isAttackClick = 1;
                     } else if (response == discard) {
                         currentPlayer.discardCharacterCardOnField(card);
-                    } else if (response == rotate){
+                    } else if (response == rotate) {
                         card.setPositionValue();
                     } else {} //Tombol CANCEL
-                  updateBoard();
+                    updateBoard();
                 });
-
             });
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
     }
@@ -496,6 +491,5 @@ public class BoardController {
         this.phaseText.setText(board.getPhase().toString());
         System.out.println(board.getPhase());
     }
-
 
 }

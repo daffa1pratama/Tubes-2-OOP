@@ -85,6 +85,8 @@ public class Player {
 
     public boolean getIsLandCardDeployed() { return this.isLandCardDeployed; }
 
+    public void setIsLandCardDeployed(boolean state) { this.isLandCardDeployed = state ;}
+
     public int setHp(int newhp){return this.hp = newhp;}
 
     //Masih ada getter dan setter yang belum lengkap
@@ -317,33 +319,22 @@ public class Player {
     /**
      * Battle Phase
      */
-//    public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
-//        //Harus dicek lagi apakah udah ada pemenang game dr proses attack
-//        if (this.turn.getPhase() == Phase.BATTLE){
-//            //Apakah perlu cek kepemilikan card ?
-//            if (characterFieldCard.getBattleAvailability() == 1){
-//                if (opponent.getCharacterFieldCards().isEmpty()){
-//                    opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-//                    characterFieldCard.setIsRotatable(0);
-//                    characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-//                } else {
-//                    if (isAttackValid(characterFieldCard,opponentCharacterCard)){
-//                        opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
-//                        opponent.getCharacterFieldCards().remove(opponentCharacterCard);
-//                        characterFieldCard.setIsRotatable(0);
-//                        characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-//                    } else {
-//                        //Lempar exception
-//                    }
-//                }
-//            } else {
-//
-//            }
-//        } else{
-//
-//        }
-//
-//    }
+    public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent)throws Exception{
+            if (opponent.getCharacterFieldCard().isEmpty()){
+                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
+                characterFieldCard.setIsRotatable(0);
+                characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+            } else {
+                if (isAttackValid(characterFieldCard,opponentCharacterCard)){
+                    opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
+                    opponent.getCharacterFieldCard().remove(opponentCharacterCard);
+                    characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+                } else {
+                    throw new Exception("Invalid Target");
+                }
+            }
+        }
+    }
 
     /**
      * Player's movement in Main2 is the same with Player's movement in Main1 
@@ -371,4 +362,4 @@ public class Player {
     // }
 
 
-}
+//}

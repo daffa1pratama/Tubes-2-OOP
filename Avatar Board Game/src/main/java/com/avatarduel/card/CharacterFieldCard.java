@@ -7,17 +7,10 @@ public class CharacterFieldCard implements iFieldCard {
     private int isAvailableAttack; // Set to attack on next turn
     private int isRotatable;
 
-    // public CharacterFieldCard(){
-    //     this.characterCard = new CharacterCard();
-    //     this.position=0;
-    //     this.isAvailableAttack=0;
-    //     this.isRotatable = 1;
-    // }
-
     public CharacterFieldCard(CharacterCard characterCard){
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getPathName(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = 1;
-        this.isAvailableAttack = 1;
+        this.isAvailableAttack = 0;
         this.isRotatable = 1;
     }
 
