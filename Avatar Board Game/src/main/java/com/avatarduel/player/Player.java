@@ -158,14 +158,6 @@ public class Player {
         }
     }
 
-//    public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
-//        if (opponentCharacterFieldCard.getPosition() == 0 ){
-//            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getDefense());
-//        } else {
-//            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getAttack());
-//        }
-//    }
-    
 
     /**
      *Player movement option in DRAW PHASE
@@ -323,21 +315,38 @@ public class Player {
     /**
      * Battle Phase
      */
-//    public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent)throws Exception{
-//            if (opponent.getCharacterFieldCard().isEmpty()){
-//                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-//                characterFieldCard.setIsRotatable(0);
-//                characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-//            } else {
-//                if (isAttackValid(characterFieldCard,opponentCharacterCard)){
-//                    opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
-//                    opponent.getCharacterFieldCard().remove(opponentCharacterCard);
-//                    characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-//                } else {
-//                    throw new Exception("Invalid Target");
-//                }
-//            }
-//        }
+    public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
+        if (opponentCharacterFieldCard.getPosition() == 0 ){
+            return (characterFieldCard.getCharacterCard().getAttack() > opponentCharacterFieldCard.getCharacterCard().getDefense());
+        } else {
+            return (characterFieldCard.getCharacterCard().getAttack() > opponentCharacterFieldCard.getCharacterCard().getAttack());
+        }
+    }
+
+    public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
+        if (isAttackValid(characterFieldCard,opponentCharacterCard)){
+            opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
+            opponent.getCharacterFieldCard().remove(opponentCharacterCard);//Apakah akan ke remove multiple opponent
+            //dump the opponentSkillCard
+            for (SkillFieldCard skills : opponent.getSkillFieldCard()){
+                if(opponentCharacterCard.getSkills().contains(skills)){
+                    opponent.getSkillFieldCard().remove(skills); // Mungkin bisa bug
+                    opponentCharacterCard.getSkills().remove(skills);
+                }
+            }
+            characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+//    if (opponent.getCharacterFieldCard().isEmpty()){
+//        opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
+//        characterFieldCard.setIsRotatable(0);
+//        characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
 //    }
+
+
 
 }

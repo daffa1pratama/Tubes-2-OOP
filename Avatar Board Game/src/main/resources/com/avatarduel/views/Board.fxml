@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.33444816053511706" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.avatarduel.board.BoardController">
+<SplitPane dividerPositions="0.33444816053511706" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.board.BoardController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -32,13 +32,13 @@
             </Pane>
             <Pane layoutX="185.0" layoutY="434.0">
                <children>
-                  <TextField fx:id="landA" editable="false" layoutY="24.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="airA" editable="false" layoutY="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="fireA" editable="false" layoutY="69.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="earthA" editable="false" layoutY="91.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="hpA" editable="false" minHeight="-Infinity" prefHeight="25.0" prefWidth="54.0" />
-                  <TextField fx:id="waterA" editable="false" layoutY="113.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="energyA" editable="false" layoutY="135.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
+                  <TextField fx:id="landA" editable="false" layoutY="24.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="airA" editable="false" layoutY="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="fireA" editable="false" layoutY="69.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="earthA" editable="false" layoutY="91.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="hpA" editable="false" minHeight="-Infinity" prefHeight="25.0" prefWidth="60.0" />
+                  <TextField fx:id="waterA" editable="false" layoutY="113.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="energyA" editable="false" layoutY="135.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
                </children>
             </Pane>
             <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="144.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true">
@@ -76,7 +76,7 @@
                   <TextField fx:id="deckCountA" editable="false" layoutY="1.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="38.0" text="60" />
                </children>
             </Pane>
-            <BorderPane fx:id="cardDetail" layoutX="51.0" layoutY="176.0" prefHeight="247.0" prefWidth="158.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="53.0" />
+            <BorderPane fx:id="cardDetail" layoutX="25.0" layoutY="176.0" prefHeight="247.0" prefWidth="158.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="80.0" />
             <Text layoutX="136.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
                <font>
                   <Font size="18.0" />
@@ -89,13 +89,13 @@
             </ImageView>
             <Pane layoutX="185.0" layoutY="3.0">
                <children>
-                  <TextField fx:id="energyB" editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="waterB" editable="false" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="earthB" editable="false" layoutY="45.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="fireB" editable="false" layoutY="67.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="airB" editable="false" layoutY="89.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="54.0" />
-                  <TextField fx:id="hpB" editable="false" layoutY="136.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="54.0" />
-                  <TextField fx:id="landB" editable="false" layoutY="112.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="54.0" />
+                  <TextField fx:id="energyB" editable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="waterB" editable="false" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="earthB" editable="false" layoutY="45.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="fireB" editable="false" layoutY="67.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="airB" editable="false" layoutY="89.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="60.0" />
+                  <TextField fx:id="hpB" editable="false" layoutY="136.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="60.0" />
+                  <TextField fx:id="landB" editable="false" layoutY="112.0" minHeight="-Infinity" prefHeight="25.0" prefWidth="60.0" />
                </children>
             </Pane>
             <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="147.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
@@ -143,6 +143,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
+            <Button fx:id="btn_discard" layoutX="187.0" layoutY="284.0" mnemonicParsing="false" text="Discard" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="527.0">
          <children>

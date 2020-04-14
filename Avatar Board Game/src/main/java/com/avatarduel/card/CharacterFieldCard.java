@@ -1,10 +1,15 @@
 package com.avatarduel.card;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CharacterFieldCard extends FieldCard{
     private CharacterCard characterCard;
     private int position; //0 defense 1 attack
     private int isAvailableAttack; // Set to attack on next turn
     private int isRotatable;
+    private List<SkillFieldCard> skills;
+
 
     public CharacterFieldCard(int field, CharacterCard characterCard){
         super(field);
@@ -12,7 +17,12 @@ public class CharacterFieldCard extends FieldCard{
         this.position = 1;
         this.isAvailableAttack = 0;
         this.isRotatable = 1;
+        this.skills = new ArrayList<SkillFieldCard>();
     }
+
+    public List<SkillFieldCard>getSkills(){ return this.skills;}
+
+    public void addSkills(SkillFieldCard skillFieldCard){this.skills.add(skillFieldCard);}
 
     public CharacterCard getCharacterCard(){return this.characterCard;}
     public int getBattleAvailability(){return this.isAvailableAttack;}
