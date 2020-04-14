@@ -418,6 +418,8 @@ public class BoardController {
             public void handle(ActionEvent e) {
                 board.switchTurn();
                 updateBoard();
+                updateCharacterFieldCardAttackAvailability(board.getCurrentPlayer().getCharacterFieldCard());
+                nextPhaseButton.setDisable(false);
             }
         }));
         nextPhaseButton.setOnAction((new EventHandler<ActionEvent>() {
@@ -425,6 +427,9 @@ public class BoardController {
             public void handle(ActionEvent actionEvent) {
                 board.nextPhase();
                 updateBoard();
+                if (board.getPhase() == Phase.BATTLE){
+                    nextPhaseButton.setDisable(true);
+                }
             }
         }));
     }
@@ -446,6 +451,12 @@ public class BoardController {
             for (int i = 0; i < p2.size(); i++) {
                 displayHandCard(p2.get(i), 2, i);
             }
+        }
+    }
+
+    public void updateCharacterFieldCardAttackAvailability(List<CharacterFieldCard> cp){
+        for (CharacterFieldCard characterFieldCard: cp){
+            characterFieldCard.setBattleAvailability(1);
         }
     }
 

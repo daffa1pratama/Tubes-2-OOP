@@ -75,9 +75,6 @@ public class Board {
             case MAIN:
                 this.phase = Phase.BATTLE;
                 break;
-            case BATTLE:
-                //Lempar alert harus end turn
-                break;
         }
     }
 }
