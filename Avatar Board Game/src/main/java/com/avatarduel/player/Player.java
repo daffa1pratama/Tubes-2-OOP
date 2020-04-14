@@ -12,7 +12,7 @@ public class Player {
     private List<Card> onHand;
     private List<LandCard> landFieldCards;
     private List<CharacterFieldCard> characterFieldCards;
-    private List<SkillCard> skillFieldCards;
+    private List<SkillFieldCard> skillFieldCards;
     private int hp;
     private int maxFire;
     private int maxEarth;
@@ -32,7 +32,7 @@ public class Player {
         this.onHand = new ArrayList<Card>(7);
         this.landFieldCards = new ArrayList<LandCard>();
         this.characterFieldCards = new ArrayList<CharacterFieldCard>(6);
-        this.skillFieldCards = new ArrayList<SkillCard>(6);
+        this.skillFieldCards = new ArrayList<SkillFieldCard>(6);
         this.isLandCardDeployed = false;
         this.hp = 80;
 //        this.maxFire = 0;
@@ -81,7 +81,7 @@ public class Player {
 
     public List<CharacterFieldCard> getCharacterFieldCard() {return this.characterFieldCards;}
 
-    public List<SkillCard> getSkillFieldCard() {return this.skillFieldCards;}
+    public List<SkillFieldCard> getSkillFieldCard() {return this.skillFieldCards;}
 
     public boolean getIsLandCardDeployed() { return this.isLandCardDeployed; }
 
@@ -91,23 +91,23 @@ public class Player {
 
     //Masih ada getter dan setter yang belum lengkap
 
-    public boolean hasEnoughPower (Element element,int amount){
+    public boolean hasEnoughPower (Element element,int amount) {
         boolean temp=true;
         switch(element){
             case FIRE:
-                temp = (this.curFire >= amount) ? true : false;
+                temp = this.curFire >= amount;
                 break;
             case EARTH:
-                temp = (this.curEarth >= amount) ? true : false;
+                temp = this.curEarth >= amount;
                 break;
             case WATER:
-                temp = (this.curWater >= amount) ? true : false;
+                temp = this.curWater >= amount;
                 break;
             case AIR:
-                temp = (this.curWater >= amount) ? true : false;
+                temp = this.curAir >= amount;
                 break;
             case ENERGY:
-                temp = (this.curEnergy >= amount) ? true : false;
+                temp = this.curEnergy >= amount;
                 break;
         }
         return temp;
@@ -217,15 +217,19 @@ public class Player {
         }
     }
 
-    public void addToField(Card card,int field) {
+    public void addToField(int field, Card card) {
         if (card instanceof CharacterCard) {
-            CharacterFieldCard fieldCard = new CharacterFieldCard((CharacterCard) card,field);
+            usePower(card.getElement(), ((CharacterCard) card).getPower());
+            CharacterFieldCard fieldCard = new CharacterFieldCard(field, (CharacterCard) card);
             characterFieldCards.add(fieldCard);
         } else if (card instanceof LandCard) {
-            landFieldCards.add((LandCard) card);
             addPower(card.getElement());
+            isLandCardDeployed = true;
+            landFieldCards.add((LandCard) card);
         } else {
-            skillFieldCards.add((SkillCard) card);
+            usePower(card.getElement(), ((SkillCard) card).getPower());
+            SkillFieldCard skillFieldCard = new SkillFieldCard(field, (SkillCard) card);
+            skillFieldCards.add(skillFieldCard);
         }
         discardCardOnHand(card);
     }

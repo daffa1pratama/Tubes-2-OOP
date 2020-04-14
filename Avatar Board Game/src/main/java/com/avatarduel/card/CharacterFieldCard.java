@@ -6,7 +6,7 @@ public class CharacterFieldCard extends FieldCard{
     private int isAvailableAttack; // Set to attack on next turn
     private int isRotatable;
 
-    public CharacterFieldCard(CharacterCard characterCard,int field){
+    public CharacterFieldCard(int field, CharacterCard characterCard){
         super(field);
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getPathName(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = 1;
@@ -23,9 +23,11 @@ public class CharacterFieldCard extends FieldCard{
 
     public void setIsRotatable(int isRotatable) { this.isRotatable = isRotatable; }
 
-    public void setPositionValue(){position = (position+1)%2 ;}
+    public void setPositionValue(){position = (position+1)%2; }
 
     public void rotate() { this.position = (this.position + 1) % 2; }
+
+    public int getPosition() { return this.position; }
 
 
 
