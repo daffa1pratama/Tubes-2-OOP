@@ -376,6 +376,7 @@ public class BoardController {
                 alert.showAndWait().ifPresent(response -> {
                     if (response == attack) {
                         isAttackClick = 1;
+
                     } else if (response == discard) {
                         currentPlayer.discardCharacterCardOnField(card);
                     } else if (response == rotate) {
@@ -387,6 +388,12 @@ public class BoardController {
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
+    }
+
+    public boolean choosingEnemyTarget(CharacterFieldCard attacker,CharacterFieldCard attackedCard,Player opponent){
+        attackedCard.setOnMouseEntered((MouseEvent)->{
+
+        });
     }
 
     public void addHoverEvent(Card card, Pane pane) {
