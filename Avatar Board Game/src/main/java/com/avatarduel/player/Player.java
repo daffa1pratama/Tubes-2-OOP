@@ -158,13 +158,13 @@ public class Player {
         }
     }
 
-    public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
-        if (opponentCharacterFieldCard.getPosition() == 0 ){
-            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getDefense());
-        } else {
-            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getAttack());
-        }
-    }
+//    public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
+//        if (opponentCharacterFieldCard.getPosition() == 0 ){
+//            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getDefense());
+//        } else {
+//            return (characterFieldCard.getCharacterCard().getAttack() >= opponentCharacterFieldCard.getCharacterCard().getAttack());
+//        }
+//    }
     
 
     /**
@@ -217,9 +217,9 @@ public class Player {
         }
     }
 
-    public void addToField(Card card) {
+    public void addToField(Card card,int field) {
         if (card instanceof CharacterCard) {
-            CharacterFieldCard fieldCard = new CharacterFieldCard((CharacterCard) card);
+            CharacterFieldCard fieldCard = new CharacterFieldCard((CharacterCard) card,field);
             characterFieldCards.add(fieldCard);
         } else if (card instanceof LandCard) {
             landFieldCards.add((LandCard) card);
@@ -319,47 +319,21 @@ public class Player {
     /**
      * Battle Phase
      */
-    public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent)throws Exception{
-            if (opponent.getCharacterFieldCard().isEmpty()){
-                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-                characterFieldCard.setIsRotatable(0);
-                characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-            } else {
-                if (isAttackValid(characterFieldCard,opponentCharacterCard)){
-                    opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
-                    opponent.getCharacterFieldCard().remove(opponentCharacterCard);
-                    characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-                } else {
-                    throw new Exception("Invalid Target");
-                }
-            }
-        }
-    }
-
-    /**
-     * Player's movement in Main2 is the same with Player's movement in Main1 
-     */
-
-    /**
-     * Player's movement in END PHASE
-     */
-
-//    public void endPhase() {
-//        this.isLandCardDeployed = false;
-//        for(CharacterFieldCard currentCard : this.characterFieldCards){
-//            currentCard.setIsRotatable(1);
-//            currentCard.setBattleAvailability(1);
+//    public void attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent)throws Exception{
+//            if (opponent.getCharacterFieldCard().isEmpty()){
+//                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
+//                characterFieldCard.setIsRotatable(0);
+//                characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+//            } else {
+//                if (isAttackValid(characterFieldCard,opponentCharacterCard)){
+//                    opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
+//                    opponent.getCharacterFieldCard().remove(opponentCharacterCard);
+//                    characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+//                } else {
+//                    throw new Exception("Invalid Target");
+//                }
+//            }
 //        }
-//        this.turn.setEndTurn(1);
 //    }
 
-    // public void endTurn() {
-    //     // End turn implements later
-    // }
-
-    // public void placeCard(Card card) {
-    //     // Place card implements later
-    // }
-
-
-//}
+}
