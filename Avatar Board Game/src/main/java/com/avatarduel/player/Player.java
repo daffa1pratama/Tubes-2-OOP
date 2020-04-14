@@ -340,13 +340,9 @@ public class Player {
             return false;
         }
     }
-
-//    if (opponent.getCharacterFieldCard().isEmpty()){
-//        opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-//        characterFieldCard.setIsRotatable(0);
-//        characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
-//    }
-
-
-
+    public void attackOpponentPlayer(CharacterFieldCard characterFieldCard,Player opponent){
+        opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
+        characterFieldCard.setIsRotatable(0);
+        characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+    }
 }

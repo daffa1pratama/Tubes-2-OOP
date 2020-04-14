@@ -64,6 +64,9 @@ public class BoardController {
     @FXML
     private TextField playerText, phaseText;
 
+    @FXML
+    private Text lbl_hpA,lbl_hpB;
+
 
     private Board board;
 
@@ -78,6 +81,7 @@ public class BoardController {
         this.phaseText.setText(Phase.DRAW.toString());
         initializeClick();
     }
+
 
 
     public void displayCard(CharacterCard card) {
@@ -480,10 +484,43 @@ public class BoardController {
                 if (selected1 == null){
                     sendMessage("Please click on your card before clicking this button");
                 } else {
-                  //Nyambungin ke cardnya gimana nih ?
+                    if (selected1.getField() != board.getTurn()){
+                        sendMessage("You can only discard your own card");
+                        clearSelected();
+                    } else {
+                        if (board.getPhase() == Phase.MAIN){
+                            if (selected1 instanceof CharacterFieldCard){
+                                sendMessage("Discard fail.You can only discard skill Card");
+                            } else {
+                                board.getCurrentPlayer().getSkillFieldCard().remove((SkillFieldCard)selected1);
+                            }
+                        } else {
+                            sendMessage("Discard fail. Wrong Phase");
+                        }
+                    }
                 }
             }
         }));
+        lbl_hpA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if ((board.getTurn()==2) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
+                    selected1!= null && selected1.getField()==board.getTurn() &&
+                    selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
+                    board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                }
+            }
+        });
+        lbl_hpB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if ((board.getTurn()==1) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
+                        selected1!= null && selected1.getField()==board.getTurn() &&
+                        selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
+                    board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                }
+            }
+        });
     }
 
     public void sendMessage(String text) {
@@ -513,67 +550,102 @@ public class BoardController {
         if (selected1.getField() != board.getTurn()) {
             selected1 = null;
             sendMessage("Can't select enemy card.");
-        } else if (selected1 instanceof CharacterFieldCard) {
-            if (selected1 == selected2) {
-                ((CharacterFieldCard) selected1).rotate();
-                sendMessage("Successfully changed card position.");
-                clearSelected();
-            } else if (selected2 == null) {
-                if (((CharacterFieldCard) selected1).getIsRotateAble() == 1) {
-                    if (((CharacterFieldCard) selected1).getPosition() == 1) {
-                        if (((CharacterFieldCard) selected1).getBattleAvailability() == 1){
-                            sendMessage("Click on the card once again to change position or click on opponent character card to attack.");
-                            //Case when attack opponentPlayer if enemy's field card contains no character card is handle in onClick event in enemyGridpane
-                        } else {
-                            sendMessage("This card is currently not available to launch attack.");
-                            clearSelected();
-                        }
-                    } else {
-                        sendMessage("Double click on the card to change position.");
+        } else if (board.getPhase() == Phase.MAIN) {
+            if (selected1 instanceof CharacterFieldCard) {
+                if (selected1 == selected2) {
+                    if (((CharacterFieldCard) selected1).getIsRotateAble() == 1) {
+                        ((CharacterFieldCard) selected1).rotate();
+                        sendMessage("Successfully changed card position.");
                         clearSelected();
+                    } else {
+                        sendMessage("This is card is not rotatable currently");
                     }
-                } else { // selected1 is not rotatable
-                    if (((CharacterFieldCard) selected1).getPosition() == 1) {
-                        if (((CharacterFieldCard) selected1).getBattleAvailability() == 1){
-                            sendMessage("Click on opponent character card to attack.");
-                        } else {
-                            sendMessage("This card is currently not available to launch attack.");
-                            clearSelected();
-                        }
-                    } else {
-                        sendMessage("Nothing to do with this card.");
+                } else if (selected2 == null) {
+                    sendMessage("Click discard button if you wish discard.Click once more time to rotate");
+                } else { // selected2 != selected1
+                    if (selected2.getField() != board.getTurn()) {
+                        sendMessage("Invalid Move");
                         clearSelected();
+                    } else { //selected1 == Character && selected2 == Skill
+                        selected1 = selected2;
+                        selected2 = null;
+                        sendMessage("Click the discard button if you wish discard");
                     }
                 }
-            } else { //selected1 != selected2
-                if (selected2 instanceof CharacterFieldCard){
-                    if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1,(CharacterFieldCard) selected2,board.getOppositePlayer())){
-                        sendMessage("You attack succesfully on enemy card");
-                    } else{
-                        sendMessage("Attack not valid, your card's attack value is too low");
+            } else {//skill1 instance of skillcard
+                if (selected2 == null) {
+                    sendMessage("Click any character card to use you Card.Click discard button if you wish discard");
+                } else {// selected2 != null
+                    if (selected2 instanceof CharacterFieldCard) {
+                        //Use Skill card
+                        if (((SkillFieldCard) selected1).getSkillCard() instanceof PowerUpCard) {
+                            ((PowerUpCard) (((SkillFieldCard) selected1).getSkillCard())).Effect((CharacterFieldCard) selected2);
+                        } else if (((SkillFieldCard) selected1).getSkillCard() instanceof DestroyCard) {
+                            ((DestroyCard) (((SkillFieldCard) selected1).getSkillCard())).Effect((CharacterFieldCard) selected2);
+                            //Erase all skillCard on Field and on the target Character Field card
+
+                        } else {
+                            ((AuraCard) (((SkillFieldCard) selected1).getSkillCard())).Effect((CharacterFieldCard) selected2);
+                        }
+                        ((CharacterFieldCard) selected2).getSkills().add((SkillFieldCard) selected1);
+                        sendMessage("Skill card succesfully use");
+                        clearSelected();
+                    } else {//selected2 instanceof SkillCard
+                        if (selected2.getField() != board.getTurn()) {//selected2 == enemy's skillFieldCard
+                            sendMessage("Invalid Move");
+                            clearSelected();
+                        } else {
+                            selected1 = selected2;
+                            selected2 = null;
+                            sendMessage("Click any character card to use you Card.Click the discard button if you wish discard");
+                        }
                     }
-                    clearSelected();
-                } else {//selected 2 instance of SkillFieldCard
-                    sendMessage("Skill card canot .");
                 }
             }
-        } else if (selected1 instanceof SkillFieldCard){
-            if (selected2 instanceof CharacterFieldCard){
-                if (((SkillFieldCard)selected1).getSkillCard() instanceof PowerUpCard){
-                    ((PowerUpCard)(((SkillFieldCard)selected1).getSkillCard())).Effect((CharacterFieldCard) selected2);
-                } else if (((SkillFieldCard)selected1).getSkillCard() instanceof DestroyCard){
-                    ((DestroyCard)(((SkillFieldCard)selected1).getSkillCard())).Effect((CharacterFieldCard) selected2);
-                } else{
-                    ((AuraCard)(((SkillFieldCard)selected1).getSkillCard())).Effect((CharacterFieldCard) selected2);
+        } else if  (board.getPhase() == Phase.BATTLE){
+            if (selected1 instanceof CharacterFieldCard){
+                if (selected2 == null){
+                    sendMessage("Click enemy character card to attack");
+                    //Case when attack opponentPlayer if enemy's field card contains no character card is handle in onClick event in enemyGridpane
+                } else {//selected2 != null
+                    if (selected2.getField() != board.getTurn()){
+                        if (selected2 instanceof CharacterFieldCard){
+                            //Attack
+                            if (((CharacterFieldCard) selected1).getBattleAvailability() == 1){
+                                if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1,(CharacterFieldCard) selected2,board.getOppositePlayer())){
+                                    sendMessage("You attack succesfully on enemy card");
+                                } else{
+                                    sendMessage("Attack not valid, your card's attack value is too low");
+                                }
+                            } else {
+                                sendMessage("This card is currently not available to launch attack.");
+                                clearSelected();
+                            }
+
+                            clearSelected();
+                        } else {
+                            sendMessage("Cannot attack skill card");
+                            clearSelected();
+                        }
+                    } else {//selected2 is my own card
+                        if (selected2 == selected1){
+                            sendMessage("Rotate Fail.Wrong Phase !!!");
+                            clearSelected();
+                        } else {
+                            if (selected2 instanceof CharacterFieldCard){
+                                selected1 = selected2;
+                                selected2 = null;
+                            } else {
+                                sendMessage("Cannot attack skill card");
+                            }
+                        }
+                    }
                 }
-                sendMessage("Skill card succesfully use");
-                clearSelected();
-            } else {
-                sendMessage("Click on any character card in order to use this skill card");
+            }else{ //selected1 instance of SkillFieldCard
+                sendMessage("You cannot do anything with this card in this phase");
             }
-        } else {
-            sendMessage("Invalid operation.");
-            clearSelected();
+        } else{//DRAW PHASE
+            //MAU DISCARD KAH ?
         }
     }
 

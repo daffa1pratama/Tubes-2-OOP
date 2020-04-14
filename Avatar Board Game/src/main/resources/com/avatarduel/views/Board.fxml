@@ -61,7 +61,7 @@
                   <Image url="@../card/image/element/AirElement.png" />
                </image>
             </ImageView>
-            <Text layoutX="138.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP">
+            <Text fx:id="lbl_hpA" layoutX="138.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
@@ -118,7 +118,7 @@
                   <Image url="@../card/image/element/AirElement.png" />
                </image>
             </ImageView>
-            <Text layoutX="138.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP">
+            <Text fx:id="lbl_hpB" layoutX="138.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HP">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
