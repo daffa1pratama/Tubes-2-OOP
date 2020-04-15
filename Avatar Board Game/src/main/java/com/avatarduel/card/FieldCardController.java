@@ -34,20 +34,31 @@ public class FieldCardController {
 
     public void setFieldCard(Card card){
         cardName.setText(card.getName());
-//            System.out.println(card.getPathName());
-        Image newImage = new Image(card.getPathName());
+        try {
+            Image newImage = new Image(card.getPathName());
+        } catch (Exception e) {
+            System.out.println(card.getPathName());
+        }
         cardImage.setImage(newImage);
     }
 
     public void setFieldCard(CharacterFieldCard card) {
         cardName.setText(card.getCharacterCard().getName());
-        Image newImage = new Image(card.getCharacterCard().getPathName());
+        try {
+            Image newImage = new Image(card.getCharacterCard().getPathName());
+        } catch (Exception e) {
+            System.out.println(card.getCharacterCard().getPathName());
+        }
         cardImage.setImage(newImage);
     }
 
     public void setFieldCard(SkillFieldCard card) {
         cardName.setText(card.getSkillCard().getName());
-        Image newImage = new Image(card.getSkillCard().getPathName());
+        try {
+            Image newImage = new Image(card.getSkillCard().getPathName());
+        } catch (Exception e) {
+            System.out.println(card.getSkillCard().getPathName());
+        }
         cardImage.setImage(newImage);
     }
 }

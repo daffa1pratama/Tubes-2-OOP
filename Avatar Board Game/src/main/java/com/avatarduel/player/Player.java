@@ -244,9 +244,9 @@ public class Player {
     public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//TargetPlayer can be currentPlayer or Opposite Player
         for (SkillFieldCard skills : target.getSkills()){
             targetPlayer.getSkillFieldCard().remove(skills);
-            target.getSkills().remove(skills);
         }
         targetPlayer.getCharacterFieldCard().remove(target);
+        this.skillFieldCards.remove(skillFieldCard);
     }
 
     public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition, target is currentPlayer's card
