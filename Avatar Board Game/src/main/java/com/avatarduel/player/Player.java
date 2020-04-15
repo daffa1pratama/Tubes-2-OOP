@@ -5,6 +5,7 @@ import com.avatarduel.deck.Deck;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
     private String name;
@@ -163,10 +164,12 @@ public class Player {
      *Player movement option in DRAW PHASE
      */
     public void drawCard() {
-        if (this.onHand.size() < 8){
-            this.onHand.add(this.deck.drawCard());
-        } else {
-            // Skip draw phase
+        this.onHand.add(this.deck.drawCard());
+        if (this.onHand.size() > 8){
+            // randomly delete one card
+            Random r = new Random();
+            int idx = r.nextInt(this.onHand.size());
+            this.onHand.remove(idx);
         }
     }
 
