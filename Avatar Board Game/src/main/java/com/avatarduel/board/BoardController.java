@@ -67,16 +67,12 @@ public class BoardController {
     @FXML
     private Text lbl_hpA,lbl_hpB;
 
-
     private Board board;
-
-    private String colorCard;
 
     private FieldCard selected1, selected2;
 
     @FXML
     public void initialize() {
-        colorCard = "";
         this.playerText.setText("PLAYER A");
         this.phaseText.setText(Phase.DRAW.toString());
         initializeClick();
@@ -88,25 +84,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #F3D06F; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -119,25 +97,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #65C387; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -150,25 +110,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #01BAEB; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -181,25 +123,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #D13539; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -212,25 +136,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #A57FBB; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -258,24 +164,20 @@ public class BoardController {
             handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
+            String colorCard = "";
+
+            if (card instanceof CharacterCard) {
+                colorCard = "F3D06F"; //kuning
+            } else if (card instanceof LandCard) {
+                colorCard = "65C387"; //ijo
+            } else if (card instanceof AuraCard) {
+                colorCard = "01BAEB"; //biru
+            } else if (card instanceof DestroyCard) {
+                colorCard = "D13539"; //merah
+            } else if (card instanceof PowerUpCard) {
+                colorCard = "A57FBB"; //ungu
             }
+
             if (player == 1){
                 handCardA.add(handCard,x,0,1,1);
             } else { //player == 2
@@ -326,25 +228,6 @@ public class BoardController {
             characterFieldCard.setClip(new Rectangle(characterFieldCard.getPrefWidth(), characterFieldCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
-            Element cardElement = card.getCharacterCard().getElement();
-            switch (cardElement) {
-                case AIR:
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER:
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE:
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH:
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY:
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-
             if (player == 1) {
                 characterFieldCardA.add(characterFieldCard, x, 0, 1, 1);
             } else { //player == 2
@@ -355,7 +238,7 @@ public class BoardController {
             } else {
                 characterFieldCard.setRotate(0);
             }
-            String style = "-fx-background-color: #" + colorCard + ";";
+            String style = "-fx-background-color: #F3D06F;";
             if (selected1 instanceof CharacterFieldCard && card == (CharacterFieldCard) selected1) {
                 style += " -fx-border-color: BLACK; -fx-border-width: 5;";
             } else if (selected1 instanceof SkillFieldCard && ((SkillFieldCard) selected1).getOwner() == card) {
@@ -381,23 +264,14 @@ public class BoardController {
             skillFieldCard.setClip(new Rectangle(skillFieldCard.getPrefWidth(), skillFieldCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
-            Element cardElement = card.getSkillCard().getElement();
-            switch (cardElement) {
-                case AIR:
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER:
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE:
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH:
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY:
-                    this.colorCard = "A57FBB";
-                    break;
+            String colorCard = "";
+
+            if (card.getSkillCard() instanceof AuraCard) {
+                colorCard = "01BAEB";
+            } else if (card.getSkillCard() instanceof DestroyCard) {
+                colorCard = "D13539";
+            } else if (card.getSkillCard() instanceof PowerUpCard) {
+                colorCard = "A57FBB";
             }
 
             if (player == 1) {

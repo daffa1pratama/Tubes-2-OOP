@@ -28,6 +28,9 @@ public class FieldCardController {
     private Text cardName;
 
     @FXML
+    private ImageView cardElement;
+
+    @FXML
     public void initialize() {
 
     }
@@ -37,17 +40,56 @@ public class FieldCardController {
 //            System.out.println(card.getPathName());
         Image newImage = new Image(card.getPathName());
         cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else if (card.getElement() == Element.EARTH) {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
+        }
+        cardElement.setImage(elementImage);
     }
 
     public void setFieldCard(CharacterFieldCard card) {
         cardName.setText(card.getCharacterCard().getName());
         Image newImage = new Image(card.getCharacterCard().getPathName());
         cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getCharacterCard().getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getCharacterCard().getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getCharacterCard().getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else if (card.getCharacterCard().getElement() == Element.EARTH) {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
+        }
+        cardElement.setImage(elementImage);
     }
 
     public void setFieldCard(SkillFieldCard card) {
         cardName.setText(card.getSkillCard().getName());
         Image newImage = new Image(card.getSkillCard().getPathName());
         cardImage.setImage(newImage);
+        Image elementImage;
+        if (card.getSkillCard().getElement() == Element.AIR) {
+            elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
+        } else if (card.getSkillCard().getElement() == Element.WATER) {
+            elementImage = new Image("/com/avatarduel/card/image/element/WaterElement.png");
+        } else if (card.getSkillCard().getElement() == Element.FIRE) {
+            elementImage = new Image("/com/avatarduel/card/image/element/FireElement.png");
+        } else if (card.getSkillCard().getElement() == Element.EARTH) {
+            elementImage = new Image("/com/avatarduel/card/image/element/EarthElement.png");
+        } else {
+            elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
+        }
+        cardElement.setImage(elementImage);
     }
 }
