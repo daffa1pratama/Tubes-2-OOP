@@ -38,8 +38,6 @@ public class FieldCardController {
     public void setFieldCard(Card card){
         cardName.setText(card.getName());
 //            System.out.println(card.getPathName());
-        Image newImage = new Image(card.getPathName());
-        cardImage.setImage(newImage);
         Image elementImage;
         if (card.getElement() == Element.AIR) {
             elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
@@ -53,12 +51,16 @@ public class FieldCardController {
             elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
+        try {
+            Image newImage = new Image(card.getPathName());
+            cardImage.setImage(newImage);
+        } catch (Exception e) {
+            System.out.println(card.getPathName());
+        }
     }
 
     public void setFieldCard(CharacterFieldCard card) {
         cardName.setText(card.getCharacterCard().getName());
-        Image newImage = new Image(card.getCharacterCard().getPathName());
-        cardImage.setImage(newImage);
         Image elementImage;
         if (card.getCharacterCard().getElement() == Element.AIR) {
             elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
@@ -72,12 +74,16 @@ public class FieldCardController {
             elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
+        try {
+            Image newImage = new Image(card.getCharacterCard().getPathName());
+            cardImage.setImage(newImage);
+        } catch (Exception e) {
+            System.out.println(card.getCharacterCard().getPathName());
+        }
     }
 
     public void setFieldCard(SkillFieldCard card) {
         cardName.setText(card.getSkillCard().getName());
-        Image newImage = new Image(card.getSkillCard().getPathName());
-        cardImage.setImage(newImage);
         Image elementImage;
         if (card.getSkillCard().getElement() == Element.AIR) {
             elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
@@ -91,5 +97,11 @@ public class FieldCardController {
             elementImage = new Image("/com/avatarduel/card/image/element/EnergyElement.png");
         }
         cardElement.setImage(elementImage);
+        try {
+            Image newImage = new Image(card.getSkillCard().getPathName());
+            cardImage.setImage(newImage);
+        } catch (Exception e) {
+            System.out.println(card.getSkillCard().getPathName());
+        }
     }
 }

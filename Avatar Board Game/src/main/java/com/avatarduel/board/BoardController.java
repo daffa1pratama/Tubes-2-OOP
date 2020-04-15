@@ -371,12 +371,9 @@ public class BoardController {
                             if (selected1 instanceof CharacterFieldCard){
                                 sendMessage("Discard fail.You can only discard skill Card");
                             } else {
-                                if (((SkillFieldCard)selected1).getOwner() != null ){
-                                    ((SkillFieldCard)selected1).getOwner().getSkills().remove((SkillFieldCard)selected1);
-                                }
-                                board.getCurrentPlayer().getSkillFieldCard().remove((SkillFieldCard)selected1);
-                                updateBoard();
+                                board.getCurrentPlayer().discardSkillFieldCard((SkillFieldCard) selected1);
                             }
+                            updateBoard();
                         } else {
                             sendMessage("Discard fail. Wrong Phase");
                             clearSelected();
@@ -508,13 +505,15 @@ public class BoardController {
                             sendMessage("This skill already used.Click discard button to discard");
                         }
 
+                    } else if (selected2 == selected1) {
+                        clearSelected();
                     } else {//selected2 instanceof SkillCard
                         if (selected2.getField() != board.getTurn()) {//selected2 == enemy's skillFieldCard
                             sendMessage("Invalid Move");
                             clearSelected();
                         } else {
                             updateSelected();
-                            sendMessage("Click any character card to use you Card.Click the discard button if you wish discard");
+                            sendMessage("Click any character card to use you Card. Click the discard button if you wish discard");
                         }
                     }
                 }
