@@ -344,7 +344,6 @@ public class BoardController {
                     this.colorCard = "A57FBB";
                     break;
             }
-
             if (player == 1) {
                 characterFieldCardA.add(characterFieldCard, x, 0, 1, 1);
             } else { //player == 2
@@ -515,6 +514,8 @@ public class BoardController {
                     selected1!= null && selected1.getField()==board.getTurn() &&
                     selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                    sendMessage("You opponent's hp is dropping");
+                    updateBoard();
                 }
             }
         });
@@ -525,6 +526,8 @@ public class BoardController {
                         selected1!= null && selected1.getField()==board.getTurn() &&
                         selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                    sendMessage("You opponent's hp is dropping");
+                    updateBoard();
                 }
             }
         });
@@ -562,10 +565,20 @@ public class BoardController {
         selected2 = null;
     }
 
+    public String selectedSkillType(FieldCard selected){
+        String skillType;
+        if (((SkillFieldCard) selected1).getSkillCard() instanceof  AuraCard){
+            skillType = "Aura";
+        } else if (((SkillFieldCard) selected1).getSkillCard() instanceof  PowerUpCard){
+            skillType = "Power up";
+        } else {
+            skillType = "Destroyer";
+        }
+        return skillType;
+    }
 
     public void processSelected() {
         if (selected1 == null) return;
-
         if (selected1.getField() != board.getTurn()) {
             selected1 = null;
             sendMessage("Can't select enemy card.");
@@ -583,7 +596,7 @@ public class BoardController {
                     sendMessage("Click one more time to rotate.");
                 } else { // selected2 != selected1
                     if (selected2.getField() != board.getTurn()) {
-                        sendMessage("Invalid Move");//Spesifikan jenis invalid
+                        sendMessage("Invalid Move");
                         clearSelected();
                     } else { //selected1 == Character && selected2 == Skill or CharacterCard
                         selected1 = selected2;
@@ -592,19 +605,23 @@ public class BoardController {
                             sendMessage("Click one more time to rotate");
                         } else {//selected2 instance of SkillFieldCard
                             if (((SkillFieldCard) selected1).getOwner() == null){
-                                sendMessage("Click any character card to use you Card or Click discard button");
+                                String skillType = selectedSkillType(selected1);
+                                sendMessage("Click card to use" + skillType + " or Click discard button");
                             } else {
-                                sendMessage("This skill already used.Click discard button to discard");
+                                sendMessage("Skill used.Click discard button to discard");
                             }
                         }
                     }
                 }
             } else {//skill1 instance of skillcard
+                if (selected1 == selected2){ clearSelected();
+                    System.out.println("kok erorr"); }
                 if (selected2 == null) {
                     if (((SkillFieldCard) selected1).getOwner() == null){
-                        sendMessage("Click any character card to use you Card or Click discard button");
+                        String skillType = selectedSkillType(selected1);
+                        sendMessage("Click card to use " + skillType + " or Click discard button");
                     } else {
-                        sendMessage("This skill already used.Click discard button to discard");
+                        sendMessage("Skill used.Click discard button to discard");
                     }
                 } else {// selected2 != null
                     if (selected2 instanceof CharacterFieldCard) {
@@ -616,15 +633,14 @@ public class BoardController {
                             } else {
                                 target = board.getP2();
                             }
+                            String stringType = selectedSkillType(selected1);
                             if (((SkillFieldCard) selected1).getSkillCard() instanceof AuraCard) {
                                 board.getCurrentPlayer().useAura((SkillFieldCard)selected1,(CharacterFieldCard) selected2,target);
-                                sendMessage("Aura card succesfully used");
                             } else if (((SkillFieldCard) selected1).getSkillCard() instanceof DestroyCard) {
                                 board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
-                                sendMessage("Destroy card succesfully used");
                             } else {
                                 board.getCurrentPlayer().usePowerUp((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
-                                sendMessage("Power up skill succesfully used");
+                                sendMessage(stringType +"succesfully used");
                             }
                             clearSelected();
                         } else {
@@ -633,7 +649,7 @@ public class BoardController {
 
                     } else {//selected2 instanceof SkillCard
                         if (selected2.getField() != board.getTurn()) {//selected2 == enemy's skillFieldCard
-                            sendMessage("Invalid Move");
+                            sendMessage("Invalid Move !!! Wrong Phase");
                             clearSelected();
                         } else {
                             updateSelected();
@@ -676,7 +692,8 @@ public class BoardController {
                                     sendMessage("Click enemy character card to attack");
                                 } else {
                                     updateSelected();
-                                    sendMessage("Click any character card to use you Card.Click the discard button if you wish discard");
+                                    String skillType = selectedSkillType(selected1);
+                                    sendMessage("Click card to use " + skillType + " or Click discard button");
                                 }
                             }
                         }
@@ -689,10 +706,8 @@ public class BoardController {
                 sendMessage("This card is currently not available to launch attack.");
                 clearSelected();
             }
-
-
         } else{//DRAW PHASE
-            //MAU DISCARD KAH ?
+            sendMessage("Nothing you can do in this PHASE. Click Next Phase");
         }
     }
 
