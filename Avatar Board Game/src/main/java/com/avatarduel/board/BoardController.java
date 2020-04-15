@@ -55,17 +55,17 @@ public class BoardController {
     @FXML
     private Text lbl_hpA,lbl_hpB;
 
+<<<<<<< HEAD
     private CardReader cardReader;
 
+=======
+>>>>>>> bee2dfdd49ac60afb79da501314bc05fb45e6466
     private Board board;
-
-    private String colorCard;
 
     private FieldCard selected1, selected2;
 
     @FXML
     public void initialize() {
-        colorCard = "";
         this.playerText.setText("PLAYER A");
         this.phaseText.setText(Phase.DRAW.toString());
         initializeClick();
@@ -77,25 +77,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #F3D06F; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -108,25 +90,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #65C387; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -139,25 +103,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #01BAEB; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -170,25 +116,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #D13539; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -201,25 +129,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-            cardDetailPane.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #A57FBB; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -247,24 +157,20 @@ public class BoardController {
             handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
-            Element cardElement = card.getElement();
-            switch (cardElement) {
-                case AIR :
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER :
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE :
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH :
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY :
-                    this.colorCard = "A57FBB";
-                    break;
+            String colorCard = "";
+
+            if (card instanceof CharacterCard) {
+                colorCard = "F3D06F"; //kuning
+            } else if (card instanceof LandCard) {
+                colorCard = "65C387"; //ijo
+            } else if (card instanceof AuraCard) {
+                colorCard = "01BAEB"; //biru
+            } else if (card instanceof DestroyCard) {
+                colorCard = "D13539"; //merah
+            } else if (card instanceof PowerUpCard) {
+                colorCard = "A57FBB"; //ungu
             }
+
             if (player == 1){
                 handCardA.add(handCard,x,0,1,1);
             } else { //player == 2
@@ -315,25 +221,6 @@ public class BoardController {
             characterFieldCard.setClip(new Rectangle(characterFieldCard.getPrefWidth(), characterFieldCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
-            Element cardElement = card.getCharacterCard().getElement();
-            switch (cardElement) {
-                case AIR:
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER:
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE:
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH:
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY:
-                    this.colorCard = "A57FBB";
-                    break;
-            }
-
             if (player == 1) {
                 characterFieldCardA.add(characterFieldCard, x, 0, 1, 1);
             } else { //player == 2
@@ -344,7 +231,7 @@ public class BoardController {
             } else {
                 characterFieldCard.setRotate(0);
             }
-            String style = "-fx-background-color: #" + colorCard + ";";
+            String style = "-fx-background-color: #F3D06F;";
             if (selected1 instanceof CharacterFieldCard && card == (CharacterFieldCard) selected1) {
                 style += " -fx-border-color: BLACK; -fx-border-width: 5;";
             } else if (selected1 instanceof SkillFieldCard && ((SkillFieldCard) selected1).getOwner() == card) {
@@ -370,23 +257,14 @@ public class BoardController {
             skillFieldCard.setClip(new Rectangle(skillFieldCard.getPrefWidth(), skillFieldCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
-            Element cardElement = card.getSkillCard().getElement();
-            switch (cardElement) {
-                case AIR:
-                    this.colorCard = "F3D06F";
-                    break;
-                case WATER:
-                    this.colorCard = "01BAEB";
-                    break;
-                case FIRE:
-                    this.colorCard = "D13539";
-                    break;
-                case EARTH:
-                    this.colorCard = "65C387";
-                    break;
-                case ENERGY:
-                    this.colorCard = "A57FBB";
-                    break;
+            String colorCard = "";
+
+            if (card.getSkillCard() instanceof AuraCard) {
+                colorCard = "01BAEB";
+            } else if (card.getSkillCard() instanceof DestroyCard) {
+                colorCard = "D13539";
+            } else if (card.getSkillCard() instanceof PowerUpCard) {
+                colorCard = "A57FBB";
             }
 
             if (player == 1) {
@@ -508,6 +386,10 @@ public class BoardController {
                     selected1!= null && selected1.getField()==board.getTurn() &&
                     selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+<<<<<<< HEAD
+=======
+                    sendMessage("You opponent's hp is dropping");
+>>>>>>> bee2dfdd49ac60afb79da501314bc05fb45e6466
                     updateBoard();
                 }
             }
@@ -519,6 +401,10 @@ public class BoardController {
                         selected1!= null && selected1.getField()==board.getTurn() &&
                         selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+<<<<<<< HEAD
+=======
+                    sendMessage("You opponent's hp is dropping");
+>>>>>>> bee2dfdd49ac60afb79da501314bc05fb45e6466
                     updateBoard();
                 }
             }
@@ -557,10 +443,20 @@ public class BoardController {
         selected2 = null;
     }
 
+    public String selectedSkillType(FieldCard selected){
+        String skillType;
+        if (((SkillFieldCard) selected1).getSkillCard() instanceof  AuraCard){
+            skillType = "Aura";
+        } else if (((SkillFieldCard) selected1).getSkillCard() instanceof  PowerUpCard){
+            skillType = "Power up";
+        } else {
+            skillType = "Destroyer";
+        }
+        return skillType;
+    }
 
     public void processSelected() {
         if (selected1 == null) return;
-
         if (selected1.getField() != board.getTurn()) {
             selected1 = null;
             sendMessage("Can't select enemy card.");
@@ -578,7 +474,7 @@ public class BoardController {
                     sendMessage("Click one more time to rotate.");
                 } else { // selected2 != selected1
                     if (selected2.getField() != board.getTurn()) {
-                        sendMessage("Invalid Move");//Spesifikan jenis invalid
+                        sendMessage("Invalid Move");
                         clearSelected();
                     } else { //selected1 == Character && selected2 == Skill or CharacterCard
                         selected1 = selected2;
@@ -587,19 +483,23 @@ public class BoardController {
                             sendMessage("Click one more time to rotate");
                         } else {//selected2 instance of SkillFieldCard
                             if (((SkillFieldCard) selected1).getOwner() == null){
-                                sendMessage("Click any character card to use you Card or Click discard button");
+                                String skillType = selectedSkillType(selected1);
+                                sendMessage("Click card to use" + skillType + " or Click discard button");
                             } else {
-                                sendMessage("This skill already used.Click discard button to discard");
+                                sendMessage("Skill used.Click discard button to discard");
                             }
                         }
                     }
                 }
             } else {//skill1 instance of skillcard
+                if (selected1 == selected2){ clearSelected();
+                    System.out.println("kok erorr"); }
                 if (selected2 == null) {
                     if (((SkillFieldCard) selected1).getOwner() == null){
-                        sendMessage("Click any character card to use you Card or Click discard button");
+                        String skillType = selectedSkillType(selected1);
+                        sendMessage("Click card to use " + skillType + " or Click discard button");
                     } else {
-                        sendMessage("This skill already used.Click discard button to discard");
+                        sendMessage("Skill used.Click discard button to discard");
                     }
                 } else {// selected2 != null
                     if (selected2 instanceof CharacterFieldCard) {
@@ -611,15 +511,14 @@ public class BoardController {
                             } else {
                                 target = board.getP2();
                             }
+                            String stringType = selectedSkillType(selected1);
                             if (((SkillFieldCard) selected1).getSkillCard() instanceof AuraCard) {
                                 board.getCurrentPlayer().useAura((SkillFieldCard)selected1,(CharacterFieldCard) selected2,target);
-                                sendMessage("Aura card succesfully used");
                             } else if (((SkillFieldCard) selected1).getSkillCard() instanceof DestroyCard) {
                                 board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
-                                sendMessage("Destroy card succesfully used");
                             } else {
                                 board.getCurrentPlayer().usePowerUp((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
-                                sendMessage("Power up skill succesfully used");
+                                sendMessage(stringType +"succesfully used");
                             }
                             clearSelected();
                         } else {
@@ -630,7 +529,7 @@ public class BoardController {
                         clearSelected();
                     } else {//selected2 instanceof SkillCard
                         if (selected2.getField() != board.getTurn()) {//selected2 == enemy's skillFieldCard
-                            sendMessage("Invalid Move");
+                            sendMessage("Invalid Move !!! Wrong Phase");
                             clearSelected();
                         } else {
                             updateSelected();
@@ -673,7 +572,8 @@ public class BoardController {
                                     sendMessage("Click enemy character card to attack");
                                 } else {
                                     updateSelected();
-                                    sendMessage("Click any character card to use you Card.Click the discard button if you wish discard");
+                                    String skillType = selectedSkillType(selected1);
+                                    sendMessage("Click card to use " + skillType + " or Click discard button");
                                 }
                             }
                         }
@@ -686,10 +586,8 @@ public class BoardController {
                 sendMessage("This card is currently not available to launch attack.");
                 clearSelected();
             }
-
-
         } else{//DRAW PHASE
-            //MAU DISCARD KAH ?
+            sendMessage("Nothing you can do in this PHASE. Click Next Phase");
         }
     }
 
