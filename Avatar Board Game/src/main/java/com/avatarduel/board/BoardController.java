@@ -287,10 +287,8 @@ public class BoardController {
             handCard.setOnMouseClicked(e -> {
                 clearSelected();
                 Card clickedCard = currentPlayer.getOnHand().get(x);
-//                System.out.println("Mouse clicked card " + clickedCard.getName());
                 ButtonType deploy = new ButtonType("Deploy");
-                ButtonType discard = new ButtonType("Discard");
-                Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard,ButtonType.CANCEL);
+                Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to deploy this card?", deploy, ButtonType.CANCEL);
                 boolean isLand = card instanceof LandCard;
                 if ((isLand && currentPlayer.getIsLandCardDeployed()) || (!currentPlayer.canDeploy(clickedCard)) || (board.getPhase() != Phase.MAIN)){
                     alert.getDialogPane().lookupButton(deploy).setDisable(true);
@@ -301,8 +299,6 @@ public class BoardController {
                         if (isLand){
                             currentPlayer.setIsLandCardDeployed(true);
                         }
-                    } else if (response == discard) {
-                        currentPlayer.discardCardOnHand(clickedCard);
                     }
                     updateBoard();
                 });
