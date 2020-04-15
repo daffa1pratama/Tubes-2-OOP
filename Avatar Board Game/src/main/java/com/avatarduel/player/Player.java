@@ -259,6 +259,7 @@ public class Player {
         }
         this.getSkillFieldCard().remove(skillFieldCard);
         targetPlayer.getCharacterFieldCard().remove(target);
+        this.skillFieldCards.remove(skillFieldCard);
     }
 
     public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition, target is currentPlayer's card
