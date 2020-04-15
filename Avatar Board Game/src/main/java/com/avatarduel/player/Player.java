@@ -220,7 +220,8 @@ public class Player {
             landFieldCards.add((LandCard) card);
         } else {
             usePower(card.getElement(), ((SkillCard) card).getPower());
-            SkillFieldCard skillFieldCard = new SkillFieldCard(field, (SkillCard) card);
+//            SkillFieldCard skillFieldCard = new SkillFieldCard(field, (SkillCard) card);
+            SkillFieldCard skillFieldCard = new SkillFieldCard.SkillFieldCardBuilder(field,(SkillCard) card).build(field);
             skillFieldCards.add(skillFieldCard);
         }
         discardCardOnHand(card);
@@ -231,23 +232,28 @@ public class Player {
 
     public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
 
-    public void useAura (SkillFieldCard skillFieldCard,CharacterFieldCard target){//Precondition: skillFieldCard is an auracard
+    public void useAura (SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition: skillFieldCard is an auracard
         ((AuraCard)skillFieldCard.getSkillCard()).Effect(target);
+        ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
+        target.getSkills().add(skillFieldCard);
+//        targetPlayer.getSkillFieldCard().add(skillFieldCard);
     }
 
-    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player opponent){//Precondition: target is opponent's card
-        opponent.getCharacterFieldCard().remove(target);
-        for (SkillFieldCard skills : opponent.getSkillFieldCard()){
+    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//TargetPlayer can be currentPlayer or Opposite Player
+        targetPlayer.getCharacterFieldCard().remove(target);
+        for (SkillFieldCard skills : targetPlayer.getSkillFieldCard()){
             if(target.getSkills().contains(skills)){
-                opponent.getSkillFieldCard().remove(skills); // Mungkin bisa bug
+                targetPlayer.getSkillFieldCard().remove(skills);
                 target.getSkills().remove(skills);
             }
         }
     }
 
-    public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target){//Precondition, target is currentPlayer's card
-        this.getSkillFieldCard().add(skillFieldCard);
+    public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition, target is currentPlayer's card
         target.addSkills(skillFieldCard);
+        ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
+        target.getSkills().add(skillFieldCard);
+//        targetPlayer.getSkillFieldCard().add(skillFieldCard);
     }
 
     //    public void deployCharacterCard(CharacterCard characterCard,int position){
@@ -336,6 +342,7 @@ public class Player {
     /**
      * Battle Phase
      */
+
     public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
         if (opponentCharacterFieldCard.getPosition() == 0 ){
             return (characterFieldCard.getCharacterCard().getAttack() > opponentCharacterFieldCard.getCharacterCard().getDefense());
