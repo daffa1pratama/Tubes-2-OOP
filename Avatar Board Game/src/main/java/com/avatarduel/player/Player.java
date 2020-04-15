@@ -236,17 +236,14 @@ public class Player {
         ((AuraCard)skillFieldCard.getSkillCard()).Effect(target);
         ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
         target.getSkills().add(skillFieldCard);
-//        targetPlayer.getSkillFieldCard().add(skillFieldCard);
     }
 
     public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//TargetPlayer can be currentPlayer or Opposite Player
-        targetPlayer.getCharacterFieldCard().remove(target);
-        for (SkillFieldCard skills : targetPlayer.getSkillFieldCard()){
-            if(target.getSkills().contains(skills)){
-                targetPlayer.getSkillFieldCard().remove(skills);
-                target.getSkills().remove(skills);
-            }
+        for (SkillFieldCard skills : target.getSkills()){
+            targetPlayer.getSkillFieldCard().remove(skills);
+            target.getSkills().remove(skills);
         }
+        targetPlayer.getCharacterFieldCard().remove(target);
     }
 
     public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition, target is currentPlayer's card

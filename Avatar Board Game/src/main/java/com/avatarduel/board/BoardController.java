@@ -82,8 +82,6 @@ public class BoardController {
         initializeClick();
     }
 
-
-
     public void displayCard(CharacterCard card) {
         try {
             FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/Card.fxml"));
@@ -287,6 +285,7 @@ public class BoardController {
             addHoverEvent(card, handCard);
             Player currentPlayer = board.getCurrentPlayer();
             handCard.setOnMouseClicked(e -> {
+                clearSelected();
                 Card clickedCard = currentPlayer.getOnHand().get(x);
 //                System.out.println("Mouse clicked card " + clickedCard.getName());
                 ButtonType deploy = new ButtonType("Deploy");
@@ -550,7 +549,13 @@ public class BoardController {
     }
 
     public void updateSelected(){
-        selected1 = selected2;
+        if (selected1 instanceof CharacterFieldCard && selected2 instanceof SkillFieldCard){
+            selected1 = (SkillFieldCard)selected2;
+        } else if (selected1 instanceof SkillFieldCard && selected2 instanceof CharacterFieldCard) {
+            selected1 = (CharacterFieldCard)selected2;
+        } else {
+            selected1 = selected2;
+        }
         selected2 = null;
     }
 
@@ -589,7 +594,6 @@ public class BoardController {
                                 sendMessage("This skill already used.Click discard button to discard");
                             }
                         }
-
                     }
                 }
             } else {//skill1 instance of skillcard
