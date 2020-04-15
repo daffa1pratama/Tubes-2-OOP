@@ -235,8 +235,20 @@ public class Player {
 
     public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
 
+    public void discardSkillFieldCard(SkillFieldCard skillFieldCard){
+        if (skillFieldCard.getOwner() != null){
+            if (skillFieldCard.getSkillCard() instanceof AuraCard){
+                ((AuraCard)skillFieldCard.getSkillCard()).reverseEffect(skillFieldCard.getOwner());
+                skillFieldCard.getOwner().getSkills().remove(skillFieldCard);
+            } else if (skillFieldCard.getSkillCard() instanceof PowerUpCard){
+                skillFieldCard.getOwner().getSkills().remove(skillFieldCard);
+            }
+        }
+        this.getSkillFieldCard().remove(skillFieldCard);//Remove on the user's field
+    }
+
     public void useAura (SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition: skillFieldCard is an auracard
-        ((AuraCard)skillFieldCard.getSkillCard()).Effect(target);
+        ((AuraCard)skillFieldCard.getSkillCard()).effect(target);
         ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
         target.getSkills().add(skillFieldCard);
     }
@@ -245,6 +257,7 @@ public class Player {
         for (SkillFieldCard skills : target.getSkills()){
             targetPlayer.getSkillFieldCard().remove(skills);
         }
+        this.getSkillFieldCard().remove(skillFieldCard);
         targetPlayer.getCharacterFieldCard().remove(target);
         this.skillFieldCards.remove(skillFieldCard);
     }
@@ -253,96 +266,9 @@ public class Player {
         target.addSkills(skillFieldCard);
         ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
         target.getSkills().add(skillFieldCard);
-//        targetPlayer.getSkillFieldCard().add(skillFieldCard);
     }
 
-    //    public void deployCharacterCard(CharacterCard characterCard,int position){
-//        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
-//            if (this.onHand.contains(characterCard)){
-//                if (deployAble(characterCard.getElement(), characterCard.getPower())){
-//                    if (this.characterFieldCards.size() <= 8){
-//                        this.characterFieldCards.add(new CharacterFieldCard(characterCard,position,0));
-//                        usePower(characterCard.getElement(), characterCard.getPower());
-//                    } else {
-//
-//                    }
-//                } else {
-//                    //Lempar Exception
-//                 }
-//
-//            } else {
-//                //Lempar exception
-//            }
-//        } else {
-//
-//        }
-//    }
-//
-//    public void changeCharacterCardPosition(CharacterFieldCard characterFieldCard){
-//        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
-//            if (this.characterFieldCards.contains(characterFieldCard)){
-//                if (characterFieldCard.getIsRotateAble() == 1){
-//                    characterFieldCard.rotate();
-//                } else {
-//
-//                }
-//            } else {
-//                //Kartu yang diklik berupa kartu lawan sehingga tidak valid untuk diganti position
-//            }
-//        } else {
-//
-//        }
-//    }
-//
-//    public void deployLandCard(LandCard landCard){
-//        if (this.onHand.remove(landCard)){
-//            this.landFieldCards.add(landCard);
-//            addPower(landCard.getElement());
-//            this.isLandCardDeployed = true;
-//        } else {
-//            //Lempar exception
-//        }
-//    }
-//
-//    public void deploySkillCard(SkillCard skillCard,CharacterFieldCard characterFieldCard){
-//        // !!!! Perlu cek kondisi apakah field sudah penuh !!!
-//        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
-//            if (this.characterFieldCards.contains(characterFieldCard)){
-//                if (deployAble(skillCard.getElement(), skillCard.getPower())){
-//                    if (this.skillFieldCards.size() <= 8){
-//                        this.skillFieldCards.add(skillCard);
-//                        //Pemanggilan fungsi useSkillOnCard()
-//                        usePower(skillCard.getElement(), skillCard.getPower());
-//                    } else {
-//
-//                    }
-//                } else {
-//                    //Lempar Exception
-//                }
-//            } else {
-//
-//            }
-//        } else{
-//
-//        }
-//    }
-//
-//    public void dumpSkillCard(SkillCard skillCard){
-//        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
-//            if (this.skillFieldCards.contains(skillCard)){
-//                this.skillFieldCards.remove(skillCard);
-//            } else {
-//
-//            }
-//        } else {
-//
-//        }
-//    }
-
-    /**
-     * Battle Phase
-     */
-
+    
     public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
         if (opponentCharacterFieldCard.getPosition() == 0 ){
             return (characterFieldCard.getCharacterCard().getAttack() > opponentCharacterFieldCard.getCharacterCard().getDefense());
