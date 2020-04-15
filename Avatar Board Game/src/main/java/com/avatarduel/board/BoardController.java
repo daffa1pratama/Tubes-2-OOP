@@ -1,33 +1,21 @@
 package com.avatarduel.board;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.Optional;
 import java.util.List;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.geometry.HPos;
 
-import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 
@@ -67,6 +55,7 @@ public class BoardController {
     @FXML
     private Text lbl_hpA,lbl_hpB;
 
+    private CardReader cardReader;
 
     private Board board;
 
@@ -454,6 +443,10 @@ public class BoardController {
         });
     }
 
+    public void setCardReader(CardReader cardReader) {
+        this.cardReader = cardReader;
+    }
+
     public void setBoard(Board board) {
         this.board = board;
     }
@@ -515,6 +508,7 @@ public class BoardController {
                     selected1!= null && selected1.getField()==board.getTurn() &&
                     selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                    updateBoard();
                 }
             }
         });
@@ -525,6 +519,7 @@ public class BoardController {
                         selected1!= null && selected1.getField()==board.getTurn() &&
                         selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                    updateBoard();
                 }
             }
         });
@@ -768,6 +763,18 @@ public class BoardController {
         else landB.setText("NO");
     }
 
+    public void checkWinner() {
+        if (board.getP1().getHp() <= 0) {
+            ButtonType restart = new ButtonType("Restart Game");
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Player 1 Wins!", restart);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == restart) {
+                    board = new Board(cardReader);
+                }
+            });
+        }
+    }
+
     public void updateBoard() {
         if (selected1 != null) {
             System.out.print("Selected1: ");
@@ -791,6 +798,7 @@ public class BoardController {
         updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
         updateSkillFieldCardDisplay(board.getP1().getSkillFieldCard(), board.getP2().getSkillFieldCard());
         updatePlayerData(board.getP1(), board.getP2());
+        checkWinner();
         if (board.getTurn() == 1) this.playerText.setText("PLAYER A");
         else this.playerText.setText("PLAYER B");
         this.phaseText.setText(board.getPhase().toString());

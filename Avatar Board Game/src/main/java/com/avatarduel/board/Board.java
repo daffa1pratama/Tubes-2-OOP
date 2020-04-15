@@ -1,12 +1,9 @@
 package com.avatarduel.board;
 
+import com.avatarduel.card.*;
 import com.avatarduel.deck.Deck;
 import com.avatarduel.player.Phase;
 import com.avatarduel.player.Player;
-import com.avatarduel.card.CardCollection;
-import com.avatarduel.card.CharacterCard;
-import com.avatarduel.card.Card;
-import com.avatarduel.card.Element;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,9 +37,9 @@ public class Board {
         this.phase = Phase.DRAW;
     }
 
-    public Board(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
-        this.p1 = new Player("P1", characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
-        this.p2 = new Player("P2", characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
+    public Board(CardReader cardReader) {
+        this.p1 = new Player("P1", cardReader.getCharacterCardCollection(), cardReader.getLandCardCollection(), cardReader.getAuraCardCollection(), cardReader.getDestroyCardCollection(), cardReader.getPowerupCardCollection());
+        this.p2 = new Player("P2", cardReader.getCharacterCardCollection(), cardReader.getLandCardCollection(), cardReader.getAuraCardCollection(), cardReader.getDestroyCardCollection(), cardReader.getPowerupCardCollection());
         this.turn = 1;
         this.winner = null;
         for (int i = 0; i < 8; i++) this.p1.drawCard(); // player 1 starts first, so draw 1 extra
