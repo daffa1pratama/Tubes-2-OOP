@@ -359,7 +359,11 @@ public class BoardController {
             } else {
                 characterFieldCard.setRotate(0);
             }
-            characterFieldCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            String style = "-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;";
+            if (selected1 instanceof CharacterFieldCard && card == (CharacterFieldCard) selected1) {
+                style += " -fx-border-width: 5;";
+            }
+            characterFieldCard.setStyle(style);
             addHoverEvent(card, characterFieldCard);
             Player currentPlayer = board.getCurrentPlayer();
             characterFieldCard.setOnMouseClicked(e -> {
@@ -404,7 +408,11 @@ public class BoardController {
             } else { //player == 2
                 skillFieldCardB.add(skillFieldCard, x, 0, 1, 1);
             }
-            skillFieldCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            String style = "-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;";
+            if (selected1 instanceof SkillFieldCard && card == (SkillFieldCard) selected1) {
+                style += " -fx-border-width: 5;";
+            }
+            skillFieldCard.setStyle(style);
             addHoverEvent(card, skillFieldCard);
             Player currentPlayer = board.getCurrentPlayer();
             skillFieldCard.setOnMouseClicked(e -> {
