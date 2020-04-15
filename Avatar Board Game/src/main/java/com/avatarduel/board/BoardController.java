@@ -355,15 +355,16 @@ public class BoardController {
             } else {
                 characterFieldCard.setRotate(0);
             }
-            String style = "-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;";
+            String style = "-fx-background-color: #" + colorCard + ";";
             if (selected1 instanceof CharacterFieldCard && card == (CharacterFieldCard) selected1) {
-                style += " -fx-border-width: 5;";
+                style += " -fx-border-color: BLACK; -fx-border-width: 5;";
+            } else if (selected1 instanceof SkillFieldCard && ((SkillFieldCard) selected1).getOwner() == card) {
+                style += " -fx-border-color: YELLOW; -fx-border-width: 5;";
             }
             characterFieldCard.setStyle(style);
             addHoverEvent(card, characterFieldCard);
             Player currentPlayer = board.getCurrentPlayer();
             characterFieldCard.setOnMouseClicked(e -> {
-                CharacterFieldCard clickedCard = currentPlayer.getCharacterFieldCard().get(x);
                 if (selected1 == null) selected1 = (FieldCard) card;
                 else selected2 = (FieldCard) card;
                 updateBoard();
@@ -404,15 +405,16 @@ public class BoardController {
             } else { //player == 2
                 skillFieldCardB.add(skillFieldCard, x, 0, 1, 1);
             }
-            String style = "-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;";
+            String style = "-fx-background-color: #" + colorCard + ";";
             if (selected1 instanceof SkillFieldCard && card == (SkillFieldCard) selected1) {
-                style += " -fx-border-width: 5;";
+                style += " -fx-border-color: BLACK; -fx-border-width: 5;";
+            } else if (selected1 instanceof CharacterFieldCard && card.getOwner() == selected1) {
+                style += " -fx-border-color: YELLOW; -fx-border-width: 5;";
             }
             skillFieldCard.setStyle(style);
             addHoverEvent(card, skillFieldCard);
             Player currentPlayer = board.getCurrentPlayer();
             skillFieldCard.setOnMouseClicked(e -> {
-                SkillFieldCard clickedCard = currentPlayer.getSkillFieldCard().get(x);
                 if (selected1 == null) selected1 = (FieldCard) card;
                 else selected2 = (FieldCard) card;
                 updateBoard();
@@ -576,12 +578,12 @@ public class BoardController {
                     if (((CharacterFieldCard) selected1).getIsRotateAble() == 1) {
                         ((CharacterFieldCard) selected1).rotate();
                         sendMessage("Successfully changed card position.");
-                        clearSelected();
                     } else {
                         sendMessage("This is card is not rotatable currently");
                     }
+                    clearSelected();
                 } else if (selected2 == null) {
-                    sendMessage("Click once more time to rotate");
+                    sendMessage("Click one more time to rotate.");
                 } else { // selected2 != selected1
                     if (selected2.getField() != board.getTurn()) {
                         sendMessage("Invalid Move");//Spesifikan jenis invalid
