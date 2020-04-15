@@ -5,7 +5,7 @@ public class PowerUpCard extends SkillCard {
         super(name, description, element, imagePath, power);
     }
 
-    public void Effect (CharacterFieldCard characterFieldCard) {
-
-    }
+//    public void Effect (CharacterFieldCard characterFieldCard) {
+//
+//    }
 }

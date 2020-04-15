@@ -39,7 +39,16 @@ public class CharacterFieldCard extends FieldCard{
 
     public int getPosition() { return this.position; }
 
-
+    public boolean hasPowerUp(){
+        boolean has = false;
+        for (SkillFieldCard skills : this.getSkills()){
+            if (skills.getSkillCard() instanceof PowerUpCard){
+                has = true;
+                break;
+            }
+        }
+        return has;
+    }
 
 //    public int getPositionValue() {
 //        if (this.position == 0) {

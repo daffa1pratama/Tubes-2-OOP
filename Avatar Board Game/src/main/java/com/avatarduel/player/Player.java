@@ -228,8 +228,29 @@ public class Player {
 
     public void discardCardOnHand(Card card) { onHand.remove(card); }
 
+
     public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
-//    public void deployCharacterCard(CharacterCard characterCard,int position){
+
+    public void useAura (SkillFieldCard skillFieldCard,CharacterFieldCard target){//Precondition: skillFieldCard is an auracard
+        ((AuraCard)skillFieldCard.getSkillCard()).Effect(target);
+    }
+
+    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player opponent){//Precondition: target is opponent's card
+        opponent.getCharacterFieldCard().remove(target);
+        for (SkillFieldCard skills : opponent.getSkillFieldCard()){
+            if(target.getSkills().contains(skills)){
+                opponent.getSkillFieldCard().remove(skills); // Mungkin bisa bug
+                target.getSkills().remove(skills);
+            }
+        }
+    }
+
+    public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target){//Precondition, target is currentPlayer's card
+        this.getSkillFieldCard().add(skillFieldCard);
+        target.addSkills(skillFieldCard);
+    }
+
+    //    public void deployCharacterCard(CharacterCard characterCard,int position){
 //        if ((this.turn.getPhase() == Phase.MAIN1) || (this.turn.getPhase() == Phase.MAIN2)){
 //            if (this.onHand.contains(characterCard)){
 //                if (deployAble(characterCard.getElement(), characterCard.getPower())){
@@ -323,16 +344,23 @@ public class Player {
         }
     }
 
+
     public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
         if (isAttackValid(characterFieldCard,opponentCharacterCard)){
-            opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
-            opponent.getCharacterFieldCard().remove(opponentCharacterCard);//Apakah akan ke remove multiple opponent
+            if (opponentCharacterCard.getPosition()==1){
+                opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
+            }
+            opponent.getCharacterFieldCard().remove(opponentCharacterCard);
             //dump the opponentSkillCard
             for (SkillFieldCard skills : opponent.getSkillFieldCard()){
                 if(opponentCharacterCard.getSkills().contains(skills)){
-                    opponent.getSkillFieldCard().remove(skills); // Mungkin bisa bug
+                    opponent.getSkillFieldCard().remove(skills);
                     opponentCharacterCard.getSkills().remove(skills);
                 }
+            }
+            //Check if attack has powerup skill and available to use it
+            if (opponentCharacterCard.getPosition() == 0 && characterFieldCard.hasPowerUp()){
+                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
             }
             characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
             return true;
