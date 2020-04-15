@@ -483,9 +483,9 @@ public class BoardController {
                     }
                 }
             } else {//skill1 instance of skillcard
-                if (selected1 == selected2){ clearSelected();
-                    System.out.println("kok erorr"); }
-                if (selected2 == null) {
+                if (selected1 != null && selected2 != null && selected1 == selected2){
+                    clearSelected();
+                } else if (selected2 == null) {
                     if (((SkillFieldCard) selected1).getOwner() == null){
                         String skillType = selectedSkillType(selected1);
                         sendMessage("Click card to use " + skillType + " or Click discard button");
