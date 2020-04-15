@@ -55,11 +55,8 @@ public class BoardController {
     @FXML
     private Text lbl_hpA,lbl_hpB;
 
-<<<<<<< HEAD
     private CardReader cardReader;
 
-=======
->>>>>>> bee2dfdd49ac60afb79da501314bc05fb45e6466
     private Board board;
 
     private FieldCard selected1, selected2;
@@ -386,10 +383,7 @@ public class BoardController {
                     selected1!= null && selected1.getField()==board.getTurn() &&
                     selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
-<<<<<<< HEAD
-=======
                     sendMessage("You opponent's hp is dropping");
->>>>>>> bee2dfdd49ac60afb79da501314bc05fb45e6466
                     updateBoard();
                 }
             }
@@ -401,10 +395,7 @@ public class BoardController {
                         selected1!= null && selected1.getField()==board.getTurn() &&
                         selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
-<<<<<<< HEAD
-=======
                     sendMessage("You opponent's hp is dropping");
->>>>>>> bee2dfdd49ac60afb79da501314bc05fb45e6466
                     updateBoard();
                 }
             }
