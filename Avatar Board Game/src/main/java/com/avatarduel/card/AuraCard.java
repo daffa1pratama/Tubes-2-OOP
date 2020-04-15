@@ -26,11 +26,18 @@ public class AuraCard extends SkillCard {
         this.defense = defense;
     }
 
-    public void Effect(CharacterFieldCard characterFieldCard) {
+    public void effect(CharacterFieldCard characterFieldCard) {
         int currAttack = characterFieldCard.getCharacterCard().getAttack();
         int currDefense = characterFieldCard.getCharacterCard().getDefense();
         characterFieldCard.getCharacterCard().setAttack(currAttack + this.attack);
         characterFieldCard.getCharacterCard().setDefense(currDefense + this.defense);
+    }
+
+    public void reverseEffect(CharacterFieldCard characterFieldCard){
+        int normalAtk = characterFieldCard.getCharacterCard().getAttack();
+        int normalDef = characterFieldCard.getCharacterCard().getDefense();
+        characterFieldCard.getCharacterCard().setAttack(normalAtk - this.attack);
+        characterFieldCard.getCharacterCard().setDefense(normalDef - this.defense);
     }
 
     @Override

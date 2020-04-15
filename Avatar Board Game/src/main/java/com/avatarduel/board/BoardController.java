@@ -495,12 +495,9 @@ public class BoardController {
                             if (selected1 instanceof CharacterFieldCard){
                                 sendMessage("Discard fail.You can only discard skill Card");
                             } else {
-                                if (((SkillFieldCard)selected1).getOwner() != null ){
-                                    ((SkillFieldCard)selected1).getOwner().getSkills().remove((SkillFieldCard)selected1);
-                                }
-                                board.getCurrentPlayer().getSkillFieldCard().remove((SkillFieldCard)selected1);
-                                updateBoard();
+                                board.getCurrentPlayer().discardSkillFieldCard((SkillFieldCard) selected1);
                             }
+                            updateBoard();
                         } else {
                             sendMessage("Discard fail. Wrong Phase");
                             clearSelected();
