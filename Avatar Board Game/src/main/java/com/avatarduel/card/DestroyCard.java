@@ -5,8 +5,8 @@ public class DestroyCard extends SkillCard {
         super(name, description, element, imagePath, power);
     }
 
-    public void Effect (CharacterFieldCard characterCard) {
-        System.out.println("Destroying card...");
-        //Destroy card here
-    }
+//    public void Effect (CharacterFieldCard characterCard) {
+//        System.out.println("Destroying card...");
+//
+//    }
 }

@@ -1,6 +1,7 @@
 package com.avatarduel.board;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.List;
 
@@ -46,30 +47,32 @@ public class BoardController {
     private BorderPane cardDetail;
 
     @FXML
-    private GridPane handCardA, characterFieldCardA;
+    private GridPane handCardA, characterFieldCardA, skillFieldCardA;
 
     @FXML
-    private GridPane handCardB, characterFieldCardB;
-
+    private GridPane handCardB, characterFieldCardB, skillFieldCardB;
 
     @FXML
-    private TextField deckCountA, hpA, landA, airA, fireA, earthA, waterA, energyA;
+    private TextField deckCountA, hpA, landA, airA, fireA, earthA, waterA, energyA, messageA;
     
     @FXML
-    private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB;
+    private TextField deckCountB, hpB, landB, airB, fireB, earthB, waterB, energyB, messageB;
 
     @FXML
-    private Button endTurnButton, nextPhaseButton;
+    private Button endTurnButton, nextPhaseButton,btn_discard;
 
     @FXML
     private TextField playerText, phaseText;
 
-    private Board board;
+    @FXML
+    private Text lbl_hpA,lbl_hpB;
 
-    private int isAttackClick = 0;//default 0, will become 1 when any charactercard's attack button is click
+
+    private Board board;
 
     private String colorCard;
 
+    private FieldCard selected1, selected2;
 
     @FXML
     public void initialize() {
@@ -78,7 +81,6 @@ public class BoardController {
         this.phaseText.setText(Phase.DRAW.toString());
         initializeClick();
     }
-
 
     public void displayCard(CharacterCard card) {
         try {
@@ -253,7 +255,6 @@ public class BoardController {
         try{
             FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
             Pane handCard = (Pane) fieldCardLoader.load();
-//            handCard.setPrefSize(66, 80);
             handCard.setClip(new Rectangle(handCard.getPrefWidth(), handCard.getPrefHeight()));
             FieldCardController fieldCardController = fieldCardLoader.getController();
             fieldCardController.setFieldCard(card);
@@ -284,8 +285,9 @@ public class BoardController {
             addHoverEvent(card, handCard);
             Player currentPlayer = board.getCurrentPlayer();
             handCard.setOnMouseClicked(e -> {
+                clearSelected();
                 Card clickedCard = currentPlayer.getOnHand().get(x);
-                System.out.println("Mouse clicked card " + clickedCard.getName());
+//                System.out.println("Mouse clicked card " + clickedCard.getName());
                 ButtonType deploy = new ButtonType("Deploy");
                 ButtonType discard = new ButtonType("Discard");
                 Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this card.", deploy, discard,ButtonType.CANCEL);
@@ -295,7 +297,7 @@ public class BoardController {
                 }
                 alert.showAndWait().ifPresent(response -> {
                     if (response == deploy) {
-                        currentPlayer.addToField(clickedCard);
+                        currentPlayer.addToField(board.getTurn(), clickedCard);
                         if (isLand){
                             currentPlayer.setIsLandCardDeployed(true);
                         }
@@ -362,27 +364,54 @@ public class BoardController {
             Player currentPlayer = board.getCurrentPlayer();
             characterFieldCard.setOnMouseClicked(e -> {
                 CharacterFieldCard clickedCard = currentPlayer.getCharacterFieldCard().get(x);
-                System.out.println("Mouse clicked card " + clickedCard.getCharacterCard().getName());
-                ButtonType discard = new ButtonType("Discard");
-                ButtonType attack = new ButtonType("Attack");
-                ButtonType rotate = new ButtonType("Rotate");
-                Alert alert = new Alert(AlertType.CONFIRMATION, "Choose what you want to do with this character card.", attack, rotate, discard, ButtonType.CANCEL);
-                if (card.getIsRotateAble() == 0 || board.getPhase() != Phase.MAIN) {
-                    alert.getDialogPane().lookupButton(rotate).setDisable(true);
-                }
-                if ((card.getPosition() == 0) || (card.getBattleAvailability() == 0) || board.getPhase()!= Phase.BATTLE) {
-                    alert.getDialogPane().lookupButton(attack).setDisable(true);
-                }
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == attack) {
-                        isAttackClick = 1;
-                    } else if (response == discard) {
-                        currentPlayer.discardCharacterCardOnField(card);
-                    } else if (response == rotate) {
-                        card.setPositionValue();
-                    } else {} //Tombol CANCEL
-                    updateBoard();
-                });
+                if (selected1 == null) selected1 = (FieldCard) card;
+                else selected2 = (FieldCard) card;
+                updateBoard();
+            });
+        } catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
+    }
+
+    public void displaySkillFieldCard(SkillFieldCard card, int player, int x) {
+        try {
+            FXMLLoader fieldCardLoader = new FXMLLoader(getClass().getResource("/com/avatarduel/views/FieldCard.fxml"));
+            Pane skillFieldCard = (Pane) fieldCardLoader.load();
+            skillFieldCard.setClip(new Rectangle(skillFieldCard.getPrefWidth(), skillFieldCard.getPrefHeight()));
+            FieldCardController fieldCardController = fieldCardLoader.getController();
+            fieldCardController.setFieldCard(card);
+            Element cardElement = card.getSkillCard().getElement();
+            switch (cardElement) {
+                case AIR:
+                    this.colorCard = "F3D06F";
+                    break;
+                case WATER:
+                    this.colorCard = "01BAEB";
+                    break;
+                case FIRE:
+                    this.colorCard = "D13539";
+                    break;
+                case EARTH:
+                    this.colorCard = "65C387";
+                    break;
+                case ENERGY:
+                    this.colorCard = "A57FBB";
+                    break;
+            }
+
+            if (player == 1) {
+                skillFieldCardA.add(skillFieldCard, x, 0, 1, 1);
+            } else { //player == 2
+                skillFieldCardB.add(skillFieldCard, x, 0, 1, 1);
+            }
+            skillFieldCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            addHoverEvent(card, skillFieldCard);
+            Player currentPlayer = board.getCurrentPlayer();
+            skillFieldCard.setOnMouseClicked(e -> {
+                SkillFieldCard clickedCard = currentPlayer.getSkillFieldCard().get(x);
+                if (selected1 == null) selected1 = (FieldCard) card;
+                else selected2 = (FieldCard) card;
+                updateBoard();
             });
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -409,6 +438,16 @@ public class BoardController {
         });
     }
 
+    public void addHoverEvent(SkillFieldCard card,Pane pane) {
+        pane.setOnMouseEntered((MouseEvent t) -> {
+            this.displayCard(card.getSkillCard());
+        });
+
+        pane.setOnMouseExited((MouseEvent t) -> {
+            cardDetail.setCenter(new Pane());
+        });
+    }
+
     public void setBoard(Board board) {
         this.board = board;
     }
@@ -416,15 +455,21 @@ public class BoardController {
     public void initializeClick(){
         endTurnButton.setOnAction((new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
+                clearSelected();
+                clearMessage();
                 board.switchTurn();
                 updateBoard();
+                board.getCurrentPlayer().setIsLandCardDeployed(false);
                 updateCharacterFieldCardAttackAvailability(board.getCurrentPlayer().getCharacterFieldCard());
                 nextPhaseButton.setDisable(false);
+
             }
         }));
         nextPhaseButton.setOnAction((new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(ActionEvent e) {
+                clearSelected();
+                clearMessage();
                 board.nextPhase();
                 updateBoard();
                 if (board.getPhase() == Phase.BATTLE){
@@ -432,6 +477,220 @@ public class BoardController {
                 }
             }
         }));
+        btn_discard.setOnAction((new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (selected1 == null){
+                    sendMessage("Please click on your card before clicking this button");
+                } else {
+                    if (selected1.getField() != board.getTurn()){
+                        sendMessage("You can only discard your own card");
+                        clearSelected();
+                    } else {
+                        if (board.getPhase() == Phase.MAIN){
+                            if (selected1 instanceof CharacterFieldCard){
+                                sendMessage("Discard fail.You can only discard skill Card");
+                            } else {
+                                if (((SkillFieldCard)selected1).getOwner() != null ){
+                                    ((SkillFieldCard)selected1).getOwner().getSkills().remove((SkillFieldCard)selected1);
+                                }
+                                board.getCurrentPlayer().getSkillFieldCard().remove((SkillFieldCard)selected1);
+                                updateBoard();
+                            }
+                        } else {
+                            sendMessage("Discard fail. Wrong Phase");
+                            clearSelected();
+                        }
+                    }
+                }
+            }
+        }));
+        lbl_hpA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if ((board.getTurn()==2) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
+                    selected1!= null && selected1.getField()==board.getTurn() &&
+                    selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
+                    board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                }
+            }
+        });
+        lbl_hpB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if ((board.getTurn()==1) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
+                        selected1!= null && selected1.getField()==board.getTurn() &&
+                        selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
+                    board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
+                }
+            }
+        });
+    }
+
+    public void sendMessage(String text) {
+        if (board.getTurn() == 1) {
+            messageA.setText(text);
+        } else {
+            messageB.setText(text);
+        }
+    }
+
+    public void clearMessage() {
+        if (board.getTurn() == 1) {
+            messageA.setText("");
+        } else {
+            messageB.setText("");
+        }
+    }
+
+    public void clearSelected() {
+        selected1 = null;
+        selected2 = null;
+    }
+
+    public void updateSelected(){
+        if (selected1 instanceof CharacterFieldCard && selected2 instanceof SkillFieldCard){
+            selected1 = (SkillFieldCard)selected2;
+        } else if (selected1 instanceof SkillFieldCard && selected2 instanceof CharacterFieldCard) {
+            selected1 = (CharacterFieldCard)selected2;
+        } else {
+            selected1 = selected2;
+        }
+        selected2 = null;
+    }
+
+
+    public void processSelected() {
+        if (selected1 == null) return;
+
+        if (selected1.getField() != board.getTurn()) {
+            selected1 = null;
+            sendMessage("Can't select enemy card.");
+        } else if (board.getPhase() == Phase.MAIN) {
+            if (selected1 instanceof CharacterFieldCard) {
+                if (selected1 == selected2) {
+                    if (((CharacterFieldCard) selected1).getIsRotateAble() == 1) {
+                        ((CharacterFieldCard) selected1).rotate();
+                        sendMessage("Successfully changed card position.");
+                        clearSelected();
+                    } else {
+                        sendMessage("This is card is not rotatable currently");
+                    }
+                } else if (selected2 == null) {
+                    sendMessage("Click once more time to rotate");
+                } else { // selected2 != selected1
+                    if (selected2.getField() != board.getTurn()) {
+                        sendMessage("Invalid Move");//Spesifikan jenis invalid
+                        clearSelected();
+                    } else { //selected1 == Character && selected2 == Skill or CharacterCard
+                        selected1 = selected2;
+                        selected2 = null;
+                        if (selected2 instanceof CharacterFieldCard){
+                            sendMessage("Click one more time to rotate");
+                        } else {//selected2 instance of SkillFieldCard
+                            if (((SkillFieldCard) selected1).getOwner() == null){
+                                sendMessage("Click any character card to use you Card or Click discard button");
+                            } else {
+                                sendMessage("This skill already used.Click discard button to discard");
+                            }
+                        }
+                    }
+                }
+            } else {//skill1 instance of skillcard
+                if (selected2 == null) {
+                    if (((SkillFieldCard) selected1).getOwner() == null){
+                        sendMessage("Click any character card to use you Card or Click discard button");
+                    } else {
+                        sendMessage("This skill already used.Click discard button to discard");
+                    }
+                } else {// selected2 != null
+                    if (selected2 instanceof CharacterFieldCard) {
+                        //Use Skill card
+                        if (((SkillFieldCard) selected1).getOwner() == null){
+                            Player target = board.getP1(); // Assumptiion
+                            if (selected2.getField() == 1){
+                                target = board.getP1();
+                            } else {
+                                target = board.getP2();
+                            }
+                            if (((SkillFieldCard) selected1).getSkillCard() instanceof AuraCard) {
+                                board.getCurrentPlayer().useAura((SkillFieldCard)selected1,(CharacterFieldCard) selected2,target);
+                                sendMessage("Aura card succesfully used");
+                            } else if (((SkillFieldCard) selected1).getSkillCard() instanceof DestroyCard) {
+                                board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
+                                sendMessage("Destroy card succesfully used");
+                            } else {
+                                board.getCurrentPlayer().usePowerUp((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
+                                sendMessage("Power up skill succesfully used");
+                            }
+                            clearSelected();
+                        } else {
+                            sendMessage("This skill already used.Click discard button to discard");
+                        }
+
+                    } else {//selected2 instanceof SkillCard
+                        if (selected2.getField() != board.getTurn()) {//selected2 == enemy's skillFieldCard
+                            sendMessage("Invalid Move");
+                            clearSelected();
+                        } else {
+                            updateSelected();
+                            sendMessage("Click any character card to use you Card.Click the discard button if you wish discard");
+                        }
+                    }
+                }
+            }
+        } else if  (board.getPhase() == Phase.BATTLE){
+            if (((CharacterFieldCard) selected1).getBattleAvailability() == 1){
+                if (selected1 instanceof CharacterFieldCard){
+                    if (selected2 == null){
+                        sendMessage("Click enemy character card to attack");
+                        //Case when attack opponentPlayer if enemy's field card contains no character card is handle in onClick event in enemyGridpane
+                    } else {//selected2 != null
+                        if (selected2.getField() != board.getTurn()){
+                            if (selected2 instanceof CharacterFieldCard){
+                                //Attack
+                                if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1,(CharacterFieldCard) selected2,board.getOppositePlayer())){
+                                    if (((CharacterFieldCard)selected1).hasPowerUp() && ((CharacterFieldCard)selected2).getPosition()==0 ){
+                                        sendMessage("You attack successfully with PowerUp skill");
+                                    } else{
+                                        sendMessage("You attack succesfully on enemy card");
+                                    }
+                                } else{
+                                    sendMessage("Attack not valid, your card's attack value is too low");
+                                }
+                                clearSelected();
+                            } else {
+                                sendMessage("Cannot attack skill card");
+                                clearSelected();
+                            }
+                        } else {//selected2 is my own card
+                            if (selected2 == selected1){
+                                sendMessage("Rotate Fail.Wrong Phase !!!");
+                                clearSelected();
+                            } else {
+                                if (selected2 instanceof CharacterFieldCard){
+                                    updateSelected();
+                                    sendMessage("Click enemy character card to attack");
+                                } else {
+                                    updateSelected();
+                                    sendMessage("Click any character card to use you Card.Click the discard button if you wish discard");
+                                }
+                            }
+                        }
+                    }
+                }else{ //selected1 instance of SkillFieldCard
+                    sendMessage("You cannot do anything with this card in this phase");
+                    clearSelected();
+                }
+            }else {
+                sendMessage("This card is currently not available to launch attack.");
+                clearSelected();
+            }
+
+
+        } else{//DRAW PHASE
+            //MAU DISCARD KAH ?
+        }
     }
 
     public void updateHandCardDisplay(List<Card> p1, List<Card> p2) {
@@ -471,6 +730,17 @@ public class BoardController {
         }
     }
 
+    public void updateSkillFieldCardDisplay(List<SkillFieldCard> p1, List<SkillFieldCard> p2) {
+        skillFieldCardA.getChildren().clear();
+        skillFieldCardB.getChildren().clear();
+        for (int i = 0; i < p1.size(); i++) {
+            displaySkillFieldCard(p1.get(i), 1, i);
+        }
+        for (int i = 0; i < p2.size(); i++) {
+            displaySkillFieldCard(p2.get(i), 2, i);
+        }
+    }
+
     public void updatePlayerData(Player p1, Player p2) {
         deckCountA.setText(Integer.toString(p1.getDeck().getDeckCount()));
         hpA.setText(Integer.toString(p1.getHp()));
@@ -494,13 +764,31 @@ public class BoardController {
     }
 
     public void updateBoard() {
+        if (selected1 != null) {
+            System.out.print("Selected1: ");
+            if (selected1 instanceof CharacterFieldCard) {
+                System.out.println(((CharacterFieldCard) selected1).getCharacterCard().getName() + "Character");
+            } else {
+                System.out.println(((SkillFieldCard) selected1).getSkillCard().getName() + "Skill");
+            }
+        }
+        if (selected2 != null) {
+            System.out.print("Selected2: ");
+            if (selected2 instanceof CharacterFieldCard) {
+                System.out.println(((CharacterFieldCard) selected2).getCharacterCard().getName() + "Character");
+            } else {
+                System.out.println(((SkillFieldCard) selected2).getSkillCard().getName() + "Skill");
+            }
+        }
+        System.out.println("---");
+        processSelected();
         updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
         updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
+        updateSkillFieldCardDisplay(board.getP1().getSkillFieldCard(), board.getP2().getSkillFieldCard());
         updatePlayerData(board.getP1(), board.getP2());
         if (board.getTurn() == 1) this.playerText.setText("PLAYER A");
         else this.playerText.setText("PLAYER B");
         this.phaseText.setText(board.getPhase().toString());
-        System.out.println(board.getPhase());
     }
 
 }

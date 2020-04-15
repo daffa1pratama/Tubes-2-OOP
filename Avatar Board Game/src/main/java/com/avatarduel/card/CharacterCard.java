@@ -5,13 +5,6 @@ public class CharacterCard extends Card {
     private int defense;
     private int power;
 
-    // public CharacterCard() {
-    //     super();
-    //     this.attack = 0;
-    //     this.defense = 0;
-    //     this.power = 0;
-    // }
-
     public CharacterCard(String name, String description, Element element, String imagePath,int attack, int defense, int power) {
         super(name, description, element,imagePath);
         this.attack = attack;

@@ -6,13 +6,6 @@ public abstract class Card {
     protected Element element;
     protected String imagePath;
 
-
-    // public Card() {
-    //     this.name = "";
-    //     this.description = "";
-    //     this.element = Element.AIR;
-    // }
-
     public Card(String name, String description, Element element,String pathName) {
         this.name = name;
         this.description = description;

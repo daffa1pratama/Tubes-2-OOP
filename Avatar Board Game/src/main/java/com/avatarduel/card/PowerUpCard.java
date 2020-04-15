@@ -5,10 +5,7 @@ public class PowerUpCard extends SkillCard {
         super(name, description, element, imagePath, power);
     }
 
-    public void Effect (CharacterFieldCard characterFieldCard) {
-        // If enemy position defense, attack is same as enemy position attack
-        if (characterFieldCard.getPosition() == 0) {
-            // Attack
-        }
-    }
+//    public void Effect (CharacterFieldCard characterFieldCard) {
+//
+//    }
 }

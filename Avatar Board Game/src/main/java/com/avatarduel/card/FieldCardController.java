@@ -44,4 +44,10 @@ public class FieldCardController {
         Image newImage = new Image(card.getCharacterCard().getPathName());
         cardImage.setImage(newImage);
     }
+
+    public void setFieldCard(SkillFieldCard card) {
+        cardName.setText(card.getSkillCard().getName());
+        Image newImage = new Image(card.getSkillCard().getPathName());
+        cardImage.setImage(newImage);
+    }
 }
