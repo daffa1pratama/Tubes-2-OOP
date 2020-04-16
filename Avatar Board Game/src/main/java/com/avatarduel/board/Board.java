@@ -33,6 +33,7 @@ public class Board {
 
     public void switchTurn() {
         if (turn == 1) turn = 2; else turn = 1;
+//        getCurrentPlayer().resetPower(); // don't forget to uncomment. debug only.
         getCurrentPlayer().drawCard();
         this.phase = Phase.DRAW;
     }

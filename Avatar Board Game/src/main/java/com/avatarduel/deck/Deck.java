@@ -10,16 +10,26 @@ import java.util.Queue;
 public class Deck {
     private Queue<Card> deckContainer;
     private int deckSize;
+    public boolean deckEmpty;
 
     public Deck(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
         this.deckSize = 50;
         buildDeck(characterCardCollection, landCardCollection, auraCardCollection, destroyCardCollection, powerupCardCollection);
+        this.deckEmpty = false;
     }
 
     public int getDeckCount() { return this.deckContainer.size(); }
 
     public Card drawCard() {
-        return this.deckContainer.remove();
+        if (!deckContainer.isEmpty()) return this.deckContainer.remove();
+        else {
+            deckEmpty = true;
+            return null;
+        }
+    }
+
+    public boolean isDeckEmpty() {
+        return this.deckEmpty;
     }
 
     public void buildDeck(CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection auraCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {

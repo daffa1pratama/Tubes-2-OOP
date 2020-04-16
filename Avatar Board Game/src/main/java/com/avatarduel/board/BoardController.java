@@ -333,7 +333,6 @@ public class BoardController {
                 board.getCurrentPlayer().setIsLandCardDeployed(false);
                 updateCharacterFieldCardAttackAvailability(board.getCurrentPlayer().getCharacterFieldCard());
                 nextPhaseButton.setDisable(false);
-
             }
         }));
         nextPhaseButton.setOnAction((new EventHandler<ActionEvent>() {
@@ -363,6 +362,7 @@ public class BoardController {
                                 sendMessage("Discard fail.You can only discard skill Card");
                             } else {
                                 board.getCurrentPlayer().discardSkillFieldCard((SkillFieldCard) selected1);
+                                clearSelected();
                             }
                             updateBoard();
                         } else {
@@ -461,11 +461,10 @@ public class BoardController {
                         sendMessage("Invalid Move");
                         clearSelected();
                     } else { //selected1 == Character && selected2 == Skill or CharacterCard
-                        selected1 = selected2;
-                        selected2 = null;
-                        if (selected2 instanceof CharacterFieldCard){
+                        updateSelected();
+                        if (selected1 instanceof CharacterFieldCard){
                             sendMessage("Click one more time to rotate");
-                        } else {//selected2 instance of SkillFieldCard
+                        } else {//selected1 instance of SkillFieldCard
                             if (((SkillFieldCard) selected1).getOwner() == null){
                                 String skillType = selectedSkillType(selected1);
                                 sendMessage("Click card to use" + skillType + " or Click discard button");
@@ -473,6 +472,7 @@ public class BoardController {
                                 sendMessage("Skill used.Click discard button to discard");
                             }
                         }
+
                     }
                 }
             } else {//skill1 instance of skillcard
@@ -570,12 +570,12 @@ public class BoardController {
                             }
                         }
                     }
-                }else{ //selected1 instance of SkillFieldCard
-                    sendMessage("You cannot do anything with this card in this phase");
+                }else {
+                    sendMessage("This card is currently not available to launch attack.");
                     clearSelected();
                 }
-            }else {
-                sendMessage("This card is currently not available to launch attack.");
+            } else{ //selected1 instance of SkillFieldCard
+                sendMessage("You cannot do anything with this card in this phase");
                 clearSelected();
             }
         } else{//DRAW PHASE
@@ -654,12 +654,22 @@ public class BoardController {
     }
 
     public void checkWinner() {
-        if (board.getP1().getHp() <= 0) {
+        if (board.getP1().getHp() <= 0 || board.getP1().getDeck().isDeckEmpty()) {
+            ButtonType restart = new ButtonType("Restart Game");
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Player 2 Wins!", restart);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == restart) {
+                    board = new Board(cardReader);
+                    updateBoard();
+                }
+            });
+        } else if (board.getP2().getHp() <= 0 || board.getP2().getDeck().isDeckEmpty()) {
             ButtonType restart = new ButtonType("Restart Game");
             Alert alert = new Alert(AlertType.CONFIRMATION, "Player 1 Wins!", restart);
             alert.showAndWait().ifPresent(response -> {
                 if (response == restart) {
                     board = new Board(cardReader);
+                    updateBoard();
                 }
             });
         }
