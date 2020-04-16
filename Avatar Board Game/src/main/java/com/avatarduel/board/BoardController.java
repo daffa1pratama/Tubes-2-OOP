@@ -52,9 +52,6 @@ public class BoardController {
     @FXML
     private TextField playerText, phaseText;
 
-    @FXML
-    private Text lbl_hpA,lbl_hpB;
-
     private CardReader cardReader;
 
     private Board board;
@@ -376,7 +373,7 @@ public class BoardController {
                 }
             }
         }));
-        lbl_hpA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        characterFieldCardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if ((board.getTurn()==2) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
@@ -388,7 +385,7 @@ public class BoardController {
                 }
             }
         });
-        lbl_hpB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        characterFieldCardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if ((board.getTurn()==1) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
@@ -454,12 +451,8 @@ public class BoardController {
         } else if (board.getPhase() == Phase.MAIN) {
             if (selected1 instanceof CharacterFieldCard) {
                 if (selected1 == selected2) {
-                    if (((CharacterFieldCard) selected1).getIsRotateAble() == 1) {
-                        ((CharacterFieldCard) selected1).rotate();
-                        sendMessage("Successfully changed card position.");
-                    } else {
-                        sendMessage("This is card is not rotatable currently");
-                    }
+                    ((CharacterFieldCard) selected1).rotate();
+                    sendMessage("Successfully changed card position.");
                     clearSelected();
                 } else if (selected2 == null) {
                     sendMessage("Click one more time to rotate.");
@@ -532,39 +525,47 @@ public class BoardController {
         } else if  (board.getPhase() == Phase.BATTLE){
             if (((CharacterFieldCard) selected1).getBattleAvailability() == 1){
                 if (selected1 instanceof CharacterFieldCard){
-                    if (selected2 == null){
-                        sendMessage("Click enemy character card to attack");
-                        //Case when attack opponentPlayer if enemy's field card contains no character card is handle in onClick event in enemyGridpane
-                    } else {//selected2 != null
-                        if (selected2.getField() != board.getTurn()){
-                            if (selected2 instanceof CharacterFieldCard){
-                                //Attack
-                                if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1,(CharacterFieldCard) selected2,board.getOppositePlayer())){
-                                    if (((CharacterFieldCard)selected1).hasPowerUp() && ((CharacterFieldCard)selected2).getPosition()==0 ){
-                                        sendMessage("You attack successfully with PowerUp skill");
-                                    } else{
-                                        sendMessage("You attack succesfully on enemy card");
-                                    }
-                                } else{
-                                    sendMessage("Attack not valid, your card's attack value is too low");
-                                }
-                                clearSelected();
-                            } else {
-                                sendMessage("Cannot attack skill card");
-                                clearSelected();
-                            }
-                        } else {//selected2 is my own card
-                            if (selected2 == selected1){
-                                sendMessage("Rotate Fail.Wrong Phase !!!");
-                                clearSelected();
-                            } else {
+                    if (((CharacterFieldCard)selected1).getPosition() == 0 ){
+                        sendMessage("Defense card cannot do anything in this Phase");
+                    } else{
+                        if (selected2 == null) {
+                            sendMessage("Click enemy character card to attack");
+                            //Case when attack opponentPlayer if enemy's field card contains no character card is handle in onClick event in enemyGridpane
+                        }else {//selected2 != null
+                            if (selected2.getField() != board.getTurn()){
                                 if (selected2 instanceof CharacterFieldCard){
-                                    updateSelected();
-                                    sendMessage("Click enemy character card to attack");
+                                    //Attack
+                                    if (((CharacterFieldCard)selected1).getPosition() == 1 ){
+                                        if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1,(CharacterFieldCard) selected2,board.getOppositePlayer())){
+                                            if (((CharacterFieldCard)selected1).hasPowerUp() && ((CharacterFieldCard)selected2).getPosition()==0 ){
+                                                sendMessage("You attack successfully with PowerUp skill");
+                                            } else{
+                                                sendMessage("You attack succesfully on enemy card");
+                                            }
+                                        } else{
+                                            sendMessage("Attack not valid, your card's attack value is too low");
+                                        }
+                                    } else {
+                                        sendMessage("Defense card cannot do anything in this Phase");
+                                    }
+                                    clearSelected();
                                 } else {
-                                    updateSelected();
-                                    String skillType = selectedSkillType(selected1);
-                                    sendMessage("Click card to use " + skillType + " or Click discard button");
+                                    sendMessage("Cannot attack skill card");
+                                    clearSelected();
+                                }
+                            } else {//selected2 is my own card
+                                if (selected2 == selected1){
+                                    sendMessage("Rotate Fail.Wrong Phase !!!");
+                                    clearSelected();
+                                } else {
+                                    if (selected2 instanceof CharacterFieldCard){
+                                        updateSelected();
+                                        sendMessage("Click enemy character card to attack");
+                                    } else {
+                                        updateSelected();
+                                        String skillType = selectedSkillType(selected1);
+                                        sendMessage("Click card to use " + skillType + " or Click discard button");
+                                    }
                                 }
                             }
                         }

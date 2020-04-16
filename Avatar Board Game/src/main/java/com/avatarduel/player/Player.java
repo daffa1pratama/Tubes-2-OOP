@@ -293,7 +293,7 @@ public class Player {
             }
             //Check if attack has powerup skill and available to use it
             if (opponentCharacterCard.getPosition() == 0 && characterFieldCard.hasPowerUp()){
-                opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
+                opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack()-opponentCharacterCard.getCharacterCard().getDefense()));
             }
             characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
             return true;
@@ -303,7 +303,7 @@ public class Player {
     }
     public void attackOpponentPlayer(CharacterFieldCard characterFieldCard,Player opponent){
         opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-        characterFieldCard.setIsRotatable(0);
+//        characterFieldCard.setIsRotatable(0);//Dihapus saja karena Phase 2 dihapus
         characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
     }
 }
