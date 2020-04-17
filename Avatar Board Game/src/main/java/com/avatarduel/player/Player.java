@@ -283,14 +283,11 @@ public class Player {
             if (opponentCharacterCard.getPosition()==1){
                 opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
             }
-            opponent.getCharacterFieldCard().remove(opponentCharacterCard);
             //dump the opponentSkillCard
-            for (SkillFieldCard skills : opponent.getSkillFieldCard()){
-                if(opponentCharacterCard.getSkills().contains(skills)){
+            for (SkillFieldCard skills : opponentCharacterCard.getSkills()){
                     opponent.getSkillFieldCard().remove(skills);
-                    opponentCharacterCard.getSkills().remove(skills);
-                }
             }
+            opponent.getCharacterFieldCard().remove(opponentCharacterCard);
             //Check if attack has powerup skill and available to use it
             if (opponentCharacterCard.getPosition() == 0 && characterFieldCard.hasPowerUp()){
                 opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack()-opponentCharacterCard.getCharacterCard().getDefense()));

@@ -502,8 +502,8 @@ public class BoardController {
                                 board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
                             } else {
                                 board.getCurrentPlayer().usePowerUp((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
-                                sendMessage(stringType +"succesfully used");
                             }
+                            sendMessage(stringType +" succesfully used");
                             clearSelected();
                         } else {
                             sendMessage("This skill already used.Click discard button to discard");
