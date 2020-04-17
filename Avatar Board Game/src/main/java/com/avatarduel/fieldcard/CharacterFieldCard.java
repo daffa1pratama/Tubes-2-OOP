@@ -15,7 +15,7 @@ public class CharacterFieldCard extends FieldCard {
 
     public CharacterFieldCard(int field, CharacterCard characterCard){
         super(field);
-        this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getPathName(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
+        this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getImagePath(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = 1;
         this.isAvailableAttack = 0;
         this.skills = new ArrayList<SkillFieldCard>();

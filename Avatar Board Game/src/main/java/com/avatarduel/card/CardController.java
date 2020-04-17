@@ -1,23 +1,15 @@
 package com.avatarduel.card;
 
-import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.scene.image.*;
 
-import com.avatarduel.card.*;
-
+/**
+ * Controller for card.
+ *
+ * @author Kelompok 9 K3
+ */
 public class CardController {
     @FXML
     private ImageView cardImage;
@@ -48,13 +40,17 @@ public class CardController {
 
     }
 
+    /**
+     * Displays character card information on the detailed card pane.
+     * @param card CharacterCard to display.
+     */
     public void setCard(CharacterCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
         cardAttack.setText(Integer.toString(card.getAttack()));
         cardDefense.setText(Integer.toString(card.getDefense()));
         cardPower.setText(Integer.toString(card.getPower()));
-        Image newImage = new Image(card.getPathName());
+        Image newImage = new Image(card.getImagePath());
         cardImage.setImage(newImage);
         Image elementImage;
         if (card.getElement() == Element.AIR) {
@@ -72,13 +68,17 @@ public class CardController {
         cardType.setText("[ C ]");
     }
 
+    /**
+     * Displays land card information on the detailed card pane.
+     * @param card LandCard to display.
+     */
     public void setCard(LandCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
         cardAttack.setText("-");
         cardDefense.setText("-");
         cardPower.setText("-");
-        Image newImage = new Image(card.getPathName());
+        Image newImage = new Image(card.getImagePath());
         cardImage.setImage(newImage);
         Image elementImage;
         if (card.getElement() == Element.AIR) {
@@ -96,13 +96,17 @@ public class CardController {
         cardType.setText("[ L ]");
     }
 
+    /**
+     * Displays aura card information on the detailed card pane.
+     * @param card AuraCard to display.
+     */
     public void setCard(AuraCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
         cardAttack.setText(Integer.toString(card.getAttack()));
         cardDefense.setText(Integer.toString(card.getDefense()));
         cardPower.setText(Integer.toString(card.getPower()));
-        Image newImage = new Image(card.getPathName());
+        Image newImage = new Image(card.getImagePath());
         cardImage.setImage(newImage);
         Image elementImage;
         if (card.getElement() == Element.AIR) {
@@ -120,13 +124,17 @@ public class CardController {
         cardType.setText("[ A ]");
     }
 
+    /**
+     * Displays destroy card information on the detailed card pane.
+     * @param card DestroyCard to display.
+     */
     public void setCard(DestroyCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
         cardPower.setText(Integer.toString(card.getPower()));
         cardAttack.setText("-");
         cardDefense.setText("-");
-        Image newImage = new Image(card.getPathName());
+        Image newImage = new Image(card.getImagePath());
         cardImage.setImage(newImage);
         Image elementImage;
         if (card.getElement() == Element.AIR) {
@@ -144,13 +152,17 @@ public class CardController {
         cardType.setText("[ D ]");
     }
 
+    /**
+     * Displays powerup card information on the detailed card pane.
+     * @param card PowerUpCard to display.
+     */
     public void setCard(PowerUpCard card) {
         cardName.setText(card.getName());
         cardDescription.setText(card.getDescription());
         cardPower.setText(Integer.toString(card.getPower()));
         cardAttack.setText("-");
         cardDefense.setText("-");
-        Image newImage = new Image(card.getPathName());
+        Image newImage = new Image(card.getImagePath());
         cardImage.setImage(newImage);
         Image elementImage;
         if (card.getElement() == Element.AIR) {

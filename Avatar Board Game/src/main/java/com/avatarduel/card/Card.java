@@ -1,46 +1,65 @@
 package com.avatarduel.card;
 
+/**
+ * Card is a class that defines a card.
+ *
+ * @author Kelompok 9 K3
+ */
 public abstract class Card {
     protected String name;
     protected String description;
     protected Element element;
     protected String imagePath;
 
-    public Card(String name, String description, Element element,String pathName) {
+    /**
+     * Creates a card.
+     * @param name Name of the card.
+     * @param description Description of the card.
+     * @param element Element of the card.
+     * @param imagePath Image path of the card.
+     */
+    public Card(String name, String description, Element element, String imagePath) {
         this.name = name;
         this.description = description;
         this.element = element;
-        this.imagePath = pathName;
+        this.imagePath = imagePath;
     }
 
+    /**
+     *
+     * @return Card's name.
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     *
+     * @return Card's description.
+     */
     public String getDescription() {
         return  this.description;
     }
 
+    /**
+     *
+     * @return Card's element.
+     */
     public Element getElement() {
         return this.element;
     }
 
-    public String getPathName(){return this.imagePath;}
-
-    public void setName(String name) {
-        this.name = name;
+    /**
+     *
+     * @return Card's image path.
+     */
+    public String getImagePath() {
+        return this.imagePath;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setElement(Element element) {
-        this.element = element;
-    }
-
-    public void setPathName(String pathName){this.imagePath = pathName;}
-
+    /**
+     * Outputs the card's information to the console.
+     */
     public void InfoCard() {
         System.out.println("Name\t : " + this.name);
         System.out.println("Desc\t : " + this.description);

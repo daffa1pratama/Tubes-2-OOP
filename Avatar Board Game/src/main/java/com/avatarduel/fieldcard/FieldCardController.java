@@ -39,10 +39,10 @@ public class FieldCardController {
         }
         cardElement.setImage(elementImage);
         try {
-            Image newImage = new Image(card.getPathName());
+            Image newImage = new Image(card.getImagePath());
             cardImage.setImage(newImage);
         } catch (Exception e) {
-            System.out.println(card.getPathName());
+            System.out.println(card.getImagePath());
         }
     }
 
@@ -62,10 +62,10 @@ public class FieldCardController {
         }
         cardElement.setImage(elementImage);
         try {
-            Image newImage = new Image(card.getCharacterCard().getPathName());
+            Image newImage = new Image(card.getCharacterCard().getImagePath());
             cardImage.setImage(newImage);
         } catch (Exception e) {
-            System.out.println(card.getCharacterCard().getPathName());
+            System.out.println(card.getCharacterCard().getImagePath());
         }
     }
 
@@ -85,10 +85,10 @@ public class FieldCardController {
         }
         cardElement.setImage(elementImage);
         try {
-            Image newImage = new Image(card.getSkillCard().getPathName());
+            Image newImage = new Image(card.getSkillCard().getImagePath());
             cardImage.setImage(newImage);
         } catch (Exception e) {
-            System.out.println(card.getSkillCard().getPathName());
+            System.out.println(card.getSkillCard().getImagePath());
         }
     }
 }
