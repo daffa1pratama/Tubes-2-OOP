@@ -529,7 +529,11 @@ public class BoardController {
                         sendMessage("Defense card cannot do anything in this Phase");
                     } else{
                         if (selected2 == null) {
-                            sendMessage("Click enemy character card to attack");
+                            if (board.getOppositePlayer().getCharacterFieldCard().isEmpty()) {
+                                sendMessage("No character card in sight. Click on the enemy field to attack its HP!");
+                            } else {
+                                sendMessage("Click enemy character card to attack");
+                            }
                             //Case when attack opponentPlayer if enemy's field card contains no character card is handle in onClick event in enemyGridpane
                         }else {//selected2 != null
                             if (selected2.getField() != board.getTurn()){
@@ -662,6 +666,8 @@ public class BoardController {
                     CardReader cardReader = CardReader.getInstance();
                     nextPhaseButton.setDisable(false);
                     board = new Board(cardReader);
+                    messageA.clear();
+                    messageB.clear();
                     updateBoard();
                 }
             });
@@ -673,6 +679,8 @@ public class BoardController {
                     CardReader cardReader = CardReader.getInstance();
                     nextPhaseButton.setDisable(false);
                     board = new Board(cardReader);
+                    messageA.clear();
+                    messageB.clear();
                     updateBoard();
                 }
             });
@@ -680,23 +688,6 @@ public class BoardController {
     }
 
     public void updateBoard() {
-        if (selected1 != null) {
-            System.out.print("Selected1: ");
-            if (selected1 instanceof CharacterFieldCard) {
-                System.out.println(((CharacterFieldCard) selected1).getCharacterCard().getName() + "Character");
-            } else {
-                System.out.println(((SkillFieldCard) selected1).getSkillCard().getName() + "Skill");
-            }
-        }
-        if (selected2 != null) {
-            System.out.print("Selected2: ");
-            if (selected2 instanceof CharacterFieldCard) {
-                System.out.println(((CharacterFieldCard) selected2).getCharacterCard().getName() + "Character");
-            } else {
-                System.out.println(((SkillFieldCard) selected2).getSkillCard().getName() + "Skill");
-            }
-        }
-        System.out.println("---");
         processSelected();
         updateHandCardDisplay(board.getP1().getOnHand(), board.getP2().getOnHand());
         updateCharacterFieldCardDisplay(board.getP1().getCharacterFieldCard(), board.getP2().getCharacterFieldCard());
