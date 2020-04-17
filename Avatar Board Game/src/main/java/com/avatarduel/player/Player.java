@@ -36,18 +36,23 @@ public class Player {
         this.skillFieldCards = new ArrayList<SkillFieldCard>(6);
         this.isLandCardDeployed = false;
         this.hp = 80;
-//        this.maxFire = 0;
-//        this.maxEarth = 0;
-//        this.maxWater = 0;
-//        this.maxAir = 0;
-//        this.maxEnergy = 0;
+        this.curFire = 0;
+        this.curEarth = 0;
+        this.curWater = 0;
+        this.curAir = 0;
+        this.curEnergy = 0;
+        this.maxFire = 0;
+        this.maxEarth = 0;
+        this.maxWater = 0;
+        this.maxAir = 0;
+        this.maxEnergy = 0;
 
 //      Supposed to be all 0, set 10 only for testing deploy
-        this.curAir = 10;
-        this.curFire = 10;
-        this.curEarth = 10;
-        this.curWater = 10;
-        this.curEnergy = 10;
+        this.maxAir = 10;
+        this.maxFire = 10;
+        this.maxEarth = 10;
+        this.maxWater = 10;
+        this.maxEnergy = 10;
     }
 
     public String getName() { return name; }
@@ -89,8 +94,6 @@ public class Player {
     public void setIsLandCardDeployed(boolean state) { this.isLandCardDeployed = state ;}
 
     public int setHp(int newhp){return this.hp = newhp;}
-
-    //Masih ada getter dan setter yang belum lengkap
 
     public boolean hasEnoughPower (Element element,int amount) {
         boolean temp=true;
@@ -174,25 +177,11 @@ public class Player {
     }
 
     public void resetPower(){
-        this.curAir = 0;
-        this.curFire = 0;
-        this.curEarth = 0;
-        this.curWater = 0;
-        this.curEnergy = 0;
-        for(Card currentCard : landFieldCards){
-            switch(currentCard.getElement()){
-                case AIR:
-                    this.maxAir +=1;
-                case WATER:
-                    this.maxWater +=1;
-                case FIRE:
-                    this.maxFire +=1;
-                case EARTH:
-                    this.maxEarth +=1;
-                case ENERGY:
-                    this.maxEnergy +=1;
-            }
-        }
+        this.curAir = this.maxAir;
+        this.curFire = this.maxFire;
+        this.curEarth = this.maxEarth;
+        this.curWater = this.maxWater;
+        this.curEnergy = this.maxEnergy;
     }
 
     /**

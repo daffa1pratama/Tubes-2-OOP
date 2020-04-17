@@ -22,11 +22,4 @@ public class CardCollection {
     public void shuffle() {
         Collections.shuffle(cardCollection);
     }
-
-    public void printCards() {
-        for (int i = 0; i < cardCollection.size(); i++) {
-            cardCollection.get(i).InfoCard();
-            System.out.println();
-        }
-    }
 }

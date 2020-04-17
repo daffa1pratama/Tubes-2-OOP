@@ -7,7 +7,6 @@ public class CharacterFieldCard extends FieldCard{
     private CharacterCard characterCard;
     private int position; //0 defense 1 attack
     private int isAvailableAttack; // Set to attack on next turn
-//    private int isRotatable;
     private List<SkillFieldCard> skills;
 
 
@@ -16,7 +15,6 @@ public class CharacterFieldCard extends FieldCard{
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getPathName(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = 1;
         this.isAvailableAttack = 0;
-//        this.isRotatable = 1;
         this.skills = new ArrayList<SkillFieldCard>();
     }
 
@@ -25,13 +23,10 @@ public class CharacterFieldCard extends FieldCard{
     public void addSkills(SkillFieldCard skillFieldCard){this.skills.add(skillFieldCard);}
 
     public CharacterCard getCharacterCard(){return this.characterCard;}
+
     public int getBattleAvailability(){return this.isAvailableAttack;}
 
     public void setBattleAvailability(int isAvailableAttack){this.isAvailableAttack = isAvailableAttack;}
-
-//    public int getIsRotateAble() { return this.isRotatable; }
-//
-//    public void setIsRotatable(int isRotatable) { this.isRotatable = isRotatable; }
 
     public void setPositionValue(){position = (position+1)%2; }
 
@@ -49,24 +44,4 @@ public class CharacterFieldCard extends FieldCard{
         }
         return has;
     }
-
-//    public int getPositionValue() {
-//        if (this.position == 0) {
-//            return this.characterCard.getAttack();
-//        }
-//        return this.characterCard.getDefense();
-//    }
-//
-//    public void AttackEnemy(com.avatarduel.card.CharacterFieldCard enemyCard) {
-//        //Enemy defense role
-//        if (enemyCard.getPosition() == 0) {
-//
-//        }
-//        //Enemy attack role
-//        else {
-//
-//        }
-//    }
-
-
-    }
+}

@@ -33,7 +33,7 @@ public class Board {
 
     public void switchTurn() {
         if (turn == 1) turn = 2; else turn = 1;
-//        getCurrentPlayer().resetPower(); // don't forget to uncomment. debug only.
+        getCurrentPlayer().resetPower();
         getCurrentPlayer().drawCard();
         this.phase = Phase.DRAW;
     }
@@ -46,23 +46,6 @@ public class Board {
         for (int i = 0; i < 8; i++) this.p1.drawCard(); // player 1 starts first, so draw 1 extra
         for (int i = 0; i < 7; i++) this.p2.drawCard();
         this.phase = Phase.DRAW;
-    }
-
-    public void printCards() {
-        // Careful. Both decks will be emptied. For debugging purposes only.
-        System.out.println("Player 1:");
-        Deck D1 = this.p1.getDeck();
-        for (int i = 0; i < D1.getDeckCount(); i++) {
-            Card C = D1.drawCard();
-            C.InfoCard();
-        }
-        System.out.println();
-        System.out.println("Player 2:");
-        Deck D2 = this.p2.getDeck();
-        for (int i = 0; i < D2.getDeckCount(); i++) {
-            Card C = D2.drawCard();
-            C.InfoCard();
-        }
     }
 
     public void nextPhase() {

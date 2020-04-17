@@ -34,27 +34,11 @@ public class CharacterCard extends Card {
         this.defense = defense;
     }
 
-    public void setPower(int power) {
-        this.power = power;
-    }
-
     @Override
     public void InfoCard() {
         super.InfoCard();
         System.out.println("Attack\t : " + this.attack);
         System.out.println("Defense\t : " + this.defense);
         System.out.println("Power\t : " + this.power);
-    }
-
-
-    public String CardInfo() {
-        String stream = "";
-        stream += "Name\t : " + super.name + "\n";
-        stream += "Desc\t\t : " + super.description + "\n";
-        stream += "Element\t : " + super.element + "\n";
-        stream += "Attack\t : " + this.attack + "\n";
-        stream += "Defense\t : " + this.defense + "\n";
-        stream += "Power\t : " + this.power + "\n";
-        return  stream;
     }
 }
