@@ -542,7 +542,7 @@ public class BoardController {
                                 if (selected2 instanceof CharacterFieldCard){
                                     //Attack
                                     if (((CharacterFieldCard)selected1).getPosition() == 1 ){
-                                        if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1, (CharacterFieldCard) selected2, board.getOppositePlayer(), board.getCurrentPlayer())){
+                                        if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1, (CharacterFieldCard) selected2, board.getOppositePlayer())){
                                             if (((CharacterFieldCard)selected1).hasPowerUp() && ((CharacterFieldCard)selected2).getPosition() == 0){
                                                 sendMessage("You attack successfully with PowerUp skill");
                                             } else{
@@ -700,5 +700,4 @@ public class BoardController {
         else this.playerText.setText("PLAYER B");
         this.phaseText.setText(board.getPhase().toString());
     }
-
 }

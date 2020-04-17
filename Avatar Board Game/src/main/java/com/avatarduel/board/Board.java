@@ -45,7 +45,7 @@ public class Board implements iBoard {
         this.phase = Phase.DRAW;
 
     }
-    
+
     @Override
     public void nextPhase() {
         switch (this.phase) {

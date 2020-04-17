@@ -268,15 +268,16 @@ public class Player {
     }
 
 
-    public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent, Player notOpponent){
+    public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
         if (isAttackValid(characterFieldCard,opponentCharacterCard)){
             if (opponentCharacterCard.getPosition()==1){
                 opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
             }
             //dump the opponentSkillCard
             for (SkillFieldCard skills : opponentCharacterCard.getSkills()){
+                //Each time only one of the below lines will be executed depend on which player owns the skillCard
                 opponent.getSkillFieldCard().remove(skills);
-                notOpponent.getSkillFieldCard().remove(skills);
+                this.getSkillFieldCard().remove(skills);
             }
             opponent.getCharacterFieldCard().remove(opponentCharacterCard);
             //Check if attack has powerup skill and available to use it
@@ -291,7 +292,6 @@ public class Player {
     }
     public void attackOpponentPlayer(CharacterFieldCard characterFieldCard,Player opponent){
         opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
-//        characterFieldCard.setIsRotatable(0);//Dihapus saja karena Phase 2 dihapus
-        characterFieldCard.setBattleAvailability(0); //Setiap karakter hanya boleh attack maksimal 1 kali
+        characterFieldCard.setBattleAvailability(0); //Each character can only attack at most once in a turn
     }
 }
