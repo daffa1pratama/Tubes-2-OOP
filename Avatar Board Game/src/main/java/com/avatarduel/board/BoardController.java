@@ -378,7 +378,7 @@ public class BoardController {
             public void handle(MouseEvent event) {
                 if ((board.getTurn()==2) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
                     selected1!= null && selected1.getField()==board.getTurn() &&
-                    selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
+                    selected1 instanceof CharacterFieldCard && ((CharacterFieldCard) selected1).getPosition() == 1) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
                     sendMessage("You opponent's hp is dropping");
                     updateBoard();
@@ -390,7 +390,7 @@ public class BoardController {
             public void handle(MouseEvent event) {
                 if ((board.getTurn()==1) && (board.getOppositePlayer().getCharacterFieldCard().isEmpty() &&
                         selected1!= null && selected1.getField()==board.getTurn() &&
-                        selected1 instanceof CharacterFieldCard) && board.getPhase()==Phase.BATTLE){
+                        selected1 instanceof CharacterFieldCard && ((CharacterFieldCard) selected1).getPosition() == 1) && board.getPhase()==Phase.BATTLE){
                     board.getCurrentPlayer().attackOpponentPlayer((CharacterFieldCard)selected1,board.getOppositePlayer());
                     sendMessage("You opponent's hp is dropping");
                     updateBoard();
