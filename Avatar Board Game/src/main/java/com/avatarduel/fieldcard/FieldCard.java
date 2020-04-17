@@ -7,6 +7,5 @@ public class FieldCard {
         this.field = field;
     }
 
-    public int getField(){return this.field;}
-    public void setField(int field){this.field= field;}
+    public int getField() { return this.field; }
 }

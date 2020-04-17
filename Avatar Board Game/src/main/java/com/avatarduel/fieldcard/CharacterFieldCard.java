@@ -6,38 +6,85 @@ import com.avatarduel.card.PowerUpCard;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CharacterFieldCard is a class that defines a character field card.
+ *
+ * @author Kelompok 9 K3
+ */
 public class CharacterFieldCard extends FieldCard {
     private CharacterCard characterCard;
-    private int position; //0 defense 1 attack
-    private int isAvailableAttack; // Set to attack on next turn
+    /**
+     * Card's position. 0 if defense and 1 if attack.
+     */
+    private int position;
+    /**
+     * Card's attack status. 0 if it is unavailable to attack, 1 if available.
+     */
+    private int isAvailableAttack;
+    /**
+     * List of buffs/debuffs this card currently has.
+     */
     private List<SkillFieldCard> skills;
 
-
+    /**
+     * Creates a character field card.
+     * @param field Which field is this card on (1 or 2).
+     * @param characterCard The character card that is placed in the field.
+     */
     public CharacterFieldCard(int field, CharacterCard characterCard){
         super(field);
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getImagePath(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = 1;
         this.isAvailableAttack = 0;
-        this.skills = new ArrayList<SkillFieldCard>();
+        this.skills = new ArrayList<>();
     }
 
-    public List<SkillFieldCard>getSkills(){ return this.skills;}
+    /**
+     *
+     * @return list of buffs/debuffs this card currently has.
+     */
+    public List<SkillFieldCard>getSkills() { return this.skills;}
 
-    public void addSkills(SkillFieldCard skillFieldCard){this.skills.add(skillFieldCard);}
+    /**
+     * Adds a buff/debuff to this card.
+     * @param skillFieldCard Skill to be used on this card.
+     */
+    public void addSkills(SkillFieldCard skillFieldCard) {this.skills.add(skillFieldCard);}
 
-    public CharacterCard getCharacterCard(){return this.characterCard;}
+    /**
+     *
+     * @return This character card
+     */
+    public CharacterCard getCharacterCard() {return this.characterCard;}
 
-    public int getBattleAvailability(){return this.isAvailableAttack;}
+    /**
+     *
+     * @return Card's attack status. 0 if it is unavailable to attack, 1 if available.
+     */
+    public int getBattleAvailability() {return this.isAvailableAttack;}
 
-    public void setBattleAvailability(int isAvailableAttack){this.isAvailableAttack = isAvailableAttack;}
+    /**
+     * Sets this card's attack status.
+     * @param isAvailableAttack 0 if it is made unavailable to attack, 1 if made available.
+     */
+    public void setBattleAvailability(int isAvailableAttack) {this.isAvailableAttack = isAvailableAttack;}
 
-    public void setPositionValue(){position = (position+1)%2; }
-
+    /**
+     * Changes the card position from attacking to defending, or vice-versa.
+     */
     public void rotate() { this.position = (this.position + 1) % 2; }
 
+    /**
+     *
+     * @return Card's position. 0 if defense and 1 if attack.
+     */
     public int getPosition() { return this.position; }
 
-    public boolean hasPowerUp(){
+    /**
+     *
+     * @return A boolean value which indicates whether this card has a powerup effect.
+     */
+    public boolean hasPowerUp() {
         boolean has = false;
         for (SkillFieldCard skills : this.getSkills()){
             if (skills.getSkillCard() instanceof PowerUpCard){
