@@ -7,7 +7,7 @@ public class CharacterFieldCard extends FieldCard{
     private CharacterCard characterCard;
     private int position; //0 defense 1 attack
     private int isAvailableAttack; // Set to attack on next turn
-    private int isRotatable;
+//    private int isRotatable;
     private List<SkillFieldCard> skills;
 
 
@@ -16,7 +16,7 @@ public class CharacterFieldCard extends FieldCard{
         this.characterCard = new CharacterCard(characterCard.getName(),characterCard.getDescription(),characterCard.getElement(),characterCard.getPathName(),characterCard.getAttack(),characterCard.getDefense(),characterCard.getPower());
         this.position = 1;
         this.isAvailableAttack = 0;
-        this.isRotatable = 1;
+//        this.isRotatable = 1;
         this.skills = new ArrayList<SkillFieldCard>();
     }
 
@@ -29,9 +29,9 @@ public class CharacterFieldCard extends FieldCard{
 
     public void setBattleAvailability(int isAvailableAttack){this.isAvailableAttack = isAvailableAttack;}
 
-    public int getIsRotateAble() { return this.isRotatable; }
-
-    public void setIsRotatable(int isRotatable) { this.isRotatable = isRotatable; }
+//    public int getIsRotateAble() { return this.isRotatable; }
+//
+//    public void setIsRotatable(int isRotatable) { this.isRotatable = isRotatable; }
 
     public void setPositionValue(){position = (position+1)%2; }
 
