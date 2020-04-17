@@ -489,17 +489,19 @@ public class BoardController {
                     if (selected2 instanceof CharacterFieldCard) {
                         //Use Skill card
                         if (((SkillFieldCard) selected1).getOwner() == null){
-                            Player target = board.getP1(); // Assumptiion
+                            Player target, notTarget;
                             if (selected2.getField() == 1){
                                 target = board.getP1();
+                                notTarget = board.getP2();
                             } else {
                                 target = board.getP2();
+                                notTarget = board.getP1();
                             }
                             String stringType = selectedSkillType(selected1);
                             if (((SkillFieldCard) selected1).getSkillCard() instanceof AuraCard) {
                                 board.getCurrentPlayer().useAura((SkillFieldCard)selected1,(CharacterFieldCard) selected2,target);
                             } else if (((SkillFieldCard) selected1).getSkillCard() instanceof DestroyCard) {
-                                board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
+                                board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1, (CharacterFieldCard)selected2, target, notTarget);
                             } else {
                                 board.getCurrentPlayer().usePowerUp((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
                             }
@@ -540,8 +542,8 @@ public class BoardController {
                                 if (selected2 instanceof CharacterFieldCard){
                                     //Attack
                                     if (((CharacterFieldCard)selected1).getPosition() == 1 ){
-                                        if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1,(CharacterFieldCard) selected2,board.getOppositePlayer())){
-                                            if (((CharacterFieldCard)selected1).hasPowerUp() && ((CharacterFieldCard)selected2).getPosition()==0 ){
+                                        if (board.getCurrentPlayer().attack((CharacterFieldCard) selected1, (CharacterFieldCard) selected2, board.getOppositePlayer(), board.getCurrentPlayer())){
+                                            if (((CharacterFieldCard)selected1).hasPowerUp() && ((CharacterFieldCard)selected2).getPosition() == 0){
                                                 sendMessage("You attack successfully with PowerUp skill");
                                             } else{
                                                 sendMessage("You attack succesfully on enemy card");

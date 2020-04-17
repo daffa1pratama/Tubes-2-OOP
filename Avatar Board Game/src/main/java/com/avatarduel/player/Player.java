@@ -253,9 +253,10 @@ public class Player {
         target.getSkills().add(skillFieldCard);
     }
 
-    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//TargetPlayer can be currentPlayer or Opposite Player
+    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer, Player notTargetPlayer){//TargetPlayer can be currentPlayer or Opposite Player
         for (SkillFieldCard skills : target.getSkills()){
             targetPlayer.getSkillFieldCard().remove(skills);
+            notTargetPlayer.getSkillFieldCard().remove(skills);
         }
         this.getSkillFieldCard().remove(skillFieldCard);
         targetPlayer.getCharacterFieldCard().remove(target);
@@ -278,14 +279,15 @@ public class Player {
     }
 
 
-    public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
+    public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent, Player notOpponent){
         if (isAttackValid(characterFieldCard,opponentCharacterCard)){
             if (opponentCharacterCard.getPosition()==1){
                 opponent.setHp(opponent.getHp() - (characterFieldCard.getCharacterCard().getAttack() - opponentCharacterCard.getCharacterCard().getAttack()));
             }
             //dump the opponentSkillCard
             for (SkillFieldCard skills : opponentCharacterCard.getSkills()){
-                    opponent.getSkillFieldCard().remove(skills);
+                opponent.getSkillFieldCard().remove(skills);
+                notOpponent.getSkillFieldCard().remove(skills);
             }
             opponent.getCharacterFieldCard().remove(opponentCharacterCard);
             //Check if attack has powerup skill and available to use it
