@@ -11,32 +11,13 @@ import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.scene.Group;
 
-public class Board {
+public class Board implements iBoard {
 
     private Player p1;
     private Player p2;
     private Player winner;
     private Phase phase;
     private int turn; //1 or 2
-
-    //MAIN BOARD IMPLEMENTS HERE
-    public Player getP1() { return this.p1; }
-
-    public Player getP2() { return this.p2; }
-
-    public Player getCurrentPlayer() { if (turn == 1) return p1; else return p2; }
-
-    public Player getOppositePlayer(){ if (turn == 1) return p2; else return p1;}
-    public int getTurn() { return this.turn; }
-
-    public Phase getPhase() { return phase; }
-
-    public void switchTurn() {
-        if (turn == 1) turn = 2; else turn = 1;
-        getCurrentPlayer().resetPower();
-        getCurrentPlayer().drawCard();
-        this.phase = Phase.DRAW;
-    }
 
     public Board(CardReader cardReader) {
         this.p1 = new Player("P1", cardReader.getCharacterCardCollection(), cardReader.getLandCardCollection(), cardReader.getAuraCardCollection(), cardReader.getDestroyCardCollection(), cardReader.getPowerupCardCollection());
@@ -48,6 +29,24 @@ public class Board {
         this.phase = Phase.DRAW;
     }
 
+    //Getter
+    public Player getP1() { return this.p1; }
+    public Player getP2() { return this.p2; }
+    public Player getCurrentPlayer() { if (turn == 1) return p1; else return p2; }
+    public Player getOppositePlayer(){ if (turn == 1) return p2; else return p1;}
+    public int getTurn() { return this.turn; }
+    public Phase getPhase() { return phase; }
+
+    @Override
+    public void switchTurn(){
+        if (turn == 1) turn = 2; else turn = 1;
+        getCurrentPlayer().resetPower();
+        getCurrentPlayer().drawCard();
+        this.phase = Phase.DRAW;
+
+    }
+    
+    @Override
     public void nextPhase() {
         switch (this.phase) {
             case DRAW:
