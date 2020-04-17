@@ -1,6 +1,7 @@
 package com.avatarduel.card;
 
 import com.avatarduel.util.CSVReader;
+import javafx.scene.control.Alert;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public class CardReader {
+    private static CardReader instance;
     private CardCollection characterCardCollection;
     private CardCollection landCardCollection;
     private CardCollection auraCardCollection;
@@ -19,8 +21,22 @@ public class CardReader {
     private static final String DESTROY_CSV_FILE_PATH = "/com/avatarduel/card/data/skill_destroy.csv";
     private static final String POWERUP_CSV_FILE_PATH = "/com/avatarduel/card/data/skill_powerup.csv";
 
-    public CardReader() {
-        // nothing here, move on
+    private CardReader() {
+        try {
+            loadCards();
+        } catch (Exception e) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Card loading failed");
+            errorAlert.setContentText("Failed to load cards: " + e);
+            errorAlert.showAndWait();
+        }
+    }
+
+    public static CardReader getInstance() {
+        if (instance == null) {
+            instance = new CardReader();
+        }
+        return instance;
     }
 
     public void loadCards() throws IOException, URISyntaxException {

@@ -16,21 +16,13 @@ public class AvatarDuel extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
-    CardReader cardReader = new CardReader();
-    try {
-      cardReader.loadCards();
-    } catch (Exception e) {
-      Alert errorAlert = new Alert(AlertType.ERROR);
-      errorAlert.setHeaderText("Card loading failed");
-      errorAlert.setContentText("Failed to load cards: " + e);
-      errorAlert.showAndWait();
-    }
+    CardReader cardReader = CardReader.getInstance();
     Board board = new Board(cardReader);
     stage.show();
     FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("views/Board.fxml"));
     Parent root = boardLoader.load();
     boardController = boardLoader.getController();
-    boardController.setCardReader(cardReader);
+//    boardController.setCardReader(cardReader);
     boardController.setBoard(board);
     boardController.updateBoard();
 

@@ -53,9 +53,7 @@ public class BoardController {
     private TextField playerText, phaseText;
 
     @FXML
-    private Text lbl_hpA,lbl_hpB;
-
-    private CardReader cardReader;
+    private Text lbl_hpA, lbl_hpB;
 
     private Board board;
 
@@ -173,7 +171,8 @@ public class BoardController {
             } else { //player == 2
                 handCardB.add(handCard,x,0,1,1);
             }
-            handCard.setStyle("-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;");
+            String style = "-fx-background-color: #" + colorCard + "; -fx-border-color: BLACK;";
+            handCard.setStyle(style);
             addHoverEvent(card, handCard);
             Player currentPlayer = board.getCurrentPlayer();
             handCard.setOnMouseClicked(e -> {
@@ -316,10 +315,6 @@ public class BoardController {
         pane.setOnMouseExited((MouseEvent t) -> {
             cardDetail.setCenter(new Pane());
         });
-    }
-
-    public void setCardReader(CardReader cardReader) {
-        this.cardReader = cardReader;
     }
 
     public void setBoard(Board board) {
@@ -658,6 +653,8 @@ public class BoardController {
             Alert alert = new Alert(AlertType.CONFIRMATION, "Player 2 Wins!", restart);
             alert.showAndWait().ifPresent(response -> {
                 if (response == restart) {
+                    CardReader cardReader = CardReader.getInstance();
+                    nextPhaseButton.setDisable(false);
                     board = new Board(cardReader);
                     updateBoard();
                 }
@@ -667,6 +664,8 @@ public class BoardController {
             Alert alert = new Alert(AlertType.CONFIRMATION, "Player 1 Wins!", restart);
             alert.showAndWait().ifPresent(response -> {
                 if (response == restart) {
+                    CardReader cardReader = CardReader.getInstance();
+                    nextPhaseButton.setDisable(false);
                     board = new Board(cardReader);
                     updateBoard();
                 }
