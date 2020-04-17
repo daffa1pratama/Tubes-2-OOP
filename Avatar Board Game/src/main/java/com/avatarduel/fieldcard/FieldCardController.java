@@ -1,19 +1,6 @@
-package com.avatarduel.card;
+package com.avatarduel.fieldcard;
 
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.scene.image.*;
 
 import com.avatarduel.card.*;

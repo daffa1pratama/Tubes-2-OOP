@@ -1,4 +1,4 @@
-package com.avatarduel.card;
+package com.avatarduel.fieldcard;
 
 public class FieldCard {
     private int field; //Determine which field is the fieldCard on, field=1 means this FieldCard is on p1's field

@@ -1,9 +1,12 @@
-package com.avatarduel.card;
+package com.avatarduel.fieldcard;
+
+import com.avatarduel.card.CharacterCard;
+import com.avatarduel.card.PowerUpCard;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterFieldCard extends FieldCard{
+public class CharacterFieldCard extends FieldCard {
     private CharacterCard characterCard;
     private int position; //0 defense 1 attack
     private int isAvailableAttack; // Set to attack on next turn

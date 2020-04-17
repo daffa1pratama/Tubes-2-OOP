@@ -1,5 +1,7 @@
 package com.avatarduel.card;
 
+import com.avatarduel.fieldcard.CharacterFieldCard;
+
 public class AuraCard extends SkillCard {
     private int attack;
     private int defense;

@@ -3,6 +3,11 @@ package com.avatarduel.board;
 import java.io.IOException;
 import java.util.List;
 
+import com.avatarduel.fieldcard.CharacterFieldCard;
+import com.avatarduel.fieldcard.FieldCard;
+import com.avatarduel.fieldcard.FieldCardController;
+import com.avatarduel.fieldcard.SkillFieldCard;
+import com.avatarduel.util.CardReader;
 import javafx.scene.image.ImageView;
 
 import javafx.event.EventHandler;
@@ -21,8 +26,6 @@ import javafx.scene.control.Button;
 
 import com.avatarduel.card.*;
 import com.avatarduel.player.*;
-
-import javax.swing.*;
 
 public class BoardController {
     @FXML
@@ -51,9 +54,6 @@ public class BoardController {
 
     @FXML
     private TextField playerText, phaseText;
-
-    @FXML
-    private Text lbl_hpA, lbl_hpB;
 
     private Board board;
 

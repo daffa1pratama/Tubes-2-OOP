@@ -1,6 +1,8 @@
-package com.avatarduel.card;
+package com.avatarduel.fieldcard;
 
-public class SkillFieldCard extends FieldCard{
+import com.avatarduel.card.SkillCard;
+
+public class SkillFieldCard extends FieldCard {
     private final SkillCard skillCard;//required
     private CharacterFieldCard owner;//optional
 

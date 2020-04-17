@@ -2,6 +2,8 @@ package com.avatarduel.player;
 
 import com.avatarduel.card.*;
 import com.avatarduel.deck.Deck;
+import com.avatarduel.fieldcard.CharacterFieldCard;
+import com.avatarduel.fieldcard.SkillFieldCard;
 
 import java.util.List;
 import java.util.ArrayList;

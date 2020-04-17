@@ -1,6 +1,6 @@
-package com.avatarduel.card;
+package com.avatarduel.util;
 
-import com.avatarduel.util.CSVReader;
+import com.avatarduel.card.*;
 import javafx.scene.control.Alert;
 
 import java.io.File;
