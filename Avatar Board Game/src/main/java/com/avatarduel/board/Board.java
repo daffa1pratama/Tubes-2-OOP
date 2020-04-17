@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Board is a class that defines the game board.
  *
- * @author Kelompok 9 K3.
+ * @author Kelompok 9 K3
  */
 public class Board implements iBoard {
 
@@ -23,7 +23,7 @@ public class Board implements iBoard {
 
     /**
      * Creates a new board. Initializes a new game.
-     * @param cardReader the initialized card reader that contains collection of cards.
+     * @param cardReader The initialized card reader that contains collection of cards.
      */
     public Board(CardReader cardReader) {
         this.p1 = new Player("P1", cardReader.getCharacterCardCollection(), cardReader.getLandCardCollection(), cardReader.getAuraCardCollection(), cardReader.getDestroyCardCollection(), cardReader.getPowerupCardCollection());
@@ -35,32 +35,32 @@ public class Board implements iBoard {
     }
 
     /**
-     * @return player 1 object.
+     * @return Player 1 object.
      */
     public Player getP1() { return this.p1; }
 
     /**
-     * @return player 2 object.
+     * @return Player 2 object.
      */
     public Player getP2() { return this.p2; }
 
     /**
-     * @return current player object according to current turn.
+     * @return Current player object according to current turn.
      */
     public Player getCurrentPlayer() { if (turn == 1) return p1; else return p2; }
 
     /**
-     * @return opponent player object according to current turn.
+     * @return Opponent player object according to current turn.
      */
     public Player getOppositePlayer() { if (turn == 1) return p2; else return p1; }
 
     /**
-     * @return integer. current turn.
+     * @return Current turn.
      */
     public int getTurn() { return this.turn; }
 
     /**
-     * @return current phase.
+     * @return Current phase.
      */
     public Phase getPhase() { return phase; }
 

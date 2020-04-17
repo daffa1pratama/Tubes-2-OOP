@@ -3,6 +3,8 @@ package com.avatarduel.board;
 /**
  * Interface that act as a contract which should be implement by class Board
  * A Board class should always consist of switchTurn() and nextPhase() method
+ *
+ * @author Kelompok 9 K3
  */
 public interface iBoard {
     /**
