@@ -184,15 +184,17 @@ public class BoardController {
                 if ((isLand && currentPlayer.getIsLandCardDeployed()) || (!currentPlayer.canDeploy(clickedCard)) || (board.getPhase() != Phase.MAIN)){
                     alert.getDialogPane().lookupButton(deploy).setDisable(true);
                 }
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == deploy) {
-                        currentPlayer.addToField(board.getTurn(), clickedCard);
-                        if (isLand){
-                            currentPlayer.setIsLandCardDeployed(true);
+                if (board.getPhase() == Phase.MAIN) {
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == deploy) {
+                            currentPlayer.addToField(board.getTurn(), clickedCard);
+                            if (isLand) {
+                                currentPlayer.setIsLandCardDeployed(true);
+                            }
                         }
-                    }
-                    updateBoard();
-                });
+                        updateBoard();
+                    });
+                }
             });
         } catch (IOException e) {
             System.out.println("Exception: " + e);
