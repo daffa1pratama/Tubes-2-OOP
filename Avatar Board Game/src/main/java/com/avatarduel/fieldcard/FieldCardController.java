@@ -7,6 +7,11 @@ import com.avatarduel.card.*;
 
 import javafx.fxml.FXML;
 
+/**
+ * Controller for card that are displayed
+ * @author Kelompok 9 K3
+ * */
+
 public class FieldCardController {
     @FXML
     private ImageView cardImage;
@@ -17,14 +22,19 @@ public class FieldCardController {
     @FXML
     private ImageView cardElement;
 
+    /**
+     * Initializer for the card.
+     */
     @FXML
     public void initialize() {
 
     }
 
+    /**
+     * Load the all the information(card name, card element and it's image) of a card which is going to be displayed
+     */
     public void setFieldCard(Card card){
         cardName.setText(card.getName());
-//            System.out.println(card.getPathName());
         Image elementImage;
         if (card.getElement() == Element.AIR) {
             elementImage = new Image("/com/avatarduel/card/image/element/AirElement.png");
@@ -46,6 +56,10 @@ public class FieldCardController {
         }
     }
 
+    /**
+     * @param card is the card instane of CharacterFieldCard that is going to be display
+     * Load the all the information(card name, card element and it's image) of a character card which is going to be displayed
+     */
     public void setFieldCard(CharacterFieldCard card) {
         cardName.setText(card.getCharacterCard().getName());
         Image elementImage;
@@ -69,6 +83,10 @@ public class FieldCardController {
         }
     }
 
+    /**
+     * @param card is the card instance of SkillFieldCard that is going to be displayed
+     * Load the all the information(card name, card element and it's image) of a skill card which is going to be displayed
+     */
     public void setFieldCard(SkillFieldCard card) {
         cardName.setText(card.getSkillCard().getName());
         Image elementImage;

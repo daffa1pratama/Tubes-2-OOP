@@ -2,24 +2,54 @@ package com.avatarduel.fieldcard;
 
 import com.avatarduel.card.SkillCard;
 
+/**
+ * SkillFieldCard is the class that represents skill card that is on deployed on the field.
+ * @author Kelompok 9 K3
+ */
 public class SkillFieldCard extends FieldCard {
-    private final SkillCard skillCard;//required
-    private CharacterFieldCard owner;//optional
+    /**
+     * skillCard is a required attribute for all instance of SkillFieldCard.It is declared final so it can't be modified once an object of this class is created
+     */
+    private final SkillCard skillCard;
+    /**
+     * owner is an optional attribute only for instance of SkillFieldCard that has already been used or attached on some CharacterFieldCard
+     */
+    private CharacterFieldCard owner;
 
-    //Private Constructor
+    /**
+     * Private Constructor
+     * @param field determine the field/side of the board that the card belongs
+     * @param builder is the builder for building SkillFieldCard
+     */
     private SkillFieldCard(int field,SkillFieldCardBuilder builder){
         super(field);
         this.skillCard = builder.skillCard;
         this.owner = builder.owner;
     }
+
+    /**
+     * getter of skillCard
+     * @return skillCard
+     */
+    public SkillCard getSkillCard() {return this.skillCard;}
+    /**
+     * getter of owner
+     * @return owner
+     */
+    public CharacterFieldCard getOwner(){return this.owner;}
+
+
+    /**
+     * Setter for owner
+     * @param characterFieldCard
+     */
     public void setOwner(CharacterFieldCard characterFieldCard){
         this.owner = characterFieldCard;
     }
 
-    public SkillCard getSkillCard() {return this.skillCard;}
-
-    public CharacterFieldCard getOwner(){return this.owner;}
-
+    /**
+     * SkillFieldCardBuilder is the builder class for SkillFieldCard
+     */
     public static class SkillFieldCardBuilder{
         private final SkillCard skillCard;//Require
         private CharacterFieldCard owner;//Optional

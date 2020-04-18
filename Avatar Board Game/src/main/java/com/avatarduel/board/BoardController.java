@@ -26,7 +26,6 @@ import com.avatarduel.player.*;
 
 /**
  * Controller for Board.
- *
  * @author Kelompok 9 K3
  */
 public class BoardController {
@@ -571,7 +570,7 @@ public class BoardController {
                                 if (((SkillFieldCard) selected1).getSkillCard() instanceof AuraCard) {
                                     board.getCurrentPlayer().useAura((SkillFieldCard)selected1,(CharacterFieldCard) selected2,target);
                                 } else if (((SkillFieldCard) selected1).getSkillCard() instanceof DestroyCard) {
-                                    board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1, (CharacterFieldCard)selected2, target, notTarget);
+                                    board.getCurrentPlayer().useDestroyer((SkillFieldCard)selected1, (CharacterFieldCard)selected2, target);
                                 } else {
                                     board.getCurrentPlayer().usePowerUp((SkillFieldCard)selected1,(CharacterFieldCard)selected2,target);
                                 }

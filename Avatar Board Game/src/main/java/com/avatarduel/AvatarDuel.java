@@ -9,9 +9,17 @@ import javafx.stage.Stage;
 
 import com.avatarduel.board.*;
 
+/**
+ * AvatarDuel is the main class of this project that launch the application
+ */
 public class AvatarDuel extends Application {
   private BoardController boardController;
 
+  /**
+   * Method to start the stage.
+   * @param stage is the stage of the game
+   * @throws Exception when there is an error happening
+   */
   @Override
   public void start(Stage stage) throws Exception {
     CardReader cardReader = CardReader.getInstance();
@@ -29,6 +37,10 @@ public class AvatarDuel extends Application {
     stage.setScene(scene);
   }
 
+  /**
+   * main method to launch the program
+   * @param args
+   */
   public static void main(String[] args) {
     launch();
   }

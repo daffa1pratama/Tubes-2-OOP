@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Player is the class that represents a player
+ * @author Kelompok 9 K3
+ */
 public class Player {
     private String name;
     private Deck deck;
@@ -29,6 +33,15 @@ public class Player {
     private int curEnergy;
     private boolean isLandCardDeployed;
 
+    /**
+     * Constructor for Player
+     * @param name is the name of a player
+     * @param characterCardCollection is the CardCollection of character card that a player owns
+     * @param landCardCollection is the CardCollection of land card that a player owns
+     * @param skillCardCollection is the CardCollection of skill card that a player owns
+     * @param destroyCardCollection is the CardCollection of destroy card that a player owns
+     * @param powerupCardCollection is the CardCollection of power up card that a player owns
+     */
     public Player(String name, CardCollection characterCardCollection, CardCollection landCardCollection, CardCollection skillCardCollection, CardCollection destroyCardCollection, CardCollection powerupCardCollection) {
         this.name = name;
         this.deck = new Deck(characterCardCollection, landCardCollection, skillCardCollection, destroyCardCollection, powerupCardCollection);
@@ -50,53 +63,47 @@ public class Player {
         this.maxEnergy = 0;
 
 //      Supposed to be all 0, set 10 only for testing deploy
-        this.maxAir = 10;
-        this.maxFire = 10;
-        this.maxEarth = 10;
-        this.maxWater = 10;
-        this.maxEnergy = 10;
+//        this.maxAir = 10;
+//        this.maxFire = 10;
+//        this.maxEarth = 10;
+//        this.maxWater = 10;
+//        this.maxEnergy = 10;
     }
 
+    /**
+     *Getter for the Player's attribut
+     */
     public String getName() { return name; }
-
     public Deck getDeck() { return deck; }
-
     public List<Card> getOnHand() { return onHand; }
-
     public int getHp() { return hp; }
-    
     public int getMaxFire() { return maxFire; }
-    
     public int getMaxEarth() { return maxEarth; }
-    
     public int getMaxWater() { return maxWater; }
-
     public int getMaxAir() { return maxAir; }
-
     public int getMaxEnergy() { return maxEnergy; }
-
     public int getCurFire() { return curFire; }
-
     public int getCurEarth() { return curEarth; }
-
     public int getCurWater() { return curWater; }
-
     public int getCurAir() { return curAir; }
-
     public int getCurEnergy() { return curEnergy; }
-
     public List<LandCard> getLandFieldCards(){return this.landFieldCards;}
-
     public List<CharacterFieldCard> getCharacterFieldCard() {return this.characterFieldCards;}
-
     public List<SkillFieldCard> getSkillFieldCard() {return this.skillFieldCards;}
-
     public boolean getIsLandCardDeployed() { return this.isLandCardDeployed; }
 
+    /**
+     * Setter for the Player's attribute
+     */
     public void setIsLandCardDeployed(boolean state) { this.isLandCardDeployed = state ;}
-
     public int setHp(int newhp){return this.hp = newhp;}
 
+    /**
+     * Check whether a player has enough amount of power of a certain type of element to deploy a card
+     * @param element the element type of a card that is going to be checked
+     * @param amount the amount that is going to be used to deploy a card with certain element
+     * @return true when a player has enough power in the selected element
+     */
     public boolean hasEnoughPower (Element element,int amount) {
         boolean temp=true;
         switch(element){
@@ -119,6 +126,10 @@ public class Player {
         return temp;
     }
 
+    /**
+     * add 1 power on a certain element to a player
+     * @param element the element that is going to be added
+     */
     public void addPower (Element element) {
         switch (element) {
             case AIR:
@@ -144,6 +155,12 @@ public class Player {
         }
     }
 
+    /**
+     * use/decrease an amount of power for a certain element on a Player.
+     * Precondition : The player has enough power to be decreased (won't leads to condition condition where player's power is a negative number)
+     * @param element is the element that is going to be used
+     * @param amount is the amount of certain element that is going to be used
+     */
     public void usePower (Element element, int amount) {
         switch (element) {
             case AIR:
@@ -168,6 +185,9 @@ public class Player {
     /**
      *Player movement option in DRAW PHASE
      */
+
+    /**drawcard to a player's hand and discard the player's card randomly when a player's has more than 8 cards on his/her hand
+     */
     public void drawCard() {
         this.onHand.add(this.deck.drawCard());
         if (this.onHand.size() > 8){
@@ -178,6 +198,9 @@ public class Player {
         }
     }
 
+    /**
+     * Reset the power for each element on the player based on his/her land card
+     */
     public void resetPower(){
         this.curAir = this.maxAir;
         this.curFire = this.maxFire;
@@ -188,6 +211,11 @@ public class Player {
 
     /**
      * Player movement option in MAIN1
+     */
+    /**
+     * Checking whether a player has enough power to deploy certain card
+     * @param card the card that is going to be deployed
+     * @return true when the player has enough power to deploy and false otherwise
      */
     public boolean canDeploy(Card card) {
         if (card instanceof CharacterCard) {
@@ -203,6 +231,11 @@ public class Player {
         }
     }
 
+    /**
+     * Add a card from the hand of a player to the field of the player
+     * @param field the field that determines the side of a board that belongs to the current player
+     * @param card the card to be deployed
+     */
     public void addToField(int field, Card card) {
         if (card instanceof CharacterCard) {
             usePower(card.getElement(), ((CharacterCard) card).getPower());
@@ -214,18 +247,22 @@ public class Player {
             landFieldCards.add((LandCard) card);
         } else {
             usePower(card.getElement(), ((SkillCard) card).getPower());
-//            SkillFieldCard skillFieldCard = new SkillFieldCard(field, (SkillCard) card);
             SkillFieldCard skillFieldCard = new SkillFieldCard.SkillFieldCardBuilder(field,(SkillCard) card).build(field);
             skillFieldCards.add(skillFieldCard);
         }
         discardCardOnHand(card);
     }
 
+    /**
+     * discard card from a player's hand
+     * @param card the card to be discarded
+     */
     public void discardCardOnHand(Card card) { onHand.remove(card); }
 
-
-    public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
-
+    /**
+     * discard a SkillFieldCard from a player's field
+     * @param skillFieldCard the skill field card to be discard
+     */
     public void discardSkillFieldCard(SkillFieldCard skillFieldCard){
         if (skillFieldCard.getOwner() != null){
             if (skillFieldCard.getSkillCard() instanceof AuraCard){
@@ -235,32 +272,55 @@ public class Player {
                 skillFieldCard.getOwner().getSkills().remove(skillFieldCard);
             }
         }
-        this.getSkillFieldCard().remove(skillFieldCard);//Remove on the user's field
+        this.getSkillFieldCard().remove(skillFieldCard);
     }
 
-    public void useAura (SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition: skillFieldCard is an auracard
+    /**
+     * use aura skill card on a certain character card
+     * @param skillFieldCard the aura card to be used
+     * @param target the card which is the target for the aura card to be used
+     * @param targetPlayer the player that owns the target card
+     */
+    public void useAura (SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){
         ((AuraCard)skillFieldCard.getSkillCard()).effect(target);
         ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
         target.getSkills().add(skillFieldCard);
     }
 
-    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer, Player notTargetPlayer){//TargetPlayer can be currentPlayer or Opposite Player
+    /**
+     * use aura skill card on a certain character card
+     * @param skillFieldCard the destroyer card to be used
+     * @param target the card which is the target for the destroyer card to be used
+     * @param targetPlayer the player that owns the target card
+     */
+    public void useDestroyer(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){
         for (SkillFieldCard skills : target.getSkills()){
             targetPlayer.getSkillFieldCard().remove(skills);
-            notTargetPlayer.getSkillFieldCard().remove(skills);
+            this.getSkillFieldCard().remove(skills);
         }
         this.getSkillFieldCard().remove(skillFieldCard);
         targetPlayer.getCharacterFieldCard().remove(target);
         this.skillFieldCards.remove(skillFieldCard);
     }
 
+    /**
+     * use power up skill card on a certain character card
+     * @param skillFieldCard the power up card to be used
+     * @param target the card which is the target for the power up card to be used
+     * @param targetPlayer the player that owns the target card
+     */
     public void usePowerUp(SkillFieldCard skillFieldCard,CharacterFieldCard target,Player targetPlayer){//Precondition, target is currentPlayer's card
         target.addSkills(skillFieldCard);
         ((SkillFieldCard) skillFieldCard).setOwner((CharacterFieldCard) target);
         target.getSkills().add(skillFieldCard);
     }
 
-    
+    /**
+     * Checking if a character field card of a player's is available to launch an attack to the opponent character field card
+     * @param characterFieldCard the attacker's card
+     * @param opponentCharacterFieldCard the target attacked card
+     * @return true when an attack is available and false otherwise
+     */
     public boolean isAttackValid(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterFieldCard){
         if (opponentCharacterFieldCard.getPosition() == 0 ){
             return (characterFieldCard.getCharacterCard().getAttack() > opponentCharacterFieldCard.getCharacterCard().getDefense());
@@ -270,6 +330,13 @@ public class Player {
     }
 
 
+    /**
+     * launch and attack from a player's character card to opponent's character card.
+     * @param characterFieldCard the attacker's card
+     * @param opponentCharacterCard the attacked target card
+     * @param opponent the opposite player in a certain turn
+     * @return true when the attack is successfully launched and false otherwise
+     */
     public boolean attack(CharacterFieldCard characterFieldCard,CharacterFieldCard opponentCharacterCard, Player opponent){
         if (isAttackValid(characterFieldCard,opponentCharacterCard)){
             if (opponentCharacterCard.getPosition()==1){
@@ -292,8 +359,19 @@ public class Player {
             return false;
         }
     }
+
+    /**
+     * Launch an attack from a character card from a player directly to the oppponent player hp.
+     * Precondition : the opponent's character field is empty
+     * @param characterFieldCard the attacker's character field card
+     * @param opponent the opponent that is going to be attacked
+     */
     public void attackOpponentPlayer(CharacterFieldCard characterFieldCard,Player opponent){
         opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
         characterFieldCard.setBattleAvailability(0); //Each character can only attack at most once in a turn
     }
+
+
+//    public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
+
 }

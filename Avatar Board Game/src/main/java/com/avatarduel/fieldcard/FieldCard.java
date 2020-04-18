@@ -1,11 +1,23 @@
 package com.avatarduel.fieldcard;
 
+/**
+ * FieldCard is a class that represents card which is deployed on the field
+ * @author Kelompok 9 K3
+ * */
 public class FieldCard {
-    private int field; //Determine which field is the fieldCard on, field=1 means this FieldCard is on p1's field
+    private int field;
 
+    /**
+     * Constructor of FieldCard, attribute field determines at which field/side of the board is the card on.the value can be 0 or 1
+     * @param field
+     */
     public FieldCard(int field) {
         this.field = field;
     }
 
+    /**
+     * getter
+     * @return the field of the FieldCard
+     */
     public int getField() { return this.field; }
 }
