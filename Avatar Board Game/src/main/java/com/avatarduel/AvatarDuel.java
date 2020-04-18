@@ -33,7 +33,7 @@ public class AvatarDuel extends Application {
     boardController.updateBoard();
 
     Scene scene = new Scene(root);
-    stage.setTitle("Avatar Duel");
+    stage.setTitle("Avatar Duel Board Game");
     stage.setScene(scene);
   }
 

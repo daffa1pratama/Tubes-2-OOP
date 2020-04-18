@@ -51,6 +51,9 @@ public class BoardController {
     @FXML
     private TextField playerText, phaseText;
 
+    @FXML
+    private SplitPane boardBg;
+
     private Board board;
 
     /**
@@ -66,6 +69,7 @@ public class BoardController {
     public void initialize() {
         this.playerText.setText("PLAYER A");
         this.phaseText.setText(Phase.DRAW.toString());
+        this.boardBg.setStyle("-fx-background-image: url(/com/avatarduel/card/image/boardBg.png)");
         initializeClick();
     }
 
@@ -130,7 +134,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            cardDetailPane.setStyle("-fx-background-color: #D13539; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #D24348; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -147,7 +151,7 @@ public class BoardController {
             Pane cardDetailPane = cardLoader.load();
             CardController cardController = cardLoader.getController();
             cardController.setCard(card);
-            cardDetailPane.setStyle("-fx-background-color: #A57FBB; -fx-border-color: BLACK;");
+            cardDetailPane.setStyle("-fx-background-color: #ad62d9; -fx-border-color: BLACK;");
             cardDetail.setCenter(cardDetailPane);
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -195,9 +199,9 @@ public class BoardController {
             } else if (card instanceof AuraCard) {
                 colorCard = "01BAEB"; // blue
             } else if (card instanceof DestroyCard) {
-                colorCard = "D13539"; // red
+                colorCard = "D24348"; // red
             } else if (card instanceof PowerUpCard) {
-                colorCard = "A57FBB"; // purple
+                colorCard = "ad62d9"; // purple
             }
 
             if (player == 1){
@@ -311,9 +315,9 @@ public class BoardController {
             if (card.getSkillCard() instanceof AuraCard) {
                 colorCard = "01BAEB";
             } else if (card.getSkillCard() instanceof DestroyCard) {
-                colorCard = "D13539";
+                colorCard = "D24348";
             } else if (card.getSkillCard() instanceof PowerUpCard) {
-                colorCard = "A57FBB";
+                colorCard = "#ad62d9";
             }
 
             if (player == 1) {

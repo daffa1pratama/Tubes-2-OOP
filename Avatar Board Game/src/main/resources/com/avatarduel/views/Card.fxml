@@ -7,67 +7,80 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="158.0" style="-fx-border-color: BLACK;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.card.CardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="238.0" style="-fx-border-color: BLACK;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.card.CardController">
    <children>
-      <ImageView fx:id="cardImage" fitHeight="100.0" fitWidth="100.0" layoutX="29.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../card/image/character/Aang.png" />
-         </image>
-      </ImageView>
-      <Pane layoutX="5.0" layoutY="8.0" prefHeight="28.0" prefWidth="149.0" style="-fx-border-color: BLACK;">
+      <Pane layoutX="30.0" layoutY="59.0" prefHeight="176.0" prefWidth="176.0" style="-fx-border-color: BLACK; -fx-border-width: 1;">
          <children>
-            <Pane prefHeight="28.0" prefWidth="149.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-border-color: BLACK;" />
-            <Text fx:id="cardName" layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-            <ImageView fx:id="cardElement" fitHeight="19.0" fitWidth="24.0" layoutX="126.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="cardImage" fitHeight="174.0" fitWidth="174.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../card/image/element/AirElement.png" />
+                  <Image url="@../card/image/character/Aang.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="5.0" layoutY="152.0" prefHeight="87.0" prefWidth="149.0" style="-fx-border-color: BLACK;">
+      <Pane layoutX="8.0" layoutY="8.0" prefHeight="38.0" prefWidth="223.0" style="-fx-border-color: BLACK;">
          <children>
-            <Pane layoutY="59.0" prefHeight="28.0" prefWidth="149.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-border-color: BLACK;" />
-            <Text layoutX="40.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atk / ">
+            <Pane prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-border-color: BLACK;">
+               <children>
+                  <Text fx:id="cardName" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="cardElement" fitHeight="28.0" fitWidth="27.0" layoutX="186.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../card/image/element/AirElement.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutX="8.0" layoutY="252.0" prefHeight="122.0" prefWidth="223.0" style="-fx-border-color: BLACK;">
+         <children>
+            <Pane layoutY="84.0" prefHeight="38.0" prefWidth="223.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-border-color: BLACK;">
+               <children>
+                  <Text layoutX="85.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atk / ">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="128.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Def / ">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="171.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pow / ">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="cardAttack" layoutX="110.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-2">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="cardDefense" layoutX="154.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-2">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="cardPower" layoutX="200.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-2">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="cardType" layoutX="9.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[ C ]">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
+            <TextArea fx:id="cardDescription" editable="false" prefHeight="85.0" prefWidth="223.0" style="-fx-border-color: BLACK;" text="Ini adalah Aaang. Dia botak. Dia beban. Dia gaguna. Dia bangsat. Sori Aang gua capek." wrapText="true">
                <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <Text layoutX="75.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Def / ">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <Text layoutX="110.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pow / ">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <Text fx:id="cardAttack" layoutX="60.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <Text fx:id="cardDefense" layoutX="95.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <Text fx:id="cardPower" layoutX="135.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
-            <TextArea fx:id="cardDescription" editable="false" prefHeight="62.0" prefWidth="149.0" style="-fx-border-color: BLACK;" text="Ini adalah Aaang. Dia botak. Dia beban. Dia gaguna. Dia bangsat. Sori Aang gua capek." wrapText="true">
-               <font>
-                  <Font size="9.0" />
+                  <Font size="11.0" />
                </font>
             </TextArea>
-            <Text fx:id="cardType" layoutX="5.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[ C ]">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Text>
          </children>
       </Pane>
    </children>
