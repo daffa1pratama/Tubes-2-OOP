@@ -60,7 +60,7 @@ public abstract class Card {
     /**
      * Outputs the card's information to the console.
      */
-    public void InfoCard() {
+    public void infoCard() {
         System.out.println("Name\t : " + this.name);
         System.out.println("Desc\t : " + this.description);
         System.out.println("Element\t : " + this.element);

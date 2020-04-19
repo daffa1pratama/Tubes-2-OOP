@@ -69,8 +69,8 @@ public class AuraCard extends SkillCard {
      * Outputs the card's information to the console.
      */
     @Override
-    public void InfoCard() {
-        super.InfoCard();
+    public void infoCard() {
+        super.infoCard();
         System.out.println("Aura Attack\t : " + this.attack);
         System.out.println("Aura Defense\t : " + this.defense);
     }

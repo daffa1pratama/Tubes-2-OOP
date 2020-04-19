@@ -483,13 +483,6 @@ public class BoardController {
      * Sets selected2 with null.
      */
     public void updateSelected(){
-//        if (selected1 instanceof CharacterFieldCard && selected2 instanceof SkillFieldCard){
-//            selected1 = selected2;
-//        } else if (selected1 instanceof SkillFieldCard && selected2 instanceof CharacterFieldCard) {
-//            selected1 = selected2;
-//        } else {
-//            selected1 = selected2;
-//        }
         selected1 = selected2;
         selected2 = null;
     }

@@ -1,4 +1,4 @@
-package com.avatarduel.player;
+package com.avatarduel.board;
 
 /**
  * Phases of each turn in the game

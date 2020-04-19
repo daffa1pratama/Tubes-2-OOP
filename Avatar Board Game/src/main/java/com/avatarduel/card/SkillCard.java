@@ -33,8 +33,8 @@ public class SkillCard extends Card {
      * Outputs the card's information to the console.
      */
     @Override
-    public void InfoCard() {
-        super.InfoCard();
+    public void infoCard() {
+        super.infoCard();
         System.out.println("Power\t : " + this.power);
     }
 }

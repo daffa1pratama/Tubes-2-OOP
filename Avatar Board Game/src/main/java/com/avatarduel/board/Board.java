@@ -1,10 +1,7 @@
 package com.avatarduel.board;
 
-import com.avatarduel.player.Phase;
 import com.avatarduel.player.Player;
 import com.avatarduel.util.CardReader;
-
-import java.io.IOException;
 
 /**
  * Board is a class that defines the game board.
