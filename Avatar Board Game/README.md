@@ -24,6 +24,7 @@ Berikut adalah cara memainkan permainan ini :
 5. Selamat bertarung!
 
 ## Struktur Kode Program
+```
 C:.
 ├───bin
 │   └───main
@@ -108,6 +109,7 @@ C:.
                     │       ├───land
                     │       └───skill
                     └───views
+```
 
 ## Credit
 Gambar kartu dan deskripsi diambil dari [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
