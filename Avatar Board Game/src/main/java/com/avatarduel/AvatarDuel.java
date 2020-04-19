@@ -39,7 +39,7 @@ public class AvatarDuel extends Application {
 
   /**
    * main method to launch the program
-   * @param args
+   * @param args Main program arguments
    */
   public static void main(String[] args) {
     launch();

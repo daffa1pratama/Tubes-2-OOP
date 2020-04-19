@@ -32,6 +32,7 @@ public class FieldCardController {
 
     /**
      * Load the all the information(card name, card element and it's image) of a card which is going to be displayed
+     * @param card Which card will set into FieldCard
      */
     public void setFieldCard(Card card){
         cardName.setText(card.getName());

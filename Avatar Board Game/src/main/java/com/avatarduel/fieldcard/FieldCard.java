@@ -9,7 +9,7 @@ public class FieldCard {
 
     /**
      * Constructor of FieldCard, attribute field determines at which field/side of the board is the card on.the value can be 0 or 1
-     * @param field
+     * @param field field number of the FieldCard
      */
     public FieldCard(int field) {
         this.field = field;
@@ -17,7 +17,7 @@ public class FieldCard {
 
     /**
      * getter
-     * @return the field of the FieldCard
+     * @return field number of the FieldCard
      */
     public int getField() { return this.field; }
 }

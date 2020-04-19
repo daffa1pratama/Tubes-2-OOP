@@ -61,13 +61,6 @@ public class Player {
         this.maxWater = 0;
         this.maxAir = 0;
         this.maxEnergy = 0;
-
-//      Supposed to be all 0, set 10 only for testing deploy
-//        this.maxAir = 10;
-//        this.maxFire = 10;
-//        this.maxEarth = 10;
-//        this.maxWater = 10;
-//        this.maxEnergy = 10;
     }
 
     /**

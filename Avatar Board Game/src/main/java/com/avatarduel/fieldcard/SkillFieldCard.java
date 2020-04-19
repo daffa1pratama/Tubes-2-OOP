@@ -41,7 +41,7 @@ public class SkillFieldCard extends FieldCard {
 
     /**
      * Setter for owner
-     * @param characterFieldCard
+     * @param characterFieldCard Which character field card this skill card applied
      */
     public void setOwner(CharacterFieldCard characterFieldCard){
         this.owner = characterFieldCard;
