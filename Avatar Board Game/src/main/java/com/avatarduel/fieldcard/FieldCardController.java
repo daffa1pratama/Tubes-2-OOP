@@ -58,8 +58,8 @@ public class FieldCardController {
     }
 
     /**
-     * @param card is the card instane of CharacterFieldCard that is going to be display
      * Load the all the information(card name, card element and it's image) of a character card which is going to be displayed
+     * @param card is the card instane of CharacterFieldCard that is going to be display
      */
     public void setFieldCard(CharacterFieldCard card) {
         cardName.setText(card.getCharacterCard().getName());
@@ -85,8 +85,8 @@ public class FieldCardController {
     }
 
     /**
-     * @param card is the card instance of SkillFieldCard that is going to be displayed
      * Load the all the information(card name, card element and it's image) of a skill card which is going to be displayed
+     * @param card is the card instance of SkillFieldCard that is going to be displayed
      */
     public void setFieldCard(SkillFieldCard card) {
         cardName.setText(card.getSkillCard().getName());

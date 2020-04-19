@@ -179,7 +179,8 @@ public class Player {
      *Player movement option in DRAW PHASE
      */
 
-    /**drawcard to a player's hand and discard the player's card randomly when a player's has more than 8 cards on his/her hand
+    /**
+     * drawcard to a player's hand and discard the player's card randomly when a player's has more than 8 cards on his/her hand
      */
     public void drawCard() {
         this.onHand.add(this.deck.drawCard());
@@ -363,8 +364,4 @@ public class Player {
         opponent.setHp(opponent.getHp() - characterFieldCard.getCharacterCard().getAttack());
         characterFieldCard.setBattleAvailability(0); //Each character can only attack at most once in a turn
     }
-
-
-//    public void discardCharacterCardOnField(CharacterFieldCard characterFieldCard) {characterFieldCards.remove(characterFieldCard);}
-
 }

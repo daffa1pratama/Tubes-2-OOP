@@ -40,7 +40,7 @@ public class CharacterFieldCard extends FieldCard {
     }
 
     /**
-     *
+     * Getter skills that equipped into CharacterFieldCard
      * @return list of buffs/debuffs this card currently has.
      */
     public List<SkillFieldCard>getSkills() { return this.skills;}
@@ -52,13 +52,13 @@ public class CharacterFieldCard extends FieldCard {
     public void addSkills(SkillFieldCard skillFieldCard) {this.skills.add(skillFieldCard);}
 
     /**
-     *
+     * Getter CharacterCard
      * @return This character card
      */
     public CharacterCard getCharacterCard() {return this.characterCard;}
 
     /**
-     *
+     * Getter battle availability
      * @return Card's attack status. 0 if it is unavailable to attack, 1 if available.
      */
     public int getBattleAvailability() {return this.isAvailableAttack;}
@@ -75,13 +75,13 @@ public class CharacterFieldCard extends FieldCard {
     public void rotate() { this.position = (this.position + 1) % 2; }
 
     /**
-     *
+     * Getter position of characterfieldcard
      * @return Card's position. 0 if defense and 1 if attack.
      */
     public int getPosition() { return this.position; }
 
     /**
-     *
+     * Check characterfieldcard has power up or not
      * @return A boolean value which indicates whether this card has a powerup effect.
      */
     public boolean hasPowerUp() {

@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * CardReader is a class to read card information from CSV files
+ */
 public class CardReader {
     private static CardReader instance;
     private CardCollection characterCardCollection;
@@ -21,6 +24,9 @@ public class CardReader {
     private static final String DESTROY_CSV_FILE_PATH = "/com/avatarduel/card/data/skill_destroy.csv";
     private static final String POWERUP_CSV_FILE_PATH = "/com/avatarduel/card/data/skill_powerup.csv";
 
+    /**
+     * Constructor of CardReader
+     */
     private CardReader() {
         try {
             loadCards();
@@ -32,6 +38,10 @@ public class CardReader {
         }
     }
 
+    /**
+     * Getter instance of CardReader
+     * @return Instance of CardReader
+     */
     public static CardReader getInstance() {
         if (instance == null) {
             instance = new CardReader();
@@ -39,6 +49,11 @@ public class CardReader {
         return instance;
     }
 
+    /**
+     * Read card information from CSV files using CSVReader
+     * @throws IOException Throw when there's error when reading files
+     * @throws URISyntaxException Throw when file name not found
+     */
     public void loadCards() throws IOException, URISyntaxException {
         characterCardCollection = new CardCollection();
         landCardCollection = new CardCollection();
@@ -88,9 +103,29 @@ public class CardReader {
         }
     }
 
+    /**
+     * Getter character card collection
+     * @return Character card collection
+     */
     public CardCollection getCharacterCardCollection() { return this.characterCardCollection; }
+    /**
+     * Getter land card collection
+     * @return Land card collection
+     */
     public CardCollection getLandCardCollection() { return this.landCardCollection; }
+    /**
+     * Getter aura card collection
+     * @return Aura card collection
+     */
     public CardCollection getAuraCardCollection() { return this.auraCardCollection; }
+    /**
+     * Getter destroy card collection
+     * @return Destroy card collection
+     */
     public CardCollection getDestroyCardCollection() { return this.destroyCardCollection; }
+    /**
+     * Getter power up card collection
+     * @return Power up card collection
+     */
     public CardCollection getPowerupCardCollection() { return this.powerupCardCollection; }
 }

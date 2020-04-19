@@ -28,16 +28,16 @@ public class SkillFieldCard extends FieldCard {
     }
 
     /**
-     * getter of skillCard
+     * Getter of skillCard
      * @return skillCard
      */
     public SkillCard getSkillCard() {return this.skillCard;}
+
     /**
-     * getter of owner
+     * Getter of owner
      * @return owner
      */
     public CharacterFieldCard getOwner(){return this.owner;}
-
 
     /**
      * Setter for owner

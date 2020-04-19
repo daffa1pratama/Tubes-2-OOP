@@ -16,7 +16,7 @@ public class FieldCard {
     }
 
     /**
-     * getter
+     * Getter number of field
      * @return field number of the FieldCard
      */
     public int getField() { return this.field; }
