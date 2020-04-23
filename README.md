@@ -4,7 +4,7 @@
 ## Deskripsi Program
 Program yang dibuat untuk Tugas Besar 2 IF2210 ini adalah permainan board game bertemakan Avatar: The Legend of Aang. Permainan ini mirip seperti game Yu Gi Oh! dan Magic: The Gathering, dimainkan oleh 2 orang yang bertarung pada sebuah papan permainan dengan menggunakan kartu sebagai alat permainan. Terdapat 3 jenis kartu dasar, yaitu Character Card, Land Card, dan Skill Card. Skill Card dibedakan lagi menjadi 3 jenis, yaitu Aura Card, Destroy Card, dan Power Up Card. Untuk menggunakan kartu, terdapat power untuk setiap elemen kartu yang dapat ditambahkan menggunakan Land Card. Ada 5 elemen kartu, yaitu Water, Earth, Fire, Air, dan Energy.
 
-![image](https://user-images.githubusercontent.com/47893326/80060133-01152280-8558-11ea-9a55-1a51a43d06f8.png)
+![Uploading image.png…]()
 
 ## Aturan Permainan
 * Papan permainan terdiri dari 2 sisi yang merepresentasikan pemain
